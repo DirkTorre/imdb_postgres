@@ -1,0 +1,122 @@
+05-09-25 17:34:15 - ERROR: [Errno 20] Not a directory: '/media/user/files/code/imdb_postgres/main.py/data/title.crew.tsv.gz'
+Traceback (most recent call last):
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/consumer.py", line 63, in process_tasks
+    await self._download(task)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/consumer.py", line 112, in _download
+    await self._single_segment(url, file_path, speed_limit, **kwargs)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/consumer.py", line 137, in _single_segment
+    await sd.worker(url, file_path, **kwargs)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/downloader.py", line 39, in worker
+    await self.download(url, file_path, "wb", **kwargs)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/downloader.py", line 22, in download
+    async with aiofiles.open(path, mode) as file:
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/aiofiles/base.py", line 63, in __aenter__
+    return await self
+           ^^^^^^^^^^
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/aiofiles/base.py", line 59, in __await__
+    self._obj = yield from self._coro.__await__()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/aiofiles/threadpool/__init__.py", line 92, in _open
+    f = await loop.run_in_executor(executor, cb)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+NotADirectoryError: [Errno 20] Not a directory: '/media/user/files/code/imdb_postgres/main.py/data/title.crew.tsv.gz'
+05-09-25 17:34:15 - ERROR: [Errno 20] Not a directory: '/media/user/files/code/imdb_postgres/main.py/data/title.basics.tsv.gz'
+Traceback (most recent call last):
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/consumer.py", line 63, in process_tasks
+    await self._download(task)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/consumer.py", line 112, in _download
+    await self._single_segment(url, file_path, speed_limit, **kwargs)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/consumer.py", line 137, in _single_segment
+    await sd.worker(url, file_path, **kwargs)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/downloader.py", line 39, in worker
+    await self.download(url, file_path, "wb", **kwargs)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/downloader.py", line 22, in download
+    async with aiofiles.open(path, mode) as file:
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/aiofiles/base.py", line 63, in __aenter__
+    return await self
+           ^^^^^^^^^^
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/aiofiles/base.py", line 59, in __await__
+    self._obj = yield from self._coro.__await__()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/aiofiles/threadpool/__init__.py", line 92, in _open
+    f = await loop.run_in_executor(executor, cb)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+NotADirectoryError: [Errno 20] Not a directory: '/media/user/files/code/imdb_postgres/main.py/data/title.basics.tsv.gz'
+05-09-25 17:34:15 - ERROR: [Errno 20] Not a directory: '/media/user/files/code/imdb_postgres/main.py/data/title.ratings.tsv.gz.json'
+Traceback (most recent call last):
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/consumer.py", line 63, in process_tasks
+    await self._download(task)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/consumer.py", line 107, in _download
+    segment_table = await create_segment_table(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/utils.py", line 486, in create_segment_table
+    async with fopen(progress_file, "w") as f:
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/aiofiles/base.py", line 63, in __aenter__
+    return await self
+           ^^^^^^^^^^
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/aiofiles/base.py", line 59, in __await__
+    self._obj = yield from self._coro.__await__()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/aiofiles/threadpool/__init__.py", line 92, in _open
+    f = await loop.run_in_executor(executor, cb)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+NotADirectoryError: [Errno 20] Not a directory: '/media/user/files/code/imdb_postgres/main.py/data/title.ratings.tsv.gz.json'
+05-09-25 17:34:15 - ERROR: [Errno 20] Not a directory: '/media/user/files/code/imdb_postgres/main.py/data/title.principals.tsv.gz'
+Traceback (most recent call last):
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/consumer.py", line 63, in process_tasks
+    await self._download(task)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/consumer.py", line 112, in _download
+    await self._single_segment(url, file_path, speed_limit, **kwargs)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/consumer.py", line 137, in _single_segment
+    await sd.worker(url, file_path, **kwargs)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/downloader.py", line 39, in worker
+    await self.download(url, file_path, "wb", **kwargs)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/downloader.py", line 22, in download
+    async with aiofiles.open(path, mode) as file:
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/aiofiles/base.py", line 63, in __aenter__
+    return await self
+           ^^^^^^^^^^
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/aiofiles/base.py", line 59, in __await__
+    self._obj = yield from self._coro.__await__()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/aiofiles/threadpool/__init__.py", line 92, in _open
+    f = await loop.run_in_executor(executor, cb)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+NotADirectoryError: [Errno 20] Not a directory: '/media/user/files/code/imdb_postgres/main.py/data/title.principals.tsv.gz'
+05-09-25 17:34:15 - ERROR: [Errno 20] Not a directory: '/media/user/files/code/imdb_postgres/main.py/data/name.basics.tsv.gz'
+Traceback (most recent call last):
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/consumer.py", line 63, in process_tasks
+    await self._download(task)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/consumer.py", line 112, in _download
+    await self._single_segment(url, file_path, speed_limit, **kwargs)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/consumer.py", line 137, in _single_segment
+    await sd.worker(url, file_path, **kwargs)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/downloader.py", line 39, in worker
+    await self.download(url, file_path, "wb", **kwargs)
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/pypdl/downloader.py", line 22, in download
+    async with aiofiles.open(path, mode) as file:
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/aiofiles/base.py", line 63, in __aenter__
+    return await self
+           ^^^^^^^^^^
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/aiofiles/base.py", line 59, in __await__
+    self._obj = yield from self._coro.__await__()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/files/code/imdb_postgres/.venv/lib/python3.12/site-packages/aiofiles/threadpool/__init__.py", line 92, in _open
+    f = await loop.run_in_executor(executor, cb)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+NotADirectoryError: [Errno 20] Not a directory: '/media/user/files/code/imdb_postgres/main.py/data/name.basics.tsv.gz'
