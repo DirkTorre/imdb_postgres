@@ -29,12 +29,12 @@ create temp table tconst_to_remove (
     tconst text
 );
 
-insert into tconst_to_remove (
-    select tconst
-    from title_basics
-    where isadult=true
-    or titletype not in ('movie','tvMovie')
-);
+-- insert into tconst_to_remove (
+--     select tconst
+--     from title_basics
+--     where isadult=true
+--     or titletype not in ('movie','tvMovie')
+-- );
 
 -- do this at a later point with a cascade, or not do it at all
 -- DELETE FROM title_basics USING tconst_to_remove
@@ -141,9 +141,68 @@ ALTER TABLE primary_profession ADD CONSTRAINT primary_profession_fk FOREIGN KEY 
 ALTER TABLE known_for_titles ADD CONSTRAINT known_for_titles_fk_nconst FOREIGN KEY (nconst) REFERENCES name_basics(nconst);
 ALTER TABLE known_for_titles ADD CONSTRAINT known_for_titles_fk_tconst FOREIGN KEY (tconst) REFERENCES title_basics(tconst);
 
-
-
-
 -- END LOAD AND MODIFY NAME_BASICS
 
+
+-- BEGIN LOAD AND MODIFY TITLE_CREW
+
+CREATE TEMP TABLE title_crew (
+    tconst varchar(11),
+    directors TEXT,
+    writers TEXT
+);
+
+\copy title_crew FROM 'data/title.crew.tsv' DELIMITER E'\t' QUOTE E'\b' NULL '\N' CSV HEADER;
+
+
+CREATE TABLE title_directors (
+    tconst varchar(11),
+    nconst varchar(11),
+    UNIQUE (tconst, nconst)
+);
+
+
+INSERT INTO title_directors (
+    select tconst, unnest(string_to_array(directors,',')) as nconst
+    from title_crew
+);
+
+-- problem!!!!!!!: sometimes a nconst is in title_directors, but not (yet) in name_basics
+-- solution: remove nconst from title_directors that are not in name_basics
+
+DELETE FROM title_directors
+WHERE nconst IN (
+    select nconst from title_directors
+    except
+    select nconst from name_basics
+);
+
+ALTER TABLE title_directors ADD CONSTRAINT title_directors_fk_tconst FOREIGN KEY (tconst) REFERENCES title_basics(tconst);
+ALTER TABLE title_directors ADD CONSTRAINT title_directors_fk_nconst FOREIGN KEY (nconst) REFERENCES name_basics(nconst);
+
+CREATE TABLE title_writers (
+    tconst varchar(11),
+    nconst varchar(11),
+    UNIQUE (tconst, nconst)
+);
+
+INSERT INTO title_writers (
+    select tconst, unnest(string_to_array(writers,',')) as writers
+    from title_crew
+);
+
+-- problem!!!!!!!: sometimes a movie nconst is in title_writers, but not (yet) in name_basics
+-- solution: remove nconst from title_writers that are not in name_basics
+
+DELETE FROM title_writers
+WHERE nconst IN (
+    select nconst from title_writers
+    except
+    select nconst from name_basics
+);
+
+ALTER TABLE title_writers ADD CONSTRAINT title_writers_fk_tconst FOREIGN KEY (tconst) REFERENCES title_basics(tconst);
+ALTER TABLE title_writers ADD CONSTRAINT title_writers_fk_nconst FOREIGN KEY (nconst) REFERENCES name_basics(nconst);
+
+-- END LOAD AND MODIFY TITLE_CREW
 
