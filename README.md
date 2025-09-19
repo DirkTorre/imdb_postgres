@@ -21,18 +21,13 @@ psql -h localhost -d imdb -U postgres -p 5432 -a -f full_script.sql
 
 ## todo:
 
-- TRANSFORM TABLES SO THAT IT ACTUALY MAKES SENSE AS A DATABASE
-    + title_basics: converted and ready
-    + title_ratings: ready
-    + name_basics: ready
-    + title_crew: ready
-    + title_principals -
+todo:
 
-- clean data
 - use the temp tconst table to remove values from other tables
 - decide if movies that are not tv movies or normal movies should be stored.
 - if the database is ready, create an update script
 - clean and document the code
 
+done:
 
-
+- transform data to usefull SQL database structure

@@ -3,9 +3,14 @@
 -- psql -d 'postgres' -U postgres -c "DROP DATABASE IF EXISTS imdb;"
 -- psql -d 'postgres' -U postgres -c "CREATE DATABASE imdb;"
 -- exit
-
+-- psql -h localhost -d imdb -U postgres -p 5432 -a -f full_script.sql
 
 \c imdb
+
+
+
+
+
 
 -- BEGIN LOAD AND MODIFY TITLE_BASICS
 
@@ -65,6 +70,10 @@ CREATE TYPE enum_titletype AS ENUM ('Action', 'Adventure', 'Animation','Biograph
 
 -- END LOAD AND MODIFY TITLE_BASICS
 
+
+
+
+
 -- BEGIN LOAD AND MODIFY TITLE_RATINGS
 
 CREATE TABLE title_ratings (
@@ -87,6 +96,10 @@ WHERE tconst IN (
 ALTER TABLE title_ratings ADD CONSTRAINT title_ratings_fk FOREIGN KEY (tconst) REFERENCES title_basics(tconst);
 
 -- END LOAD AND MODIFY TITLE_RATINGS
+
+
+
+
 
 -- BEGIN LOAD AND MODIFY NAME_BASICS
 
@@ -144,6 +157,9 @@ ALTER TABLE known_for_titles ADD CONSTRAINT known_for_titles_fk_tconst FOREIGN K
 -- END LOAD AND MODIFY NAME_BASICS
 
 
+
+
+
 -- BEGIN LOAD AND MODIFY TITLE_CREW
 
 CREATE TEMP TABLE title_crew (
@@ -160,7 +176,6 @@ CREATE TABLE title_directors (
     nconst varchar(11),
     UNIQUE (tconst, nconst)
 );
-
 
 INSERT INTO title_directors (
     select tconst, unnest(string_to_array(directors,',')) as nconst
@@ -206,3 +221,42 @@ ALTER TABLE title_writers ADD CONSTRAINT title_writers_fk_nconst FOREIGN KEY (nc
 
 -- END LOAD AND MODIFY TITLE_CREW
 
+
+
+
+
+-- BEGIN LOAD AND MODIFY TITLE_PRINCIPALS
+
+CREATE TYPE enum_job_category AS ENUM ('actor','actress','archive_footage','archive_sound',
+'casting_director','category','cinematographer','composer','director','editor',
+'producer','production_designer','self','writer');
+
+CREATE TABLE title_principals (
+    tconst varchar(11),
+    ordering SMALLINT,
+    nconst varchar(11),
+    category enum_job_category,
+    job TEXT,
+    characters TEXT,
+    PRIMARY KEY (tconst, ordering)
+);
+
+\copy title_principals FROM 'data/title.principals.tsv' DELIMITER E'\t' QUOTE E'\b' NULL '\N' CSV HEADER;
+
+update title_principals
+set characters = string_to_array(translate(replace(characters,' "," ','@'), '[]"\', ''),'@')::text[];
+
+-- problem!!!!!!!: sometimes a nconst is in title_principals, but not (yet) in name_basics
+-- solution: remove nconst from title_principals that are not in name_basics
+
+DELETE FROM title_principals
+WHERE nconst IN (
+    select nconst from title_principals
+    except
+    select nconst from name_basics
+);
+
+ALTER TABLE title_principals ADD CONSTRAINT title_principals_fk_tconst FOREIGN KEY (tconst) REFERENCES title_basics(tconst);
+ALTER TABLE title_principals ADD CONSTRAINT title_principals_fk_nconst FOREIGN KEY (nconst) REFERENCES name_basics(nconst);
+
+-- END LOAD AND MODIFY TITLE_PRINCIPALS
