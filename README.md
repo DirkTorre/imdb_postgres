@@ -19,15 +19,21 @@ psql -h localhost -d imdb -U postgres -p 5432 -a -f full_script.sql
 ```
 
 
+## notes
+
+One downside of creating index after importing is that table must be locked, and that may take long time (it will not be locked in opposite scenario).
+
 ## todo:
 
 todo:
 
-- use the temp tconst table to remove values from other tables
-- decide if movies that are not tv movies or normal movies should be stored.
-- if the database is ready, create an update script
+- create indices
+- create update script
+- redesign initial loading of data so that everything works imidiatly.
 - clean and document the code
 
 done:
 
+- transform and load the data
 - transform data to usefull SQL database structure
+- look at copilot improvements
