@@ -6,7 +6,17 @@
 -- =========================
 
 -- Normalize genres into separate table
-CREATE TABLE genres (
-    tconst VARCHAR(11) REFERENCES title_basics(tconst) ON DELETE CASCADE,
-    genre VARCHAR(20)
+
+CREATE TEMP TABLE temp_title_basics (
+    tconst VARCHAR(11) PRIMARY KEY,
+    titleType enum_titletype,
+    primaryTitle TEXT,
+    originalTitle TEXT,
+    isAdult BOOLEAN,
+    startYear SMALLINT,
+    endYear SMALLINT,
+    runtimeMinutes INTEGER,
+    genres TEXT
 );
+
+\copy temp_title_basics FROM 'data/title.basics.tsv' DELIMITER E'\t' QUOTE E'\b' NULL '\N' CSV HEADER;
