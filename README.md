@@ -30,8 +30,8 @@ The queries can be found in `queries.sql`, and the results can be found in `resu
 ## todo:
 
 todo:
-- create update script
-- redesign initial loading of data so that everything works immediately.
+- answer the questions
+- create separate, definition, initialization and update script so that everything works immediately.
 - clean and document the code
 
 done:
