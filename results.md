@@ -2,6 +2,8 @@
 
 <!-- https://www.convertcsv.com/csv-to-markdown.htm -->
 
+note for improvement: some actors are included in a movie when they are already passed away, this dataset does not contain all movies in which an actor was in.
+
 ## Movies and Ratings
 
 ### Which top 10 directors have the highest average imdb rating, considering only directors with at least 5 movies?
@@ -321,143 +323,168 @@ Only counting movies with more than 10.000 votes. Results may vary because of ra
 
 #### More than 10.000 votes per movie
 
-|Action     |59 |nm0000329 |Jackie Chan       |
-|-----------|---|----------|------------------|
-|Action     |45 |nm0000168 |Samuel L. Jackson |
-|Action     |43 |nm0000246 |Bruce Willis      |
-|Action     |41 |nm0000115 |Nicolas Cage      |
-|Action     |38 |nm0005458 |Jason Statham     |
-|Adventure  |29 |nm0000168 |Samuel L. Jackson |
-|Adventure  |28 |nm0000329 |Jackie Chan       |
-|Adventure  |24 |nm0000092 |John Cleese       |
-|Adventure  |24 |nm0000125 |Sean Connery      |
-|Adventure  |24 |nm0000568 |Frank Oz          |
-|Animation  |25 |nm0370677 |Megumi Hayashibara|
-|Animation  |23 |nm0191906 |Jim Cummings      |
-|Animation  |22 |nm0224007 |John DiMaggio     |
-|Animation  |21 |nm0444786 |Tom Kenny         |
-|Animation  |20 |nm0853301 |Veronica Taylor   |
-|Biography  |14 |nm0000164 |Anthony Hopkins   |
-|Biography  |11 |nm0000136 |Johnny Depp       |
-|Biography  |11 |nm0000134 |Robert De Niro    |
-|Biography  |10 |nm0000173 |Nicole Kidman     |
-|Biography  |10 |nm0765597 |Peter Sarsgaard   |
-|Comedy     |56 |nm0000552 |Eddie Murphy      |
-|Comedy     |48 |nm0001191 |Adam Sandler      |
-|Comedy     |44 |nm0474774 |Akshay Kumar      |
-|Comedy     |43 |nm0000329 |Jackie Chan       |
-|Comedy     |42 |nm0002071 |Will Ferrell      |
-|Crime      |40 |nm0000134 |Robert De Niro    |
-|Crime      |37 |nm0000168 |Samuel L. Jackson |
-|Crime      |31 |nm0000115 |Nicolas Cage      |
-|Crime      |28 |nm0000246 |Bruce Willis      |
-|Crime      |26 |nm0000151 |Morgan Freeman    |
-|Documentary|3  |nm0001385 |Eric Idle         |
-|Documentary|3  |nm0001037 |Graham Chapman    |
-|Documentary|3  |nm0077103 |Max Bernstein     |
-|Documentary|3  |nm1396916 |Stacy Jones       |
-|Documentary|3  |nm11593352|Mike Meadows      |
-|Drama      |63 |nm0000134 |Robert De Niro    |
-|Drama      |48 |nm0474774 |Akshay Kumar      |
-|Drama      |46 |nm0000164 |Anthony Hopkins   |
-|Drama      |46 |nm0000173 |Nicole Kidman     |
-|Drama      |45 |nm0000658 |Meryl Streep      |
-|Family     |14 |nm0324397 |Dave Goelz        |
-|Family     |14 |nm0000245 |Robin Williams    |
-|Family     |11 |nm0926209 |Steve Whitmire    |
-|Family     |11 |nm0000568 |Frank Oz          |
-|Family     |10 |nm0173416 |Pinto Colvig      |
-|Fantasy    |15 |nm0000115 |Nicolas Cage      |
-|Fantasy    |13 |nm0000353 |Willem Dafoe      |
-|Fantasy    |12 |nm0000136 |Johnny Depp       |
-|Fantasy    |12 |nm0842770 |Tilda Swinton     |
-|Fantasy    |11 |nm0427964 |Doug Jones        |
-|Film-Noir  |6  |nm0000007 |Humphrey Bogart   |
-|Film-Noir  |5  |nm0000044 |Burt Lancaster    |
-|Film-Noir  |4  |nm0505249 |Sam Levene        |
-|Film-Noir  |4  |nm0000074 |Gene Tierney      |
-|Film-Noir  |4  |nm0000080 |Orson Welles      |
-|History    |10 |nm0000146 |Ralph Fiennes     |
-|History    |7  |nm0001426 |Ben Kingsley      |
-|History    |7  |nm0000553 |Liam Neeson       |
-|History    |7  |nm0117709 |Daniel Brühl      |
-|History    |7  |nm0929489 |Tom Wilkinson     |
-|Horror     |18 |nm0000387 |Robert Englund    |
-|Horror     |15 |nm0000374 |Brad Dourif       |
-|Horror     |14 |nm0068551 |Tobin Bell        |
-|Horror     |13 |nm0000353 |Willem Dafoe      |
-|Horror     |12 |nm0000130 |Jamie Lee Curtis  |
-|Music      |5  |nm0000288 |Christian Bale    |
-|Music      |5  |nm0571106 |Michael McKean    |
-|Music      |4  |nm0001749 |Maggie Smith      |
-|Music      |4  |nm0000949 |Cate Blanchett    |
-|Music      |4  |nm0000191 |Ewan McGregor     |
-|Musical    |13 |nm0451321 |Shah Rukh Khan    |
-|Musical    |8  |nm0006795 |Salman Khan       |
-|Musical    |8  |nm0481363 |Reema Lagoo       |
-|Musical    |7  |nm0622186 |Alok Nath         |
-|Musical    |7  |nm0451600 |Anupam Kher       |
-|Mystery    |15 |nm0000173 |Nicole Kidman     |
-|Mystery    |14 |nm0933940 |Patrick Wilson    |
-|Mystery    |13 |nm0000115 |Nicolas Cage      |
-|Mystery    |12 |nm0915208 |Naomi Watts       |
-|Mystery    |12 |nm0000243 |Denzel Washington |
-|News       |1  |nm16734548|Suchitra          |
-|News       |1  |nm1498640 |Zana Briski       |
-|News       |1  |nm2092248 |Shanti Das        |
-|News       |1  |nm2095158 |Manik             |
-|News       |1  |nm2099087 |Avijit Halder     |
-|Romance    |20 |nm0000210 |Julia Roberts     |
-|Romance    |19 |nm0000147 |Colin Firth       |
-|Romance    |18 |nm0000173 |Nicole Kidman     |
-|Romance    |18 |nm0748620 |Paul Rudd         |
-|Romance    |18 |nm0000424 |Hugh Grant        |
-|Sci-Fi     |22 |nm0424060 |Scarlett Johansson|
-|Sci-Fi     |17 |nm0262635 |Chris Evans       |
-|Sci-Fi     |16 |nm0000375 |Robert Downey Jr. |
-|Sci-Fi     |16 |nm0413168 |Hugh Jackman      |
-|Sci-Fi     |14 |nm2225369 |Jennifer Lawrence |
-|Sport      |12 |nm0000230 |Sylvester Stallone|
-|Sport      |8  |nm0949350 |Burt Young        |
-|Sport      |6  |nm0001835 |Carl Weathers     |
-|Sport      |5  |nm0001191 |Adam Sandler      |
-|Sport      |5  |nm0000598 |Dennis Quaid      |
-|Thriller   |34 |nm0000115 |Nicolas Cage      |
-|Thriller   |32 |nm0000246 |Bruce Willis      |
-|Thriller   |28 |nm0005458 |Jason Statham     |
-|Thriller   |24 |nm0000553 |Liam Neeson       |
-|Thriller   |20 |nm0000134 |Robert De Niro    |
-|War        |5  |nm0000039 |Deborah Kerr      |
-|War        |5  |nm0000078 |John Wayne        |
-|War        |4  |nm0000044 |Burt Lancaster    |
-|War        |4  |nm0000661 |Donald Sutherland |
-|War        |4  |nm0229301 |Branko Djuric     |
-|Western    |21 |nm0000078 |John Wayne        |
-|Western    |10 |nm0000142 |Clint Eastwood    |
-|Western    |8  |nm0000071 |James Stewart     |
-|Western    |7  |nm0424565 |Ben Johnson       |
-|Western    |7  |nm0001013 |Harry Carey Jr.   |
-
+|genre             |# of movies|nconst    |primaryname       |
+|------------------|-----------|----------|------------------|
+|Action            |59         |nm0000329 |Jackie Chan       |
+|Action            |45         |nm0000168 |Samuel L. Jackson |
+|Action            |43         |nm0000246 |Bruce Willis      |
+|Action            |41         |nm0000115 |Nicolas Cage      |
+|Action            |38         |nm0005458 |Jason Statham     |
+|Adventure         |29         |nm0000168 |Samuel L. Jackson |
+|Adventure         |28         |nm0000329 |Jackie Chan       |
+|Adventure         |24         |nm0000092 |John Cleese       |
+|Adventure         |24         |nm0000125 |Sean Connery      |
+|Adventure         |24         |nm0000568 |Frank Oz          |
+|Animation         |25         |nm0370677 |Megumi Hayashibara|
+|Animation         |23         |nm0191906 |Jim Cummings      |
+|Animation         |22         |nm0224007 |John DiMaggio     |
+|Animation         |21         |nm0444786 |Tom Kenny         |
+|Animation         |20         |nm0853301 |Veronica Taylor   |
+|Biography         |14         |nm0000164 |Anthony Hopkins   |
+|Biography         |11         |nm0000136 |Johnny Depp       |
+|Biography         |11         |nm0000134 |Robert De Niro    |
+|Biography         |10         |nm0000173 |Nicole Kidman     |
+|Biography         |10         |nm0765597 |Peter Sarsgaard   |
+|Comedy            |56         |nm0000552 |Eddie Murphy      |
+|Comedy            |48         |nm0001191 |Adam Sandler      |
+|Comedy            |44         |nm0474774 |Akshay Kumar      |
+|Comedy            |43         |nm0000329 |Jackie Chan       |
+|Comedy            |42         |nm0002071 |Will Ferrell      |
+|Crime             |40         |nm0000134 |Robert De Niro    |
+|Crime             |37         |nm0000168 |Samuel L. Jackson |
+|Crime             |31         |nm0000115 |Nicolas Cage      |
+|Crime             |28         |nm0000246 |Bruce Willis      |
+|Crime             |26         |nm0000151 |Morgan Freeman    |
+|Documentary       |3          |nm0001385 |Eric Idle         |
+|Documentary       |3          |nm0001037 |Graham Chapman    |
+|Documentary       |3          |nm0077103 |Max Bernstein     |
+|Documentary       |3          |nm1396916 |Stacy Jones       |
+|Documentary       |3          |nm11593352|Mike Meadows      |
+|Drama             |63         |nm0000134 |Robert De Niro    |
+|Drama             |48         |nm0474774 |Akshay Kumar      |
+|Drama             |46         |nm0000164 |Anthony Hopkins   |
+|Drama             |46         |nm0000173 |Nicole Kidman     |
+|Drama             |45         |nm0000658 |Meryl Streep      |
+|Family            |14         |nm0324397 |Dave Goelz        |
+|Family            |14         |nm0000245 |Robin Williams    |
+|Family            |11         |nm0926209 |Steve Whitmire    |
+|Family            |11         |nm0000568 |Frank Oz          |
+|Family            |10         |nm0173416 |Pinto Colvig      |
+|Fantasy           |15         |nm0000115 |Nicolas Cage      |
+|Fantasy           |13         |nm0000353 |Willem Dafoe      |
+|Fantasy           |12         |nm0000136 |Johnny Depp       |
+|Fantasy           |12         |nm0842770 |Tilda Swinton     |
+|Fantasy           |11         |nm0427964 |Doug Jones        |
+|Film-Noir         |6          |nm0000007 |Humphrey Bogart   |
+|Film-Noir         |5          |nm0000044 |Burt Lancaster    |
+|Film-Noir         |4          |nm0505249 |Sam Levene        |
+|Film-Noir         |4          |nm0000074 |Gene Tierney      |
+|Film-Noir         |4          |nm0000080 |Orson Welles      |
+|History           |10         |nm0000146 |Ralph Fiennes     |
+|History           |7          |nm0001426 |Ben Kingsley      |
+|History           |7          |nm0000553 |Liam Neeson       |
+|History           |7          |nm0117709 |Daniel Brühl      |
+|History           |7          |nm0929489 |Tom Wilkinson     |
+|Horror            |18         |nm0000387 |Robert Englund    |
+|Horror            |15         |nm0000374 |Brad Dourif       |
+|Horror            |14         |nm0068551 |Tobin Bell        |
+|Horror            |13         |nm0000353 |Willem Dafoe      |
+|Horror            |12         |nm0000130 |Jamie Lee Curtis  |
+|Music             |5          |nm0000288 |Christian Bale    |
+|Music             |5          |nm0571106 |Michael McKean    |
+|Music             |4          |nm0001749 |Maggie Smith      |
+|Music             |4          |nm0000949 |Cate Blanchett    |
+|Music             |4          |nm0000191 |Ewan McGregor     |
+|Musical           |13         |nm0451321 |Shah Rukh Khan    |
+|Musical           |8          |nm0006795 |Salman Khan       |
+|Musical           |8          |nm0481363 |Reema Lagoo       |
+|Musical           |7          |nm0622186 |Alok Nath         |
+|Musical           |7          |nm0451600 |Anupam Kher       |
+|Mystery           |15         |nm0000173 |Nicole Kidman     |
+|Mystery           |14         |nm0933940 |Patrick Wilson    |
+|Mystery           |13         |nm0000115 |Nicolas Cage      |
+|Mystery           |12         |nm0915208 |Naomi Watts       |
+|Mystery           |12         |nm0000243 |Denzel Washington |
+|News              |1          |nm16734548|Suchitra          |
+|News              |1          |nm1498640 |Zana Briski       |
+|News              |1          |nm2092248 |Shanti Das        |
+|News              |1          |nm2095158 |Manik             |
+|News              |1          |nm2099087 |Avijit Halder     |
+|Romance           |20         |nm0000210 |Julia Roberts     |
+|Romance           |19         |nm0000147 |Colin Firth       |
+|Romance           |18         |nm0000173 |Nicole Kidman     |
+|Romance           |18         |nm0748620 |Paul Rudd         |
+|Romance           |18         |nm0000424 |Hugh Grant        |
+|Sci-Fi            |22         |nm0424060 |Scarlett Johansson|
+|Sci-Fi            |17         |nm0262635 |Chris Evans       |
+|Sci-Fi            |16         |nm0000375 |Robert Downey Jr. |
+|Sci-Fi            |16         |nm0413168 |Hugh Jackman      |
+|Sci-Fi            |14         |nm2225369 |Jennifer Lawrence |
+|Sport             |12         |nm0000230 |Sylvester Stallone|
+|Sport             |8          |nm0949350 |Burt Young        |
+|Sport             |6          |nm0001835 |Carl Weathers     |
+|Sport             |5          |nm0001191 |Adam Sandler      |
+|Sport             |5          |nm0000598 |Dennis Quaid      |
+|Thriller          |34         |nm0000115 |Nicolas Cage      |
+|Thriller          |32         |nm0000246 |Bruce Willis      |
+|Thriller          |28         |nm0005458 |Jason Statham     |
+|Thriller          |24         |nm0000553 |Liam Neeson       |
+|Thriller          |20         |nm0000134 |Robert De Niro    |
+|War               |5          |nm0000039 |Deborah Kerr      |
+|War               |5          |nm0000078 |John Wayne        |
+|War               |4          |nm0000044 |Burt Lancaster    |
+|War               |4          |nm0000661 |Donald Sutherland |
+|War               |4          |nm0229301 |Branko Djuric     |
+|Western           |21         |nm0000078 |John Wayne        |
+|Western           |10         |nm0000142 |Clint Eastwood    |
+|Western           |8          |nm0000071 |James Stewart     |
+|Western           |7          |nm0424565 |Ben Johnson       |
+|Western           |7          |nm0001013 |Harry Carey Jr.   |
 
 ### Which actors have the longest career span between their first and last movie?
 
+|primaryname       |nconst   |careerspan|from|till|birthyear|deathyear|
+|------------------|---------|----------|----|----|---------|---------|
+|Francia Seguy     |nm0782229|87        |1917|2004|1914     |2013     |
+|Carla Laemmle     |nm0480675|85        |1928|2013|1909     |2014     |
+|Karl Friedrich    |nm0294914|84        |1932|2016|1929     |2021     |
+|Hanna Maron       |nm0576754|83        |1929|2012|1923     |2014     |
+|Mária Szepes      |nm0843993|83        |1916|1999|1908     |2007     |
+|Gisèle Casadesus  |nm0142704|83        |1934|2017|1914     |2017     |
+|Alberto de Mendoza|nm0210274|81        |1930|2011|1923     |2011     |
+|Marsha Hunt       |nm0402554|81        |1935|2016|1917     |2022     |
+|Mickey Rooney     |nm0001682|80        |1932|2012|1920     |2014     |
+|Milton Berle      |nm0000926|80        |1920|2000|1908     |2002     |
 
 ## Trends & Analytics
 
 ### How has the average runtime of movies changed over the decades?  
 
-### What is the trend in the number of movies released per year across different countries?  
+|decade            |average_minutes|difference with previous decade|
+|------------------|---------------|-------------------------------|
+|1890              |85             |                               |
+|1900              |68             |-17                            |
+|1910              |62             |-6                             |
+|1920              |72             |10                             |
+|1930              |80             |8                              |
+|1940              |86             |6                              |
+|1950              |87             |1                              |
+|1960              |85             |-2                             |
+|1970              |86             |1                              |
+|1980              |88             |2                              |
+|1990              |88             |0                              |
+|2000              |85             |-3                             |
+|2010              |87             |2                              |
+|2020              |89             |2                              |
 
 ### Which genres have seen the biggest growth in the last 20 years?
 
 
 ## Awards & Popularity
 
-### Which directors or actors have the highest average box office revenue per film?  
+### Which directors or actors have the highest average number of votes per title_rating bracket?
 
-### What are the most common genres among Oscar-winning movies (if awards data is linked)?  
-
-### Which movies had *high ratings but low box office revenue, and vice versa?
+### What are the most common genres among movies with a score in the upper quantile (hign rated movies)?
 
 
 ## Complex Joins & Subqueries

@@ -244,23 +244,70 @@ ORDER  BY ranked.genre,
 
 
 -- Which actors have the longest career span between their first and last movie?
--- there is a problem with this, it does not take career brakes into account
--- TODO: only take movies, not shows etc. ( titletype IN ( 'movie', 'tvMovie' ) gives no result...??...)
 SELECT primaryname,
        tp.nconst,
        Max(startyear) - Min(startyear) AS careerspan,
        Min(startyear)                  AS from,
-       Max(startyear)                  AS till
+       Max(startyear)                  AS till,
+       birthyear,
+       deathyear
 FROM   title_basics AS tb
-       JOIN title_principals AS tp
-         ON tb.tconst = tp.tconst
-       JOIN name_basics AS nb
-         ON nb.nconst = tp.nconst
+       LEFT JOIN title_principals AS tp
+              ON tb.tconst = tp.tconst
+       LEFT JOIN name_basics AS nb
+              ON nb.nconst = tp.nconst
 WHERE  category IN ( 'actor', 'actress' )
+       AND titletype IN ( 'movie', 'tvMovie' )
        AND startyear IS NOT NULL
-       AND endyear IS NOT NULL
        AND isadult = false
-GROUP  BY primaryname,
-          tp.nconst
+       AND startyear <= deathyear
+       AND startyear >= birthyear
+GROUP  BY tp.nconst,
+          primaryname,
+          birthyear,
+          deathyear
 ORDER  BY careerspan DESC
 LIMIT  10; 
+
+---------------------
+-- Trends & Analytics
+---------------------
+
+-- How has the average runtime of movies changed over the decades?  
+WITH average_decades
+     AS (SELECT ( startyear / 10 ) :: INT * 10 AS decade,
+                Avg(runtimeminutes) :: INT     AS average_minutes
+         FROM   title_basics
+         WHERE  titletype IN ( 'tvMovie', 'movie' )
+                AND runtimeminutes IS NOT NULL
+                AND startyear IS NOT NULL
+         GROUP  BY decade)
+SELECT decade,
+       average_minutes,
+       average_minutes - Lag(average_minutes, 1)
+                           over(
+                             ORDER BY decade) AS
+       "difference with previous decade"
+FROM   average_decades; 
+
+
+-- Which genres have seen the biggest growth in the last 20 years?
+-- this query gives the needed data which can be used to generate the result
+-- todo: generate result
+
+with base_data as (
+	select genre, startyear, sum(numvotes) as sum_votes
+	from title_basics as tb
+	left join genres on genres.tconst=tb.tconst
+	left join title_ratings as tr on tr.tconst=tb.tconst
+	where 
+		startyear in (
+			date_part('year', CURRENT_DATE)-1,
+			date_part('year', CURRENT_DATE)-21)
+		and numvotes is not NULL
+	group by startyear, genre
+	order by genre
+)
+select *
+from base_data
+where genre in ('Adventure', 'Comedy');
