@@ -3,9 +3,9 @@
 
 ## Setting up the database
 
-### First download the data with the python script (fast)
+### First download the data
 
-Install the dependencies (with uv) and run main.py (`uv run main.py`)
+Run the `download_files.sh` script.
 
 ### Run commands to execute the creation of the database
 
