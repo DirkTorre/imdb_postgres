@@ -9,6 +9,8 @@ Run the `download_files.sh` script.
 
 ### Run commands to execute the creation of the database
 
+#### old commands for deleting the old database and creating a new one
+
 ```bash
 su - postgres
 psql -d 'postgres' -U postgres -c "DROP DATABASE IF EXISTS imdb;"
@@ -16,6 +18,20 @@ psql -d 'postgres' -U postgres -c "CREATE DATABASE imdb;"
 exit
 psql -h localhost -d imdb -U postgres -p 5432 -a -f create_and_load_data.sql
 ```
+
+#### new commands that does not remove the database, but updates values
+
+Manualy check if the database excists, if not rune the creating query below.
+Execute the rest afterwards.
+```bash
+su - postgres
+psql -d 'postgres' -U postgres -c "CREATE DATABASE imdb2;"
+exit
+psql -h localhost -d imdb2 -U postgres -p 5432 -a -f scripts/types.sql
+psql -h localhost -d imdb2 -U postgres -p 5432 -a -f scripts/tables.sql
+psql -h localhost -d imdb2 -U postgres -p 5432 -a -f scripts/update_tables.sql
+```
+
 
 ### notes
 
