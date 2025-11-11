@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS genres
 (
-    id bigserial,
+    id serial,
     tconst varchar(11) NOT NULL,
     genre enum_genre NOT NULL,
     CONSTRAINT genres_tconst_genre_key UNIQUE (tconst, genre),
@@ -43,9 +43,11 @@ CREATE TABLE IF NOT EXISTS title_basics
 
 CREATE TABLE IF NOT EXISTS title_directors
 (
+    id serial,
     tconst varchar(11),
     nconst varchar(11),
-    CONSTRAINT title_directors_tconst_nconst_key UNIQUE (tconst, nconst)
+    CONSTRAINT title_directors_tconst_nconst_key UNIQUE (tconst, nconst),
+    CONSTRAINT title_directors_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS title_principals
@@ -69,7 +71,9 @@ CREATE TABLE IF NOT EXISTS title_ratings
 
 CREATE TABLE IF NOT EXISTS title_writers
 (
+    id serial,
     tconst varchar(11),
     nconst varchar(11),
-    CONSTRAINT title_writers_tconst_nconst_key UNIQUE (tconst, nconst)
+    CONSTRAINT title_writers_tconst_nconst_key UNIQUE (tconst, nconst),
+    CONSTRAINT title_writers_pkey PRIMARY KEY (id)
 );

@@ -71,7 +71,7 @@ DROP TABLE temp_file_title_basics;
 -- replace title ratings
 -------------------------------------------
 
-TRUNCATE title_ratings;
+TRUNCATE title_ratings RESTART IDENTITY;;
 
 \copy title_ratings FROM 'data/title.ratings.tsv' DELIMITER E'\t' QUOTE E'\b' NULL '\N' CSV HEADER;
 
@@ -110,3 +110,96 @@ WHEN NOT matched THEN
           tnb.death_year);
 
 -- split profession and add to database
+
+TRUNCATE primary_profession RESTART IDENTITY;;
+
+INSERT INTO primary_profession
+SELECT nconst, unnest(string_to_array(primary_profession, ','))
+FROM temp_name_basics;
+
+-- split known_for_titles and add to database
+
+TRUNCATE known_for_titles RESTART IDENTITY;;
+
+INSERT INTO known_for_titles
+SELECT nconst, unnest(string_to_array(known_for_titles, ',')) as tconst
+FROM temp_name_basics;
+
+-- Remove rows that have a tconst that is not in title_basics
+DELETE FROM known_for_titles
+WHERE tconst IN (
+    -- find tconsts that are not in title.basics.
+    select tconst from known_for_titles
+    except
+    select tconst from title_basics
+);
+
+--------------------
+-- update title_crew
+--------------------
+
+CREATE TEMP TABLE temp_title_crew (
+    tconst varchar(11),
+    directors TEXT,
+    writers TEXT
+);
+
+\copy temp_title_crew FROM 'data/title.crew.tsv' DELIMITER E'\t' QUOTE E'\b' NULL '\N' CSV HEADER;
+
+-- create a temp table for title_directors, then filter the table
+CREATE TEMP TABLE temp_title_directors (
+    tconst varchar(11),
+    nconst varchar(11),
+    UNIQUE (tconst, nconst)
+);
+
+-- Load the title_directors data
+INSERT INTO temp_title_directors (
+    select tconst, unnest(string_to_array(directors,',')) as nconst
+    from temp_title_crew
+);
+
+DELETE FROM temp_title_directors
+WHERE nconst IN (
+    select nconst from temp_title_directors
+    except
+    select nconst from name_basics
+);
+
+TRUNCATE title_directors RESTART IDENTITY;;
+
+INSERT INTO title_directors (tconst, nconst)
+SELECT tconst, nconst
+FROM temp_title_directors;
+
+-- do the same for title_writers
+
+CREATE TEMP TABLE temp_title_writers (
+    tconst varchar(11),
+    nconst varchar(11),
+    UNIQUE (tconst, nconst)
+);
+
+-- Load the title_directors data
+INSERT INTO temp_title_writers (
+    select tconst, unnest(string_to_array(writers,',')) as nconst
+    from temp_title_crew
+);
+
+DELETE FROM temp_title_writers
+WHERE nconst IN (
+    select nconst from temp_title_writers
+    except
+    select nconst from name_basics
+);
+
+TRUNCATE title_writers RESTART IDENTITY;;
+
+INSERT INTO title_writers (tconst, nconst)
+SELECT tconst, nconst
+FROM temp_title_writers;
+
+
+-- --------------------------
+-- -- update title principals
+-- --------------------------
