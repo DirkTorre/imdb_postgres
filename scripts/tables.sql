@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS title_principals
     nconst varchar(11),
     category enum_job_category,
     job text,
-    characters text,
+    characters text[],
     CONSTRAINT title_principals_pkey PRIMARY KEY (tconst, ordering)
 );
 
