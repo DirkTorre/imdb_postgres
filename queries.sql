@@ -15,10 +15,10 @@
 --     - more than 5 movies per director
 -- Note: A lot of smaller directors have 1 movie that is popular somewhere.
 --       To filter them out I take an average number of movies of 10.000 per director.
- SELECT nb.primaryname          AS director,
+ SELECT nb.primary_name         AS director,
        nb.nconst,
-       Avg(tr.averagerating)   AS avg_rating,
-       Count(tr.averagerating) AS num_movies
+       Avg(tr.average_rating)   AS avg_rating,
+       Count(tr.average_rating) AS num_movies
 FROM   title_directors AS td
        JOIN title_ratings AS tr
          ON tr.tconst = td.tconst
@@ -26,14 +26,14 @@ FROM   title_directors AS td
          ON tr.tconst = tb.tconst
        JOIN name_basics AS nb
          ON td.nconst = nb.nconst
-WHERE  tb.isadult = false
+WHERE  tb.is_adult = false
 GROUP  BY td.nconst,
-          tb.titletype,
-          nb.primaryname,
+          tb.title_type,
+          nb.primary_name,
           nb.nconst
-HAVING tb.titletype IN ( 'tvMovie', 'movie' )
-       AND Count(tr.averagerating) > 5
-       AND Avg(tr.numvotes) > 10000
+HAVING tb.title_type IN ( 'tvMovie', 'movie' )
+       AND Count(tr.average_rating) > 5
+       AND Avg(tr.num_votes) > 10000
 ORDER  BY avg_rating DESC
 LIMIT  10; 
 
@@ -44,21 +44,21 @@ LIMIT  10;
 -- needed: title, release date, score, gives a 
 -- different result every time it is executed because of movies with the same score
 WITH ranked
-     AS (SELECT tb.primarytitle,
-                tb.startyear,
+     AS (SELECT tb.primary_title,
+                tb.start_year,
                 tr.tconst,
-                ( tb.startyear / 10 ) :: INT * 10    AS decade,
-                tr.averagerating,
+                ( tb.start_year / 10 ) :: INT * 10    AS decade,
+                tr.average_rating,
                 Row_number()
                   over (
-                    PARTITION BY (tb.startyear / 10)::INT * 10
-                    ORDER BY tr.averagerating DESC ) AS cat_rank
+                    PARTITION BY (tb.start_year / 10)::INT * 10
+                    ORDER BY tr.average_rating DESC ) AS cat_rank
          FROM   title_ratings tr
                 inner join title_basics tb
                         ON tb.tconst = tr.tconst
-         WHERE  tb.titletype IN ( 'tvMovie', 'movie' )
-                AND tr.numvotes > 10000
-                AND tb.isadult = false)
+         WHERE  tb.title_type IN ( 'tvMovie', 'movie' )
+                AND tr.num_votes > 10000
+                AND tb.is_adult = false)
 SELECT *
 FROM   ranked
 WHERE  cat_rank <= 10
@@ -79,8 +79,8 @@ AS
              SELECT     tp.nconst                 AS actor1,
                         tp2.nconst                AS actor2,
                         count(DISTINCT tr.tconst) AS title_count,
-                        avg(tr.averagerating)     AS average_rating,
-                        sum(tr.numvotes)          AS total_votes
+                        avg(tr.average_rating)     AS average_rating,
+                        sum(tr.num_votes)          AS total_votes
              FROM       title_principals tp
              JOIN       title_principals tp2
               ON         tp.tconst=tp2.tconst
@@ -89,16 +89,16 @@ AS
              INNER JOIN title_ratings tr
               ON         tp.tconst=tr.tconst
              WHERE      tp.nconst < tp2.nconst
-              AND        tb.titletype IN ('movie','tvMovie')
+              AND        tb.title_type IN ('movie','tvMovie')
               AND        tp.category IN ('actor','actress')
               AND        tp2.category IN ('actor','actress')
              GROUP BY   tp.nconst,
                         tp2.nconst
              ORDER BY   title_count DESC)
   SELECT actor1,
-         nb1.primaryname,
+         nb1.primary_name,
          actor2,
-         nb2.primaryname,
+         nb2.primary_name,
          title_count,
          average_rating,
          total_votes
@@ -119,8 +119,8 @@ AS
     SELECT     tp.nconst                AS actor1,
               tp2.nconst                AS actor2,
               count(DISTINCT tr.tconst) AS title_count,
-              avg(tr.averagerating)     AS average_rating,
-              sum(tr.numvotes)          AS total_votes
+              avg(tr.average_rating)     AS average_rating,
+              sum(tr.num_votes)          AS total_votes
     FROM       title_principals tp
     JOIN       title_principals tp2
       ON         tp.tconst=tp2.tconst
@@ -129,16 +129,16 @@ AS
     INNER JOIN title_ratings tr
       ON         tp.tconst=tr.tconst
     WHERE      tp.nconst < tp2.nconst
-      AND        tb.titletype IN ('movie','tvMovie')
+      AND        tb.title_type IN ('movie','tvMovie')
       AND        tp.category IN ('actor','actress')
       AND        tp2.category IN ('actor','actress')
     GROUP BY   tp.nconst,
               tp2.nconst
     ORDER BY   title_count DESC)
 SELECT   actor1,
-          nb1.primaryname,
+          nb1.primary_name,
           actor2,
-          nb2.primaryname,
+          nb2.primary_name,
           title_count,
           average_rating,
           total_votes
@@ -166,9 +166,9 @@ WITH base_data
                   ON tp.tconst = tb.tconst
                 JOIN genres AS g
                   ON g.tconst = tb.tconst
-         WHERE  titletype IN ( 'movie', 'tvMovie' )
+         WHERE  title_type IN ( 'movie', 'tvMovie' )
                 AND category IN ( 'actor', 'actress' )
-                AND isadult = false),
+                AND is_adult = false),
      grouped
      AS (SELECT genre,
                 nconst,
@@ -188,7 +188,7 @@ WITH base_data
 SELECT ranked.genre,
        tconst_count AS "# of movies",
        ranked.nconst,
-       primaryname
+       primary_name
 FROM   ranked
        LEFT JOIN name_basics AS nb
               ON nb.nconst = ranked.nconst
@@ -210,10 +210,10 @@ WITH base_data
                   ON tp.tconst = tb.tconst
                 JOIN genres AS g
                   ON g.tconst = tb.tconst
-         WHERE  titletype IN ( 'movie', 'tvMovie' )
+         WHERE  title_type IN ( 'movie', 'tvMovie' )
                 AND category IN ( 'actor', 'actress' )
-                AND isadult = false
-                AND tr.numvotes > 10000),
+                AND is_adult = false
+                AND tr.num_votes > 10000),
      grouped
      AS (SELECT genre,
                 nconst,
@@ -233,7 +233,7 @@ WITH base_data
 SELECT ranked.genre,
        tconst_count AS "# of movies",
        ranked.nconst,
-       primaryname
+       primary_name
 FROM   ranked
        LEFT JOIN name_basics AS nb
               ON nb.nconst = ranked.nconst
@@ -244,28 +244,28 @@ ORDER  BY ranked.genre,
 
 
 -- Which actors have the longest career span between their first and last movie?
-SELECT primaryname,
+SELECT primary_name,
        tp.nconst,
-       Max(startyear) - Min(startyear) AS careerspan,
-       Min(startyear)                  AS from,
-       Max(startyear)                  AS till,
-       birthyear,
-       deathyear
+       Max(start_year) - Min(start_year) AS careerspan,
+       Min(start_year)                  AS from,
+       Max(start_year)                  AS till,
+       birth_year,
+       death_year
 FROM   title_basics AS tb
        LEFT JOIN title_principals AS tp
               ON tb.tconst = tp.tconst
        LEFT JOIN name_basics AS nb
               ON nb.nconst = tp.nconst
 WHERE  category IN ( 'actor', 'actress' )
-       AND titletype IN ( 'movie', 'tvMovie' )
-       AND startyear IS NOT NULL
-       AND isadult = false
-       AND startyear <= deathyear
-       AND startyear >= birthyear
+       AND title_type IN ( 'movie', 'tvMovie' )
+       AND start_year IS NOT NULL
+       AND is_adult = false
+       AND start_year <= death_year
+       AND start_year >= birth_year
 GROUP  BY tp.nconst,
-          primaryname,
-          birthyear,
-          deathyear
+          primary_name,
+          birth_year,
+          death_year
 ORDER  BY careerspan DESC
 LIMIT  10; 
 
@@ -275,12 +275,12 @@ LIMIT  10;
 
 -- How has the average runtime of movies changed over the decades?  
 WITH average_decades
-     AS (SELECT ( startyear / 10 ) :: INT * 10 AS decade,
-                Avg(runtimeminutes) :: INT     AS average_minutes
+     AS (SELECT ( start_year / 10 ) :: INT * 10 AS decade,
+                Avg(runtime_minutes) :: INT     AS average_minutes
          FROM   title_basics
-         WHERE  titletype IN ( 'tvMovie', 'movie' )
-                AND runtimeminutes IS NOT NULL
-                AND startyear IS NOT NULL
+         WHERE  title_type IN ( 'tvMovie', 'movie' )
+                AND runtime_minutes IS NOT NULL
+                AND start_year IS NOT NULL
          GROUP  BY decade)
 SELECT decade,
        average_minutes,
@@ -296,16 +296,16 @@ FROM   average_decades;
 -- todo: generate result
 
 with base_data as (
-	select genre, startyear, sum(numvotes) as sum_votes
+	select genre, start_year, sum(num_votes) as sum_votes
 	from title_basics as tb
 	left join genres on genres.tconst=tb.tconst
 	left join title_ratings as tr on tr.tconst=tb.tconst
 	where 
-		startyear in (
+		start_year in (
 			date_part('year', CURRENT_DATE)-1,
 			date_part('year', CURRENT_DATE)-21)
-		and numvotes is not NULL
-	group by startyear, genre
+		and num_votes is not NULL
+	group by start_year, genre
 	order by genre
 )
 select *
