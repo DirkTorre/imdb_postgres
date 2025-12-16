@@ -1,210 +1,231 @@
--- --------------------------------
--- -- Loading the title_basics data
--- --------------------------------
+--------------------------------
+-- Loading the title_basics data
+--------------------------------
 
--- CREATE TEMP TABLE temp_file_title_basics (
+CREATE TEMP TABLE temp_file_title_basics (
 
---     tconst VARCHAR(11) PRIMARY KEY,
---     title_type enum_titletype,
---     primary_title TEXT,
---     original_title TEXT,
---     is_adult BOOLEAN,
---     start_year SMALLINT,
---     end_year SMALLINT,
---     runtime_minutes INTEGER,
---     genres TEXT
--- );
+    tconst VARCHAR(11) PRIMARY KEY,
+    title_type enum_titletype,
+    primary_title TEXT,
+    original_title TEXT,
+    is_adult BOOLEAN,
+    start_year SMALLINT,
+    end_year SMALLINT,
+    runtime_minutes INTEGER,
+    genres TEXT
+);
 
--- \copy temp_file_title_basics FROM 'data/title.basics.tsv' DELIMITER E'\t' QUOTE E'\b' NULL '\N' CSV HEADER;
+\copy temp_file_title_basics FROM 'data/title.basics.tsv' DELIMITER E'\t' QUOTE E'\b' NULL '\N' CSV HEADER;
 
 
--- --------------------
--- -- Insert and update new genres
--- --------------------
+--------------------
+-- Insert and update new genres
+--------------------
 
--- -- it's faster to recreate this table than it is to search for updates
--- TRUNCATE genres RESTART IDENTITY;
+-- it's faster to recreate this table than it is to search for updates
+TRUNCATE genres RESTART IDENTITY;
 
--- INSERT INTO genres (tconst, genre)
--- 	SELECT tconst, unnest(string_to_array(genres, ','))::enum_genre as genre
---     FROM temp_file_title_basics
---     WHERE genres IS NOT NULL;
+INSERT INTO genres (tconst, genre)
+	SELECT tconst, unnest(string_to_array(genres, ','))::enum_genre as genre
+    FROM temp_file_title_basics
+    WHERE genres IS NOT NULL;
 
--- --------------------
--- -- Insert and update new title_basics
--- --------------------
+--------------------
+-- Insert and update new title_basics
+--------------------
 
--- -- Note: this merge will not remove movies, which can be interesting when movies get cancelled
+-- Note: this merge will not remove movies, which can be interesting when movies get cancelled
 
--- MERGE INTO title_basics tb
--- using temp_file_title_basics tftb
--- ON tb.tconst = tftb.tconst
--- WHEN matched THEN
---   UPDATE SET title_type = tftb.title_type,
---              primary_title = tftb.primary_title,
---              original_title = tftb.original_title,
---              is_adult = tftb.is_adult,
---              start_year = tftb.start_year,
---              end_year = tftb.end_year,
---              runtime_minutes = tftb.runtime_minutes
--- WHEN NOT matched THEN
---   INSERT (tconst,
---           title_type,
---           primary_title,
---           original_title,
---           is_adult,
---           start_year,
---           end_year,
---           runtime_minutes)
---   VALUES (tftb.tconst,
---           tftb.title_type,
---           tftb.primary_title,
---           tftb.original_title,
---           tftb.is_adult,
---           tftb.start_year,
---           tftb.end_year,
---           tftb.runtime_minutes);
+MERGE INTO title_basics tb
+using temp_file_title_basics tftb
+ON tb.tconst = tftb.tconst
+WHEN matched THEN
+  UPDATE SET title_type = tftb.title_type,
+             primary_title = tftb.primary_title,
+             original_title = tftb.original_title,
+             is_adult = tftb.is_adult,
+             start_year = tftb.start_year,
+             end_year = tftb.end_year,
+             runtime_minutes = tftb.runtime_minutes
+WHEN NOT matched THEN
+  INSERT (tconst,
+          title_type,
+          primary_title,
+          original_title,
+          is_adult,
+          start_year,
+          end_year,
+          runtime_minutes)
+  VALUES (tftb.tconst,
+          tftb.title_type,
+          tftb.primary_title,
+          tftb.original_title,
+          tftb.is_adult,
+          tftb.start_year,
+          tftb.end_year,
+          tftb.runtime_minutes);
 
--- DROP TABLE temp_file_title_basics;
+DROP TABLE temp_file_title_basics;
 
--- -------------------------------------------
--- -- replace title ratings
--- -------------------------------------------
+-----------------------------------------
+-- replace title ratings
+-----------------------------------------
 
--- TRUNCATE title_ratings RESTART IDENTITY;;
+TRUNCATE title_ratings RESTART IDENTITY;
 
--- \copy title_ratings FROM 'data/title.ratings.tsv' DELIMITER E'\t' QUOTE E'\b' NULL '\N' CSV HEADER;
+CREATE TEMP TABLE IF NOT EXISTS temp_title_ratings
+(
+    tconst varchar(11) COLLATE pg_catalog."default" NOT NULL,
+    average_rating numeric(3, 1),
+    num_votes integer,
+    CONSTRAINT temp_title_ratings_pk PRIMARY KEY (tconst)
+);
 
--- ------------------------
--- -- update name basics --
--- ------------------------
+\copy temp_title_ratings FROM 'data/title.ratings.tsv' DELIMITER E'\t' QUOTE E'\b' NULL '\N' CSV HEADER;
 
--- CREATE TEMP TABLE temp_name_basics (
---     nconst VARCHAR(11) PRIMARY KEY,
---     primary_name VARCHAR(120),
---     birth_year SMALLINT,
---     death_year SMALLINT,
---     primary_profession TEXT,
---     known_for_titles TEXT
--- );
+-- remove rows that are not in temp_title_basics
+DELETE FROM temp_title_ratings 
+WHERE tconst IN (
+    select tconst
+    from temp_title_ratings
+    except
+    select tconst
+    from title_basics);
 
--- \copy temp_name_basics FROM 'data/name.basics.tsv' DELIMITER E'\t' QUOTE E'\b' NULL '\N' CSV HEADER;
+INSERT INTO title_ratings (tconst, average_rating, num_votes)
+SELECT tconst, average_rating, num_votes
+FROM temp_title_ratings;
 
--- -- first update name_basics
+------------------------
+-- update name basics --
+------------------------
 
--- MERGE INTO name_basics nb
--- using temp_name_basics tnb
--- ON nb.nconst = tnb.nconst
--- WHEN matched THEN
---   UPDATE SET primary_name = tnb.primary_name,
---              birth_year = tnb.birth_year,
---              death_year = tnb.death_year
--- WHEN NOT matched THEN
---   INSERT (nconst,
---           primary_name,
---           birth_year,
---           death_year)
---   VALUES (tnb.nconst,
---           tnb.primary_name,
---           tnb.birth_year,
---           tnb.death_year);
+CREATE TEMP TABLE temp_name_basics (
+    nconst VARCHAR(11) PRIMARY KEY,
+    primary_name VARCHAR(120),
+    birth_year SMALLINT,
+    death_year SMALLINT,
+    primary_profession TEXT,
+    known_for_titles TEXT
+);
 
--- -- split profession and add to database
+\copy temp_name_basics FROM 'data/name.basics.tsv' DELIMITER E'\t' QUOTE E'\b' NULL '\N' CSV HEADER;
 
--- TRUNCATE primary_profession RESTART IDENTITY;;
+-- first update name_basics
 
--- INSERT INTO primary_profession
--- SELECT nconst, unnest(string_to_array(primary_profession, ','))
--- FROM temp_name_basics;
+MERGE INTO name_basics nb
+using temp_name_basics tnb
+ON nb.nconst = tnb.nconst
+WHEN matched THEN
+  UPDATE SET primary_name = tnb.primary_name,
+             birth_year = tnb.birth_year,
+             death_year = tnb.death_year
+WHEN NOT matched THEN
+  INSERT (nconst,
+          primary_name,
+          birth_year,
+          death_year)
+  VALUES (tnb.nconst,
+          tnb.primary_name,
+          tnb.birth_year,
+          tnb.death_year);
 
--- -- split known_for_titles and add to database
+-- split profession and add to database
 
--- TRUNCATE known_for_titles RESTART IDENTITY;;
+TRUNCATE primary_profession RESTART IDENTITY;;
 
--- INSERT INTO known_for_titles
--- SELECT nconst, unnest(string_to_array(known_for_titles, ',')) as tconst
--- FROM temp_name_basics;
+INSERT INTO primary_profession
+SELECT nconst, unnest(string_to_array(primary_profession, ','))
+FROM temp_name_basics;
 
--- -- Remove rows that have a tconst that is not in title_basics
--- DELETE FROM known_for_titles
--- WHERE tconst IN (
---     -- find tconsts that are not in title.basics.
---     select tconst from known_for_titles
---     except
---     select tconst from title_basics
--- );
+-- split known_for_titles and add to database
 
--- --------------------
--- -- update title_crew
--- --------------------
+TRUNCATE known_for_titles RESTART IDENTITY;;
 
--- CREATE TEMP TABLE temp_title_crew (
---     tconst varchar(11),
---     directors TEXT,
---     writers TEXT
--- );
+INSERT INTO known_for_titles
+SELECT nconst, unnest(string_to_array(known_for_titles, ',')) as tconst
+FROM temp_name_basics;
 
--- \copy temp_title_crew FROM 'data/title.crew.tsv' DELIMITER E'\t' QUOTE E'\b' NULL '\N' CSV HEADER;
+-- Remove rows that have a tconst that is not in title_basics
+DELETE FROM known_for_titles
+WHERE tconst IN (
+    -- find tconsts that are not in title.basics.
+    select tconst from known_for_titles
+    except
+    select tconst from title_basics
+);
 
--- -- create a temp table for title_directors, then filter the table
--- CREATE TEMP TABLE temp_title_directors (
---     tconst varchar(11),
---     nconst varchar(11),
---     UNIQUE (tconst, nconst)
--- );
+--------------------
+-- update title_crew
+--------------------
 
--- -- Load the title_directors data
--- INSERT INTO temp_title_directors (
---     select tconst, unnest(string_to_array(directors,',')) as nconst
---     from temp_title_crew
--- );
+CREATE TEMP TABLE temp_title_crew (
+    tconst varchar(11),
+    directors TEXT,
+    writers TEXT
+);
 
--- DELETE FROM temp_title_directors
--- WHERE nconst IN (
---     select nconst from temp_title_directors
---     except
---     select nconst from name_basics
--- );
+\copy temp_title_crew FROM 'data/title.crew.tsv' DELIMITER E'\t' QUOTE E'\b' NULL '\N' CSV HEADER;
 
--- TRUNCATE title_directors RESTART IDENTITY;;
+-- create a temp table for title_directors, then filter the table
+CREATE TEMP TABLE temp_title_directors (
+    tconst varchar(11),
+    nconst varchar(11),
+    UNIQUE (tconst, nconst)
+);
 
--- INSERT INTO title_directors (tconst, nconst)
--- SELECT tconst, nconst
--- FROM temp_title_directors;
+-- Load the title_directors data
+INSERT INTO temp_title_directors (
+    select tconst, unnest(string_to_array(directors,',')) as nconst
+    from temp_title_crew
+);
 
--- -- do the same for title_writers
+DELETE FROM temp_title_directors
+WHERE nconst IN (
+    select nconst from temp_title_directors
+    except
+    select nconst from name_basics
+);
 
--- CREATE TEMP TABLE temp_title_writers (
---     tconst varchar(11),
---     nconst varchar(11),
---     UNIQUE (tconst, nconst)
--- );
+TRUNCATE title_directors RESTART IDENTITY;;
 
--- -- Load the title_directors data
--- INSERT INTO temp_title_writers (
---     select tconst, unnest(string_to_array(writers,',')) as nconst
---     from temp_title_crew
--- );
+INSERT INTO title_directors (tconst, nconst)
+SELECT tconst, nconst
+FROM temp_title_directors;
 
--- DELETE FROM temp_title_writers
--- WHERE nconst IN (
---     select nconst from temp_title_writers
---     except
---     select nconst from name_basics
--- );
+-- do the same for title_writers
 
--- TRUNCATE title_writers RESTART IDENTITY;;
+CREATE TEMP TABLE temp_title_writers (
+    tconst varchar(11),
+    nconst varchar(11),
+    UNIQUE (tconst, nconst)
+);
 
--- INSERT INTO title_writers (tconst, nconst)
--- SELECT tconst, nconst
--- FROM temp_title_writers;
+-- Load the title_directors data
+INSERT INTO temp_title_writers (
+    select tconst, unnest(string_to_array(writers,',')) as nconst
+    from temp_title_crew
+);
+
+DELETE FROM temp_title_writers
+WHERE nconst IN (
+    select nconst from temp_title_writers
+    except
+    select nconst from name_basics
+);
+
+TRUNCATE title_writers RESTART IDENTITY;;
+
+INSERT INTO title_writers (tconst, nconst)
+SELECT tconst, nconst
+FROM temp_title_writers;
 
 
 --------------------------
 -- update title principals
 --------------------------
 
-CREATE TABLE IF NOT EXISTS temp_title_principals       
+CREATE TEMP TABLE temp_title_principals
 (
     tconst varchar(11) NOT NULL,
     ordering smallint NOT NULL,
@@ -216,15 +237,6 @@ CREATE TABLE IF NOT EXISTS temp_title_principals
 
 \copy temp_title_principals FROM 'data/title.principals.tsv' DELIMITER E'\t' QUOTE E'\b' NULL '\N' CSV HEADER;
 
-
--- TODO: this does not work??????
-update temp_title_principals
-set characters = string_to_array(
-    translate(
-        replace(characters,' "," ','@'),
-        '[]"\', ''),
-    '@')::text[];
-
 -- Remove rows that have a nconst that is not in name_basics
 DELETE FROM temp_title_principals
 WHERE nconst IN (
@@ -233,38 +245,11 @@ WHERE nconst IN (
     select nconst from name_basics
 );
 
--- I think we can use a merge here, but it might not remove anything
--- it's possible to remove rows, see notes in readme file
 
-MERGE INTO title_principals tp
-using temp_title_principals ttp
-ON tp.tconst = ttp.tconst AND tp.ordering = ttp.ordering
-WHEN matched THEN
-  UPDATE SET 
-    nconst = ttp.nconst,
-    category = ttp.category,
-    job = ttp.job,
-    characters = string_to_array(
-    translate(
-        replace(ttp.characters,' "," ','@'),
-        '[]"\', ''),
-    '@')::text[]
-WHEN NOT matched THEN
-  INSERT (
-    tconst,
-    ordering,
-    nconst,
-    category,
-    job,
-    characters)
-  VALUES (
-    ttp.tconst,
-    ttp.ordering,
-    ttp.nconst,
-    ttp.category,
-    ttp.job,
-    string_to_array(
-    translate(
-        replace(ttp.characters,' "," ','@'),
-        '[]"\', ''),
-    '@')::text[]);
+-- because updating this big table takes forever, we are better off just replacing it with new data
+TRUNCATE title_principals
+RESTART IDENTITY;
+
+INSERT INTO title_principals (tconst, ordering, nconst, category, job, characters)
+SELECT tconst, ordering, nconst, category, job, characters
+FROM temp_title_principals;

@@ -52,8 +52,6 @@ ALTER TABLE IF EXISTS title_ratings
     REFERENCES title_basics (tconst) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE CASCADE;
-CREATE INDEX IF NOT EXISTS title_ratings_pk
-    ON title_ratings(tconst);
 
 
 ALTER TABLE IF EXISTS title_writers
@@ -69,3 +67,16 @@ ALTER TABLE IF EXISTS title_writers
     ON UPDATE NO ACTION
     ON DELETE NO ACTION;
 
+
+CREATE INDEX IF NOT EXISTS title_ratings_index
+    ON title_ratings(tconst);
+
+CREATE INDEX IF NOT EXISTS title_basics_index
+    ON title_basics(tconst);
+
+CREATE INDEX IF NOT EXISTS name_basics_index
+    ON name_basics(nconst);
+
+CREATE INDEX IF NOT EXISTS title_principals_index
+    ON title_principals(tconst, ordering);
+    

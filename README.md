@@ -21,8 +21,8 @@ psql -h localhost -d imdb -U postgres -p 5432 -a -f create_and_load_data.sql
 
 #### new commands that does not remove the database, but updates values
 
-Manualy check if the database excists, if not run the creating query below.
-Execute the rest afterwards.
+At first run, manualy check if the database excists, if not run the code below.
+
 ```bash
 su - postgres
 psql -d 'postgres' -U postgres -c "CREATE DATABASE imdb2;"
@@ -30,6 +30,16 @@ exit
 psql -h localhost -d imdb2 -U postgres -p 5432 -a -f scripts/types.sql
 psql -h localhost -d imdb2 -U postgres -p 5432 -a -f scripts/tables.sql
 psql -h localhost -d imdb2 -U postgres -p 5432 -a -f scripts/update_tables.sql
+psql -h localhost -d imdb2 -U postgres -p 5432 -a -f scripts/add_relations.sql
+```
+
+If you want to update the database, run these lines.
+
+```bash
+bash download_files.sh
+psql -h localhost -d imdb2 -U postgres -p 5432 -a -f scripts/drop_relations.sql
+psql -h localhost -d imdb2 -U postgres -p 5432 -a -f scripts/update_tables.sql
+psql -h localhost -d imdb2 -U postgres -p 5432 -a -f scripts/add_relations.sql
 ```
 
 
@@ -46,16 +56,13 @@ The queries can be found in `queries.sql`, and the results can be found in `resu
 ## todo:
 
 todo:
-- fix error characters isn't of type text[]
-- use the insert, update, delete fucntions from merge into (see copilot answer below)
-- create separate, definition, initialization and update script so that everything works immediately.
-- create script that creates and removes relationships
-- create script that creates and removes indixing
 - answer the questions, and create views
 - clean and document the code
 
 done:
-
+- create script that creates and removes indixing
+- create separate, definition, initialization and update script so that everything works immediately.
+- create script that creates and removes relationships
 - transform and load the data
 - transform data to usefull SQL database structure
 - look at copilot improvements
