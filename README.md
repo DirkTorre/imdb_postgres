@@ -56,7 +56,7 @@ The queries can be found in `queries.sql`, and the results can be found in `resu
 ## todo:
 
 todo:
-- answer the questions, and create views
+- answer the questions
 - clean and document the code
 
 done:

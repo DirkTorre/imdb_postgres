@@ -15,7 +15,7 @@
 --     - more than 5 movies per director
 -- Note: A lot of smaller directors have 1 movie that is popular somewhere.
 --       To filter them out I take an average number of movies of 10.000 per director.
- SELECT nb.primary_name         AS director,
+SELECT nb.primary_name         AS director,
        nb.nconst,
        Avg(tr.average_rating)   AS avg_rating,
        Count(tr.average_rating) AS num_movies
@@ -293,21 +293,69 @@ FROM   average_decades;
 
 -- Which genres have seen the biggest growth in the last 20 years?
 -- this query gives the needed data which can be used to generate the result
--- todo: generate result
+-- todo: generate result in percentage and numbers
 
-with base_data as (
-	select genre, start_year, sum(num_votes) as sum_votes
-	from title_basics as tb
-	left join genres on genres.tconst=tb.tconst
-	left join title_ratings as tr on tr.tconst=tb.tconst
-	where 
-		start_year in (
-			date_part('year', CURRENT_DATE)-1,
-			date_part('year', CURRENT_DATE)-21)
-		and num_votes is not NULL
-	group by start_year, genre
-	order by genre
+ WITH base_data
+     AS (SELECT genre,
+                start_year,
+                Sum(num_votes) AS sum_votes
+         FROM   title_basics AS tb
+                LEFT JOIN genres
+                       ON genres.tconst = tb.tconst
+                LEFT JOIN title_ratings AS tr
+                       ON tr.tconst = tb.tconst
+         WHERE  start_year IN ( Date_part('year', CURRENT_DATE) - 1,
+                                Date_part('year', CURRENT_DATE) - 21
+                              )
+                AND num_votes IS NOT NULL
+         GROUP  BY start_year,
+                   genre
+         ORDER  BY genre)
+SELECT genre,
+       ( Max(sum_votes) - Min(sum_votes) )                        AS total_increase,
+       ( Max(sum_votes) - Min(sum_votes) ) * 100 / Min(sum_votes) AS percentage_increase
+FROM   base_data
+GROUP  BY genre
+ORDER  BY total_increase DESC;
+
+----------------------
+-- Awards & Popularity
+----------------------
+
+-- Which directors or actors have the highest average number of votes per title_rating bracket?
+WITH rating_brackets AS
+(
+       SELECT tp.nconst,
+              average_rating,
+              num_votes,
+              CEIL(tr.average_rating / 2) AS rating_bracket
+       FROM   title_principals AS tp
+       JOIN   title_ratings    AS tr
+       ON     tr.tconst=tp.tconst
+       WHERE  category IN ('actor', 'actress', 'director') 
+), avg_votes_per_rank AS (
+         SELECT   rating_bracket,
+                  nconst,
+                  Avg(num_votes) AS avg_num_votes
+         FROM     rating_brackets
+         GROUP BY rating_bracket,
+                  nconst
+), ranked AS (
+         SELECT   rating_bracket,
+                  nconst,
+                  avg_num_votes,
+                  row_number() OVER w         AS top_rank
+         FROM     avg_votes_per_rank window w AS (partition BY rating_bracket ORDER BY avg_num_votes DESC) 
 )
-select *
-from base_data
-where genre in ('Adventure', 'Comedy');
+SELECT    rating_bracket,
+          avg_num_votes::int,
+          ranked.nconst,
+          name_basics.primary_name
+FROM      ranked
+LEFT JOIN name_basics
+ON        ranked.nconst=name_basics.nconst
+WHERE     top_rank < 15
+ORDER BY  rating_bracket DESC,
+          avg_num_votes DESC;
+
+-- What are the most common genres among movies with a score in the upper quantile (high rated movies)?

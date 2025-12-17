@@ -479,12 +479,116 @@ Only counting movies with more than 10.000 votes. Results may vary because of ra
 
 ### Which genres have seen the biggest growth in the last 20 years?
 
+|Romance    |4418640|137|
+|-----------|-------|---|
+|Comedy     |2976838|29 |
+|Sci-Fi     |2949424|126|
+|Drama      |2591926|13 |
+|Family     |2326474|322|
+|Horror     |1511375|46 |
+|Action     |1428791|11 |
+|Sport      |921177 |218|
+|Fantasy    |909173 |36 |
+|Biography  |797596 |48 |
+|Mystery    |715966 |19 |
+|Adventure  |562389 |5  |
+|Documentary|409683 |50 |
+|Animation  |364372 |9  |
+|Reality-TV |186292 |155|
+|Game-Show  |186122 |372|
+|Musical    |176366 |43 |
+|Music      |175212 |33 |
+|War        |172120 |50 |
+|Crime      |120431 |1  |
+|Talk-Show  |112329 |403|
+|Short      |74989  |39 |
+|Western    |72112  |341|
+|History    |42593  |3  |
+|           |32960  |243|
+|Thriller   |21435  |0  |
+|Adult      |21397  |858|
+|News       |1102   |3  |
 
 ## Awards & Popularity
 
 ### Which directors or actors have the highest average number of votes per title_rating bracket?
 
-### What are the most common genres among movies with a score in the upper quantile (hign rated movies)?
+The top actors are all in forrest gump, which has a rating of 8.8
+
+|rating_bracket|avg_num_votes|nconst    |primary_name            |
+|--------------|-------------|----------|------------------------|
+|5             |2445238      |nm0709615 |John Randall            |
+|5             |2445238      |nm0402011 |Michael Conner Humphreys|
+|5             |2445238      |nm0672225 |Bob Penny               |
+|5             |2445238      |nm0381041 |Harold G. Herthum       |
+|5             |2445238      |nm0931508 |Rebecca Williams        |
+|5             |2445238      |nm0446404 |George Kelly            |
+|5             |2440324      |nm3237775 |Mackenzie Foy           |
+|5             |2390207      |nm0824882 |Burr Steers             |
+|5             |2390207      |nm0522503 |Laura Lovelace          |
+|5             |2207962      |nm0032810 |Julian Arahanga         |
+|5             |2183055      |nm0144710 |Richard S. Castellano   |
+|5             |2143590      |nm0032370 |Noel Appleby            |
+|5             |2125343      |nm0040058 |David Aston             |
+|5             |2125343      |nm0040012 |Ali Astin               |
+|4             |930204       |nm7506216 |Melaw Nakehk'o          |
+|4             |928943       |nm1196732 |Saunders Triplets       |
+|4             |903299       |nm3193847 |Jira Banjara            |
+|4             |903299       |nm1261643 |Jeneva Talwar           |
+|4             |898548       |nm0389015 |Mark Hoffman            |
+|4             |891515       |nm3390180 |Basher Savage           |
+|4             |864348       |nm2724906 |Joanna Numata           |
+|4             |864348       |nm8421984 |Abbey                   |
+|4             |864348       |nm0287756 |Darrell Foster          |
+|4             |842712       |nm7852444 |Jadyn Malone            |
+|4             |806551       |nm4087600 |Alecia Svensen          |
+|4             |794219       |nm0971140 |Clive Pearse            |
+|4             |766384       |nm7014019 |Alex Nikolov            |
+|4             |750481       |nm4541945 |Kaden Leos              |
+|3             |752113       |nm2968738 |Jaime FitzSimons        |
+|3             |752113       |nm0246024 |Christopher Dyson       |
+|3             |517806       |nm2960208 |Gregory Tyree Boyce     |
+|3             |416655       |nm2079681 |Morgan Lily             |
+|3             |306373       |nm2633482 |Nick Jandl              |
+|3             |302575       |nm3548867 |Tine Stapelfeldt        |
+|3             |296990       |nm17536610|Rob Bowen               |
+|3             |296990       |nm0916442 |Sian Webber             |
+|3             |289738       |nm0856257 |Todd Tesen              |
+|3             |279303       |nm0761545 |Elizabeth Sanders       |
+|3             |265649       |nm2524656 |Tony Ghosthawk          |
+|3             |250845       |nm2262926 |Bambadjan Bamba         |
+|3             |249454       |nm0905154 |Lana Wachowski          |
+|3             |240029       |nm3570321 |Ray Fisher              |
+|2             |391309       |nm10574081|Andrew Barth Feldman    |
+|2             |391309       |nm10399505|Rachel Zegler           |
+|2             |391309       |nm4270695 |Tituss Burgess          |
+|2             |391309       |nm8053695 |George Salazar          |
+|2             |391309       |nm8084427 |Andrew Burnap           |
+|2             |391309       |nm0842596 |Jeremy Swift            |
+|2             |391309       |nm0006463 |Jason Kravits           |
+|2             |391309       |nm10491301|Emilia Faucher          |
+|2             |279674       |nm0000563 |Chris O'Donnell         |
+|2             |279674       |nm0000512 |Elle Macpherson         |
+|2             |279674       |nm0001708 |Joel Schumacher         |
+|2             |277634       |nm4263213 |John Bradley            |
+|2             |277634       |nm0372176 |Lena Headey             |
+|2             |277634       |nm3652842 |Isaac Hempstead Wright  |
+|1             |181306       |nm0659249 |Sudhanshu Pandey        |
+|1             |181306       |nm0222150 |Prabhu Deva             |
+|1             |181306       |nm3642592 |Pravin Tarde            |
+|1             |181306       |nm0393535 |Randeep Hooda           |
+|1             |181306       |nm11298789|Sangay Tsheltrim        |
+|1             |181306       |nm7796669 |Disha Patani            |
+|1             |181306       |nm4899111 |Arjun Kanungo           |
+|1             |115643       |nm0006795 |Salman Khan             |
+|1             |97295        |nm0294997 |Jason Friedberg         |
+|1             |97295        |nm0054697 |Ike Barinholtz          |
+|1             |97295        |nm0591373 |Vanessa Lachey          |
+|1             |97295        |nm1782667 |Matt Lanter             |
+|1             |97295        |nm1561561 |Tad Hilgenbrink         |
+|1             |97295        |nm0783536 |Aaron Seltzer           |
+
+### What are the most common genres among movies with a score in the upper quantile (high rated movies)?
 
 
 ## Complex Joins & Subqueries
@@ -494,3 +598,10 @@ Only counting movies with more than 10.000 votes. Results may vary because of ra
 ### Which movies feature the largest casts, and how does cast size correlate with ratings?  
 
 ### For each year, what is the movie with the highest rating-to-runtime ratio?
+
+
+## Personal questions
+
+### for every month of the last year: 10 most watched movies with score above average score of that month.
+
+### high scoring movies with lesser known actors in the past 70 years
