@@ -292,10 +292,7 @@ FROM   average_decades;
 
 
 -- Which genres have seen the biggest growth in the last 20 years?
--- this query gives the needed data which can be used to generate the result
--- todo: generate result in percentage and numbers
-
- WITH base_data
+WITH base_data
      AS (SELECT genre,
                 start_year,
                 Sum(num_votes) AS sum_votes
@@ -322,17 +319,19 @@ ORDER  BY total_increase DESC;
 -- Awards & Popularity
 ----------------------
 
--- Which directors or actors have the highest average number of votes per title_rating bracket?
+-- Which directors or actors have the highest average number of votes per title_rating bracket (5 brackets)?
 WITH rating_brackets AS
 (
-       SELECT tp.nconst,
-              average_rating,
-              num_votes,
-              CEIL(tr.average_rating / 2) AS rating_bracket
-       FROM   title_principals AS tp
-       JOIN   title_ratings    AS tr
-       ON     tr.tconst=tp.tconst
-       WHERE  category IN ('actor', 'actress', 'director') 
+	SELECT tp.nconst,
+	average_rating,
+	num_votes,
+	CEIL(tr.average_rating / 2) AS rating_bracket
+	FROM   title_principals AS tp
+	JOIN   title_ratings    AS tr
+	ON     tr.tconst=tp.tconst
+	JOIN   title_basics    AS tb
+	ON     tb.tconst=tr.tconst
+	WHERE  category IN ('actor', 'actress', 'director') and title_type IN ( 'tvMovie', 'movie' ) AND is_adult = false
 ), avg_votes_per_rank AS (
          SELECT   rating_bracket,
                   nconst,
@@ -345,7 +344,7 @@ WITH rating_brackets AS
                   nconst,
                   avg_num_votes,
                   row_number() OVER w         AS top_rank
-         FROM     avg_votes_per_rank window w AS (partition BY rating_bracket ORDER BY avg_num_votes DESC) 
+         FROM     avg_votes_per_rank window w AS (partition BY rating_bracket ORDER BY avg_num_votes DESC)
 )
 SELECT    rating_bracket,
           avg_num_votes::int,
@@ -354,8 +353,70 @@ SELECT    rating_bracket,
 FROM      ranked
 LEFT JOIN name_basics
 ON        ranked.nconst=name_basics.nconst
-WHERE     top_rank < 15
+WHERE     top_rank < 20
 ORDER BY  rating_bracket DESC,
           avg_num_votes DESC;
 
+-- Which directors or actors have the highest total number of votes per title_rating bracket (3 brackets)?
+WITH rating_brackets AS
+(
+	SELECT tp.nconst,
+	average_rating,
+	num_votes,
+	CEIL(tr.average_rating / 4) AS rating_bracket
+	FROM   title_principals AS tp
+	JOIN   title_ratings    AS tr
+	ON     tr.tconst=tp.tconst
+	JOIN   title_basics    AS tb
+	ON     tb.tconst=tr.tconst
+	WHERE  category IN ('actor', 'actress', 'director') and title_type IN ( 'tvMovie', 'movie' ) AND is_adult = false
+), avg_votes_per_rank AS (
+         SELECT   rating_bracket,
+                  nconst,
+                  sum(num_votes) AS avg_num_votes
+         FROM     rating_brackets
+         GROUP BY rating_bracket,
+                  nconst
+), ranked AS (
+         SELECT   rating_bracket,
+                  nconst,
+                  avg_num_votes,
+                  row_number() OVER w         AS top_rank
+         FROM     avg_votes_per_rank window w AS (partition BY rating_bracket ORDER BY avg_num_votes DESC)
+)
+SELECT    rating_bracket,
+          avg_num_votes::int,
+          ranked.nconst,
+          name_basics.primary_name
+FROM      ranked
+LEFT JOIN name_basics
+ON        ranked.nconst=name_basics.nconst
+WHERE     top_rank < 20
+ORDER BY  rating_bracket DESC,
+          avg_num_votes DESC;
+
+
 -- What are the most common genres among movies with a score in the upper quantile (high rated movies)?
+SELECT genre,
+       Count(genre)
+FROM   title_ratings AS tr
+       join title_basics AS tb
+         ON tb.tconst = tr.tconst
+       join genres
+         ON genres.tconst = tr.tconst
+WHERE  num_votes > 10000
+       AND is_adult = FALSE
+       AND title_type IN ( 'movie', 'tvMovie' )
+       AND average_rating >= (SELECT Percentile_cont(0.75)
+                                       within GROUP (ORDER BY average_rating)
+                              FROM   title_ratings)
+GROUP  BY genre
+ORDER  BY Count(genre) DESC;
+
+-----------------------------
+-- Complex Joins & Subqueries
+-----------------------------
+
+-- Find the most common “collaboration triangles”: actor A, actor B, and director C who worked together on multiple films.
+
+

@@ -511,89 +511,210 @@ Only counting movies with more than 10.000 votes. Results may vary because of ra
 
 ## Awards & Popularity
 
-### Which directors or actors have the highest average number of votes per title_rating bracket?
+### Which directors or actors have the highest average number of votes per title_rating bracket (5 brackets)?
 
-The top actors are all in forrest gump, which has a rating of 8.8
+The top actors are all in The Shawshank Redemption, which has a rating of 9.3 and 3.1 million votes
 
-|rating_bracket|avg_num_votes|nconst    |primary_name            |
-|--------------|-------------|----------|------------------------|
-|5             |2445238      |nm0709615 |John Randall            |
-|5             |2445238      |nm0402011 |Michael Conner Humphreys|
-|5             |2445238      |nm0672225 |Bob Penny               |
-|5             |2445238      |nm0381041 |Harold G. Herthum       |
-|5             |2445238      |nm0931508 |Rebecca Williams        |
-|5             |2445238      |nm0446404 |George Kelly            |
-|5             |2440324      |nm3237775 |Mackenzie Foy           |
-|5             |2390207      |nm0824882 |Burr Steers             |
-|5             |2390207      |nm0522503 |Laura Lovelace          |
-|5             |2207962      |nm0032810 |Julian Arahanga         |
-|5             |2183055      |nm0144710 |Richard S. Castellano   |
-|5             |2143590      |nm0032370 |Noel Appleby            |
-|5             |2125343      |nm0040058 |David Aston             |
-|5             |2125343      |nm0040012 |Ali Astin               |
-|4             |930204       |nm7506216 |Melaw Nakehk'o          |
-|4             |928943       |nm1196732 |Saunders Triplets       |
-|4             |903299       |nm3193847 |Jira Banjara            |
-|4             |903299       |nm1261643 |Jeneva Talwar           |
-|4             |898548       |nm0389015 |Mark Hoffman            |
-|4             |891515       |nm3390180 |Basher Savage           |
-|4             |864348       |nm2724906 |Joanna Numata           |
-|4             |864348       |nm8421984 |Abbey                   |
-|4             |864348       |nm0287756 |Darrell Foster          |
-|4             |842712       |nm7852444 |Jadyn Malone            |
-|4             |806551       |nm4087600 |Alecia Svensen          |
-|4             |794219       |nm0971140 |Clive Pearse            |
-|4             |766384       |nm7014019 |Alex Nikolov            |
-|4             |750481       |nm4541945 |Kaden Leos              |
-|3             |752113       |nm2968738 |Jaime FitzSimons        |
-|3             |752113       |nm0246024 |Christopher Dyson       |
-|3             |517806       |nm2960208 |Gregory Tyree Boyce     |
-|3             |416655       |nm2079681 |Morgan Lily             |
-|3             |306373       |nm2633482 |Nick Jandl              |
-|3             |302575       |nm3548867 |Tine Stapelfeldt        |
-|3             |296990       |nm17536610|Rob Bowen               |
-|3             |296990       |nm0916442 |Sian Webber             |
-|3             |289738       |nm0856257 |Todd Tesen              |
-|3             |279303       |nm0761545 |Elizabeth Sanders       |
-|3             |265649       |nm2524656 |Tony Ghosthawk          |
-|3             |250845       |nm2262926 |Bambadjan Bamba         |
-|3             |249454       |nm0905154 |Lana Wachowski          |
-|3             |240029       |nm3570321 |Ray Fisher              |
-|2             |391309       |nm10574081|Andrew Barth Feldman    |
-|2             |391309       |nm10399505|Rachel Zegler           |
-|2             |391309       |nm4270695 |Tituss Burgess          |
-|2             |391309       |nm8053695 |George Salazar          |
-|2             |391309       |nm8084427 |Andrew Burnap           |
-|2             |391309       |nm0842596 |Jeremy Swift            |
-|2             |391309       |nm0006463 |Jason Kravits           |
-|2             |391309       |nm10491301|Emilia Faucher          |
-|2             |279674       |nm0000563 |Chris O'Donnell         |
-|2             |279674       |nm0000512 |Elle Macpherson         |
-|2             |279674       |nm0001708 |Joel Schumacher         |
-|2             |277634       |nm4263213 |John Bradley            |
-|2             |277634       |nm0372176 |Lena Headey             |
-|2             |277634       |nm3652842 |Isaac Hempstead Wright  |
-|1             |181306       |nm0659249 |Sudhanshu Pandey        |
-|1             |181306       |nm0222150 |Prabhu Deva             |
-|1             |181306       |nm3642592 |Pravin Tarde            |
-|1             |181306       |nm0393535 |Randeep Hooda           |
-|1             |181306       |nm11298789|Sangay Tsheltrim        |
-|1             |181306       |nm7796669 |Disha Patani            |
-|1             |181306       |nm4899111 |Arjun Kanungo           |
-|1             |115643       |nm0006795 |Salman Khan             |
-|1             |97295        |nm0294997 |Jason Friedberg         |
-|1             |97295        |nm0054697 |Ike Barinholtz          |
-|1             |97295        |nm0591373 |Vanessa Lachey          |
-|1             |97295        |nm1782667 |Matt Lanter             |
-|1             |97295        |nm1561561 |Tad Hilgenbrink         |
-|1             |97295        |nm0783536 |Aaron Seltzer           |
+|rating_bracket|avg_num_votes|nconst    |primary_name                    |
+|--------------|-------------|----------|--------------------------------|
+|rating_bracket|avg_num_votes|nconst    |primary_name                    |
+|--------------|-------------|----------|--------------------------------|
+|5             |3128869      |nm0218810 |Jeffrey DeMunn                  |
+|5             |3128869      |nm0104594 |Larry Brandenburg               |
+|5             |3128869      |nm0004743 |Gil Bellows                     |
+|5             |3128869      |nm0000209 |Tim Robbins                     |
+|5             |3104589      |nm0350454 |Maggie Gyllenhaal               |
+|5             |3104589      |nm1010931 |Monique Gabriela Curnen         |
+|5             |3104589      |nm0005132 |Heath Ledger                    |
+|5             |3104589      |nm0001173 |Aaron Eckhart                   |
+|5             |3104589      |nm0212939 |Ron Dean                        |
+|5             |2758879      |nm2438307 |Dileep Rao                      |
+|5             |2758879      |nm0680983 |Elliot Page                     |
+|5             |2543645      |nm0037118 |Richmond Arquette               |
+|5             |2543645      |nm0127680 |Christina Cabot                 |
+|5             |2543645      |nm0340260 |Zach Grenier                    |
+|5             |2543645      |nm0000307 |Helena Bonham Carter            |
+|5             |2445238      |nm0672225 |Bob Penny                       |
+|5             |2445238      |nm0000705 |Robin Wright                    |
+|5             |2445238      |nm0402011 |Michael Conner Humphreys        |
+|5             |2445238      |nm0446404 |George Kelly                    |
+|4             |1233055      |nm4406623 |Style Dayne                     |
+|4             |930204       |nm7506216 |Melaw Nakehk'o                  |
+|4             |928943       |nm1196732 |Saunders Triplets               |
+|4             |903299       |nm3193259 |Azharuddin Mohammed Ismail      |
+|4             |903299       |nm3193847 |Jira Banjara                    |
+|4             |903299       |nm1261643 |Jeneva Talwar                   |
+|4             |898548       |nm0389015 |Mark Hoffman                    |
+|4             |891515       |nm3390180 |Basher Savage                   |
+|4             |881509       |nm0628599 |Theodore Newton                 |
+|4             |881509       |nm0801548 |Jean Sincere                    |
+|4             |881509       |nm1751233 |Maeve Andrews                   |
+|4             |881509       |nm0521861 |Dominique Louis                 |
+|4             |875781       |nm1018521 |Benjamin Millepied              |
+|4             |865081       |nm2333360 |Zara Phythian                   |
+|4             |864348       |nm0287756 |Darrell Foster                  |
+|4             |864348       |nm2724906 |Joanna Numata                   |
+|4             |864348       |nm8421984 |Abbey                           |
+|4             |842712       |nm7852444 |Jadyn Malone                    |
+|4             |815792       |nm11419557|Jeff Dashnaw                    |
+|3             |752113       |nm0246024 |Christopher Dyson               |
+|3             |752113       |nm2968738 |Jaime FitzSimons                |
+|3             |517806       |nm2960208 |Gregory Tyree Boyce             |
+|3             |416655       |nm2079681 |Morgan Lily                     |
+|3             |351985       |nm0853374 |Sam Taylor-Johnson              |
+|3             |325484       |nm0000881 |Michael Bay                     |
+|3             |307533       |nm0420941 |Patty Jenkins                   |
+|3             |306373       |nm2633482 |Nick Jandl                      |
+|3             |302575       |nm3548867 |Tine Stapelfeldt                |
+|3             |300026       |nm3570321 |Ray Fisher                      |
+|3             |296990       |nm17536610|Rob Bowen                       |
+|3             |296990       |nm0916442 |Sian Webber                     |
+|3             |289738       |nm0856257 |Todd Tesen                      |
+|3             |279303       |nm0761545 |Elizabeth Sanders               |
+|3             |274239       |nm0004716 |Darren Aronofsky                |
+|3             |266732       |nm0003697 |Florian Henckel von Donnersmarck|
+|3             |265649       |nm2524656 |Tony Ghosthawk                  |
+|3             |250845       |nm2262926 |Bambadjan Bamba                 |
+|3             |249454       |nm0905154 |Lana Wachowski                  |
+|2             |391309       |nm10574081|Andrew Barth Feldman            |
+|2             |391309       |nm8053695 |George Salazar                  |
+|2             |391309       |nm10399505|Rachel Zegler                   |
+|2             |391309       |nm0006463 |Jason Kravits                   |
+|2             |391309       |nm4270695 |Tituss Burgess                  |
+|2             |391309       |nm8084427 |Andrew Burnap                   |
+|2             |391309       |nm2933757 |Gal Gadot                       |
+|2             |391309       |nm0842596 |Jeremy Swift                    |
+|2             |391309       |nm10491301|Emilia Faucher                  |
+|2             |279674       |nm0001708 |Joel Schumacher                 |
+|2             |279674       |nm0000563 |Chris O'Donnell                 |
+|2             |279674       |nm0000512 |Elle Macpherson                 |
+|2             |195669       |nm1989536 |Marc Webb                       |
+|2             |193265       |nm0000216 |Arnold Schwarzenegger           |
+|2             |179964       |nm0193295 |Cliff Curtis                    |
+|2             |179964       |nm0396455 |Katharine Houghton              |
+|2             |179964       |nm0869467 |Shaun Toub                      |
+|2             |179964       |nm0541902 |Aasif Mandvi                    |
+|2             |179964       |nm0796117 |M. Night Shyamalan              |
+|1             |181306       |nm4899111 |Arjun Kanungo                   |
+|1             |181306       |nm3642592 |Pravin Tarde                    |
+|1             |181306       |nm7796669 |Disha Patani                    |
+|1             |181306       |nm3245010 |Gautam Gulati                   |
+|1             |181306       |nm0222150 |Prabhu Deva                     |
+|1             |181306       |nm0393535 |Randeep Hooda                   |
+|1             |181306       |nm11298789|Sangay Tsheltrim                |
+|1             |181306       |nm0659249 |Sudhanshu Pandey                |
+|1             |115643       |nm0006795 |Salman Khan                     |
+|1             |97295        |nm1561561 |Tad Hilgenbrink                 |
+|1             |97295        |nm2578007 |Kim Kardashian                  |
+|1             |97295        |nm0294997 |Jason Friedberg                 |
+|1             |97295        |nm0054697 |Ike Barinholtz                  |
+|1             |97295        |nm0783536 |Aaron Seltzer                   |
+|1             |97295        |nm0591373 |Vanessa Lachey                  |
+|1             |97295        |nm0185272 |Tony Cox                        |
+|1             |97295        |nm1674759 |Gary 'G. Thang' Johnson         |
+|1             |97295        |nm1556400 |Crista Flanagan                 |
+|1             |97295        |nm0001182 |Carmen Electra                  |
+
+
+### Which directors or actors have the highest total number of votes per title_rating bracket (3 brackets)?
+
+So which ones are most popular per movie score category (good, bokay, bad)
+|rating_bracket|avg_num_votes|nconst    |primary_name                    |
+|--------------|-------------|----------|--------------------------------|
+|3             |15877895     |nm0634240 |Christopher Nolan               |
+|3             |11388179     |nm0000151 |Morgan Freeman                  |
+|3             |10670413     |nm0000138 |Leonardo DiCaprio               |
+|3             |10539354     |nm0000288 |Christian Bale                  |
+|3             |9583905      |nm0000233 |Quentin Tarantino               |
+|3             |8887513      |nm0000158 |Tom Hanks                       |
+|3             |8777041      |nm0749263 |Mark Ruffalo                    |
+|3             |8508943      |nm0614165 |Cillian Murphy                  |
+|3             |8405364      |nm1019674 |Sala Baker                      |
+|3             |8304781      |nm0000323 |Michael Caine                   |
+|3             |8291536      |nm0000217 |Martin Scorsese                 |
+|3             |8197478      |nm0000229 |Steven Spielberg                |
+|3             |8079838      |nm0000198 |Gary Oldman                     |
+|3             |8073755      |nm0000134 |Robert De Niro                  |
+|3             |8004416      |nm0000093 |Brad Pitt                       |
+|3             |7793739      |nm0000148 |Harrison Ford                   |
+|3             |7504340      |nm0089217 |Orlando Bloom                   |
+|3             |7368036      |nm0000704 |Elijah Wood                     |
+|3             |7043588      |nm0424060 |Scarlett Johansson              |
+|2             |19065050     |nm0424060 |Scarlett Johansson              |
+|2             |18786207     |nm0000168 |Samuel L. Jackson               |
+|2             |16160279     |nm0000375 |Robert Downey Jr.               |
+|2             |14894236     |nm0262635 |Chris Evans                     |
+|2             |13375826     |nm0000093 |Brad Pitt                       |
+|2             |13250566     |nm0005351 |Ryan Reynolds                   |
+|2             |12518079     |nm0000129 |Tom Cruise                      |
+|2             |12095163     |nm0000136 |Johnny Depp                     |
+|2             |12092154     |nm0719637 |Jeremy Renner                   |
+|2             |11938264     |nm0413168 |Hugh Jackman                    |
+|2             |11534334     |nm0000353 |Willem Dafoe                    |
+|2             |11438861     |nm0177896 |Bradley Cooper                  |
+|2             |11230358     |nm0749263 |Mark Ruffalo                    |
+|2             |11023180     |nm0000158 |Tom Hanks                       |
+|2             |10961669     |nm2225369 |Jennifer Lawrence               |
+|2             |10663180     |nm0000255 |Ben Affleck                     |
+|2             |10387083     |nm0000246 |Bruce Willis                    |
+|2             |10360766     |nm0695435 |Chris Pratt                     |
+|2             |10313884     |nm0000204 |Natalie Portman                 |
+|1             |782618       |nm10574081|Andrew Barth Feldman            |
+|1             |615886       |nm0000235 |Uma Thurman                     |
+|1             |579796       |nm0000216 |Arnold Schwarzenegger           |
+|1             |568335       |nm0000224 |Alicia Silverstone              |
+|1             |561680       |nm0000123 |George Clooney                  |
+|1             |559348       |nm0000563 |Chris O'Donnell                 |
+|1             |469899       |nm0783536 |Aaron Seltzer                   |
+|1             |445799       |nm0458514 |Martin Klebba                   |
+|1             |441919       |nm0006795 |Salman Khan                     |
+|1             |405948       |nm0294997 |Jason Friedberg                 |
+|1             |391338       |nm1989536 |Marc Webb                       |
+|1             |391309       |nm8084427 |Andrew Burnap                   |
+|1             |391309       |nm10399505|Rachel Zegler                   |
+|1             |391309       |nm8053695 |George Salazar                  |
+|1             |391309       |nm4270695 |Tituss Burgess                  |
+|1             |391309       |nm2933757 |Gal Gadot                       |
+|1             |391309       |nm10491301|Emilia Faucher                  |
+|1             |391309       |nm0006463 |Jason Kravits                   |
+|1             |391309       |nm0842596 |Jeremy Swift                    |
+
+
 
 ### What are the most common genres among movies with a score in the upper quantile (high rated movies)?
+
+|genre|count  |
+|-----|-------|
+|Drama|731    |
+|Comedy|213    |
+|Crime|212    |
+|Action|163    |
+|Adventure|145    |
+|Romance|127    |
+|Biography|117    |
+|Thriller|111    |
+|Documentary|93     |
+|Mystery|79     |
+|Animation|72     |
+|History|64     |
+|War  |61     |
+|Family|48     |
+|Fantasy|47     |
+|Sci-Fi|43     |
+|Music|38     |
+|Sport|26     |
+|Musical|21     |
+|Horror|20     |
+|Film-Noir|20     |
+|Western|15     |
+|News |2      |
 
 
 ## Complex Joins & Subqueries
 
 ### Find the most common “collaboration triangles”: actor A, actor B, and director C who worked together on multiple films.  
+
+
 
 ### Which movies feature the largest casts, and how does cast size correlate with ratings?  
 
