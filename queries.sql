@@ -418,5 +418,161 @@ ORDER  BY Count(genre) DESC;
 -----------------------------
 
 -- Find the most common “collaboration triangles”: actor A, actor B, and director C who worked together on multiple films.
+WITH movies AS (
+       SELECT tconst
+       FROM   title_basics
+       WHERE  title_type IN ('movie', 'tvMovie')
+       AND    is_adult=false ),
+actors AS (
+       SELECT tp.tconst,
+              tp.nconst        AS actor
+       FROM   title_principals AS tp
+       WHERE  tp.category IN ('actress', 'actor') ),
+directors AS (
+       SELECT tconst,
+              nconst AS director
+       FROM   title_principals
+       WHERE  category IN ('director') ),
+together_counts AS (
+         SELECT   Count(DISTINCT m.tconst) AS together,
+                  director,
+                  Least(a1.actor, a2.actor)    AS actor1,
+                  Greatest(a1.actor, a2.actor) AS actor2
+         FROM     movies                       AS m
+         JOIN     directors                    AS d
+         ON       d.tconst=m.tconst
+         JOIN     actors AS a1
+         ON       a1.tconst=m.tconst
+         JOIN     actors AS a2
+         ON       a2.tconst=m.tconst
+         AND      a1.actor < a2.actor
+         GROUP BY director,
+                  actor1,
+                  actor2
+         HAVING   Count(DISTINCT m.tconst) > 1
+         ORDER BY together DESC limit 100 )
+SELECT tc.together,
+       dn.primary_name  AS director_name,
+       a1n.primary_name AS actor1_name,
+       a2n.primary_name AS actor2_name,
+       tc.director      AS director_id,
+       tc.actor1        AS actor1_id,
+       tc.actor2        AS actor2_id
+FROM   together_counts  AS tc
+JOIN   name_basics      AS dn
+ON     tc.director=dn.nconst
+JOIN   name_basics AS a1n
+ON     tc.actor1=a1n.nconst
+JOIN   name_basics AS a2n
+ON     tc.actor2=a2n.nconst;
 
+
+---------------------
+-- Personal questions
+---------------------
+
+-- For the last and current year: get the 10 most watched movies per genre. only include score that are above the average score for a genre.
+WITH movie_codes AS
+(
+       SELECT tconst
+       FROM   title_basics
+       WHERE  start_year >= (SELECT Extract(year FROM CURRENT_DATE)) - 1
+       AND    title_type  IN ('movie','tvMovie')
+       AND    is_adult=false ), avg_genre_ratings AS
+(
+         SELECT   g.genre,
+                  Avg(average_rating) AS avg_rating_per_genre
+         FROM     movie_codes         AS mc
+         JOIN     genres              AS g
+         ON       mc.tconst=g.tconst
+         JOIN     title_ratings AS tr
+         ON       mc.tconst=tr.tconst
+         GROUP BY genre ), unranked AS
+(
+       SELECT mc.tconst,
+              g.genre,
+              avg_rating_per_genre,
+              average_rating,
+              num_votes
+       FROM   movie_codes AS mc
+       JOIN   genres      AS g
+       ON     mc.tconst=g.tconst
+       JOIN   avg_genre_ratings AS ar
+       ON     g.genre=ar.genre
+       JOIN   title_ratings AS tr
+       ON     mc.tconst=tr.tconst
+       WHERE  average_rating > avg_rating_per_genre ), ranked_movies AS
+(
+         SELECT   tconst,
+                  genre,
+                  average_rating,
+                  avg_rating_per_genre,
+                  num_votes,
+                  row_number() OVER w AS ranking
+         FROM     unranked window w   AS (partition BY genre ORDER BY num_votes DESC) )
+SELECT    genre,
+          tb.primary_title                               AS title,
+          tb.start_year                                  AS "release year",
+          round(average_rating - avg_rating_per_genre,1) AS "above genre average",
+          average_rating                                 AS "average rating",
+          num_votes                                      AS "number of votes",
+          rm.tconst                                      AS "imdb movie id"
+FROM      ranked_movies                                  AS rm
+LEFT JOIN title_basics                                   AS tb
+ON        rm.tconst=tb.tconst
+WHERE     ranking < 11
+ORDER BY  genre,
+          num_votes DESC;
+
+-- For the last and current year: get the 10 most watched movies per genre. only include score that are above the ALL TIME AVERGAE SCORE for a genre.
+
+WITH movie_codes AS
+(
+       SELECT tconst
+       FROM   title_basics
+       WHERE  start_year >= (SELECT Extract(year FROM CURRENT_DATE)) - 1
+       AND    title_type IN ('movie', 'tvMovie')
+       AND    is_adult=false ), avg_genre_ratings AS
+(
+         SELECT   g.genre,
+                  Avg(average_rating) AS avg_rating_per_genre
+         FROM     genres              AS g
+         JOIN     title_ratings       AS tr
+         ON       g.tconst=tr.tconst
+         GROUP BY genre ), unranked AS
+(
+       SELECT mc.tconst,
+              g.genre,
+              avg_rating_per_genre,
+              average_rating,
+              num_votes
+       FROM   movie_codes AS mc
+       JOIN   genres      AS g
+       ON     mc.tconst=g.tconst
+       JOIN   avg_genre_ratings AS ar
+       ON     g.genre=ar.genre
+       JOIN   title_ratings AS tr
+       ON     mc.tconst=tr.tconst
+       WHERE  average_rating > avg_rating_per_genre ), ranked_movies AS
+(
+         SELECT   tconst,
+                  genre,
+                  average_rating,
+                  avg_rating_per_genre,
+                  num_votes,
+                  row_number() OVER w AS ranking
+         FROM     unranked window w   AS (partition BY genre ORDER BY num_votes DESC) )
+SELECT    genre,
+          tb.primary_title                               AS title,
+          tb.start_year                                  AS "release year",
+          round(average_rating - avg_rating_per_genre,1) AS "above genre average",
+          average_rating                                 AS "average rating",
+          num_votes                                      AS "number of votes",
+          rm.tconst                                      AS "imdb movie id"
+FROM      ranked_movies                                  AS rm
+LEFT JOIN title_basics                                   AS tb
+ON        rm.tconst=tb.tconst
+WHERE     ranking < 11
+ORDER BY  genre,
+          num_votes DESC;
 

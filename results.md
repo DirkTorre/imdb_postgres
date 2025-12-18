@@ -618,7 +618,8 @@ The top actors are all in The Shawshank Redemption, which has a rating of 9.3 an
 
 ### Which directors or actors have the highest total number of votes per title_rating bracket (3 brackets)?
 
-So which ones are most popular per movie score category (good, bokay, bad)
+So which ones are most popular per movie score category (good, okay, bad)
+
 |rating_bracket|avg_num_votes|nconst    |primary_name                    |
 |--------------|-------------|----------|--------------------------------|
 |3             |15877895     |nm0634240 |Christopher Nolan               |
@@ -712,17 +713,585 @@ So which ones are most popular per movie score category (good, bokay, bad)
 
 ## Complex Joins & Subqueries
 
-### Find the most common “collaboration triangles”: actor A, actor B, and director C who worked together on multiple films.  
+### Find the most common “collaboration triangles”: actor A, actor B, and director C who worked together on multiple films.
 
-
-
-### Which movies feature the largest casts, and how does cast size correlate with ratings?  
-
-### For each year, what is the movie with the highest rating-to-runtime ratio?
-
+|together|director_name            |actor1_name         |actor2_name         |director_id|actor1_id |actor2_id |
+|--------|-------------------------|--------------------|--------------------|-----------|----------|----------|
+|83      |Shirô Nakagawa           |Ritoku Arashi       |Hôshô Bandô         |nm2361543  |nm2366585 |nm2384746 |
+|83      |Shirô Nakagawa           |Enshô Jitsukawa     |Ritoku Arashi       |nm2361543  |nm1698868 |nm2366585 |
+|69      |Sasikumar                |Adoor Bhasi         |Prem Nazir          |nm0765881  |nm0006982 |nm0623427 |
+|69      |Shirô Nakagawa           |Ritoku Arashi       |Shôzô Arashi        |nm2361543  |nm2366585 |nm2367854 |
+|66      |Shirô Nakagawa           |Enshô Jitsukawa     |Hôshô Bandô         |nm2361543  |nm1698868 |nm2384746 |
+|65      |Jirô Yoshino             |Shirôgorô Sawamura  |Enjuro Ichikawa     |nm1846347  |nm1984183 |nm1990182 |
+|59      |Shirô Nakagawa           |Shôzô Arashi        |Hôshô Bandô         |nm2361543  |nm2367854 |nm2384746 |
+|59      |Shirô Nakagawa           |Enshô Jitsukawa     |Shôzô Arashi        |nm2361543  |nm1698868 |nm2367854 |
+|52      |Yôji Yamada              |Kiyoshi Atsumi      |Chieko Baishô       |nm0945282  |nm0040910 |nm0047962 |
+|51      |Yôji Yamada              |Chieko Baishô       |Gin Maeda           |nm0945282  |nm0047962 |nm0535332 |
+|49      |Yôji Yamada              |Kiyoshi Atsumi      |Gin Maeda           |nm0945282  |nm0040910 |nm0535332 |
+|49      |Yôji Yamada              |Chieko Baishô       |Chieko Misaki       |nm0945282  |nm0047962 |nm0592654 |
+|48      |Yôji Yamada              |Kiyoshi Atsumi      |Chieko Misaki       |nm0945282  |nm0040910 |nm0592654 |
+|47      |Yôji Yamada              |Chieko Baishô       |Hisao Dazai         |nm0945282  |nm0047962 |nm0206795 |
+|47      |Yôji Yamada              |Gin Maeda           |Chieko Misaki       |nm0945282  |nm0535332 |nm0592654 |
+|46      |Yôji Yamada              |Hisao Dazai         |Chieko Misaki       |nm0945282  |nm0206795 |nm0592654 |
+|46      |Jason Young              |Jason Young         |Ann Waugh           |nm3248232  |nm3248232 |nm3501384 |
+|45      |Yôji Yamada              |Kiyoshi Atsumi      |Hisao Dazai         |nm0945282  |nm0040910 |nm0206795 |
+|45      |Jason Young              |Jason Young         |Claudette Young     |nm3248232  |nm3248232 |nm3269501 |
+|45      |Yôji Yamada              |Hisao Dazai         |Gin Maeda           |nm0945282  |nm0206795 |nm0535332 |
+|44      |John Gabito Angel        |Leticia Leon Arrieta|Leo Bucio           |nm6193332  |nm2399295 |nm2604898 |
+|44      |Yôji Yamada              |Chieko Baishô       |Gajirô Satô         |nm0945282  |nm0047962 |nm0766300 |
+|44      |Yôji Yamada              |Gin Maeda           |Gajirô Satô         |nm0945282  |nm0535332 |nm0766300 |
+|43      |Yôji Yamada              |Kiyoshi Atsumi      |Gajirô Satô         |nm0945282  |nm0040910 |nm0766300 |
+|43      |Peng Hu                  |Tak-Hing Kwan       |Shih Kien           |nm0398898  |nm0477107 |nm0793384 |
+|42      |Yôji Yamada              |Chieko Misaki       |Gajirô Satô         |nm0945282  |nm0592654 |nm0766300 |
+|42      |Yôji Yamada              |Hisao Dazai         |Gajirô Satô         |nm0945282  |nm0206795 |nm0766300 |
+|39      |Shirô Nakagawa           |Okuzan Asao         |Ritoku Arashi       |nm2361543  |nm0038373 |nm2366585 |
+|38      |Sasikumar                |Adoor Bhasi         |Meena               |nm0765881  |nm0006982 |nm1467390 |
+|38      |Sasikumar                |Prem Nazir          |Meena               |nm0765881  |nm0623427 |nm1467390 |
+|38      |Peng Hu                  |Tat-Wah Tso         |Tak-Hing Kwan       |nm0398898  |nm0158656 |nm0477107 |
+|38      |John Gabito Angel        |Leticia Leon Arrieta|Luis Leonardo Bucio |nm6193332  |nm2399295 |nm6236789 |
+|37      |Keiichirô Yoshida        |Mitsuru Hirata      |Bokuzô Masana       |nm4418310  |nm0386294 |nm1210255 |
+|37      |Keiichirô Yoshida        |Mitsuru Hirata      |Tsunehiko Watase    |nm4418310  |nm0386294 |nm0913912 |
+|37      |John Gabito Angel        |Leo Bucio           |Luis Leonardo Bucio |nm6193332  |nm2604898 |nm6236789 |
+|37      |Keiichirô Yoshida        |Mitsuru Hirata      |Shingo Kazami       |nm4418310  |nm0386294 |nm0443571 |
+|37      |Keiichirô Yoshida        |Tsunehiko Watase    |Bokuzô Masana       |nm4418310  |nm0913912 |nm1210255 |
+|37      |Keiichirô Yoshida        |Shingo Kazami       |Tsunehiko Watase    |nm4418310  |nm0443571 |nm0913912 |
+|37      |Keiichirô Yoshida        |Shingo Kazami       |Bokuzô Masana       |nm4418310  |nm0443571 |nm1210255 |
+|36      |Keiichirô Yoshida        |Mitsuru Hirata      |Yôko Ôshima         |nm4418310  |nm0386294 |nm0960015 |
+|36      |Sasikumar                |Jayabharathi        |Prem Nazir          |nm0765881  |nm0419653 |nm0623427 |
+|36      |Yôji Yamada              |Chieko Misaki       |Masami Shimojô      |nm0945282  |nm0592654 |nm0793726 |
+|36      |Sam Newfield             |Buster Crabbe       |Al St. John         |nm0627864  |nm0185568 |nm0820607 |
+|36      |Keiichirô Yoshida        |Shingo Kazami       |Miho Hayashi        |nm4418310  |nm0443571 |nm2082012 |
+|36      |Sam Newfield             |Charles King        |Al St. John         |nm0627864  |nm0454559 |nm0820607 |
+|36      |Keiichirô Yoshida        |Mitsuru Hirata      |Miho Hayashi        |nm4418310  |nm0386294 |nm2082012 |
+|36      |Keiichirô Yoshida        |Shingo Kazami       |Yôko Ôshima         |nm4418310  |nm0443571 |nm0960015 |
+|36      |Keiichirô Yoshida        |Yôko Ôshima         |Miho Hayashi        |nm4418310  |nm0960015 |nm2082012 |
+|36      |Keiichirô Yoshida        |Yôko Ôshima         |Bokuzô Masana       |nm4418310  |nm0960015 |nm1210255 |
+|36      |Yôji Yamada              |Chieko Baishô       |Masami Shimojô      |nm0945282  |nm0047962 |nm0793726 |
+|36      |Keiichirô Yoshida        |Tsunehiko Watase    |Yôko Ôshima         |nm4418310  |nm0913912 |nm0960015 |
+|36      |Yôji Yamada              |Kiyoshi Atsumi      |Masami Shimojô      |nm0945282  |nm0040910 |nm0793726 |
+|36      |Keiichirô Yoshida        |Tsunehiko Watase    |Miho Hayashi        |nm4418310  |nm0913912 |nm2082012 |
+|36      |Ray Nazarro              |Smiley Burnette     |Charles Starrett    |nm0623401  |nm0122470 |nm0823633 |
+|36      |Keiichirô Yoshida        |Bokuzô Masana       |Miho Hayashi        |nm4418310  |nm1210255 |nm2082012 |
+|35      |Yôji Yamada              |Gin Maeda           |Masami Shimojô      |nm0945282  |nm0535332 |nm0793726 |
+|35      |Yôji Yamada              |Hisao Dazai         |Masami Shimojô      |nm0945282  |nm0206795 |nm0793726 |
+|35      |Ashley Hays Wright       |Cadence Wright      |David Owen Wright   |nm10977492 |nm11001208|nm11004690|
+|35      |Shirô Nakagawa           |Okuzan Asao         |Hôshô Bandô         |nm2361543  |nm0038373 |nm2384746 |
+|35      |Peng Hu                  |Tat-Wah Tso         |Shih Kien           |nm0398898  |nm0158656 |nm0793384 |
+|35      |Yôji Yamada              |Gajirô Satô         |Masami Shimojô      |nm0945282  |nm0766300 |nm0793726 |
+|35      |Ladislav Povazay         |Sissy Löwinger      |Walter Scheuer      |nm2823681  |nm0530593 |nm4104325 |
+|34      |Ashley Hays Wright       |Jaina Wright        |David Owen Wright   |nm10977492 |nm11001206|nm11004690|
+|34      |Ashley Hays Wright       |Jaina Wright        |Cadence Wright      |nm10977492 |nm11001206|nm11001208|
+|34      |Ashley Hays Wright       |Ashley Hays Wright  |David Owen Wright   |nm10977492 |nm10977492|nm11004690|
+|34      |Ashley Hays Wright       |Jaina Wright        |Scout Wright        |nm10977492 |nm11001206|nm11001207|
+|34      |Isamu Aitsuki            |Gô Wakabayashi      |Momiji Yamamura     |nm2739774  |nm0906688 |nm1736396 |
+|34      |Ladislav Povazay         |Sissy Löwinger      |Hilde Rom           |nm2823681  |nm0530593 |nm0738560 |
+|33      |Ashley Hays Wright       |Scout Wright        |David Owen Wright   |nm10977492 |nm11001207|nm11004690|
+|33      |Ashley Hays Wright       |Scout Wright        |Cadence Wright      |nm10977492 |nm11001207|nm11001208|
+|33      |Ashley Hays Wright       |Ashley Hays Wright  |Scout Wright        |nm10977492 |nm10977492|nm11001207|
+|33      |Sasikumar                |Adoor Bhasi         |Jayabharathi        |nm0765881  |nm0006982 |nm0419653 |
+|33      |Shirô Nakagawa           |Okuzan Asao         |Enshô Jitsukawa     |nm2361543  |nm0038373 |nm1698868 |
+|33      |Ladislav Povazay         |Hilde Rom           |Walter Scheuer      |nm2823681  |nm0738560 |nm4104325 |
+|33      |Ashley Hays Wright       |Ashley Hays Wright  |Jaina Wright        |nm10977492 |nm10977492|nm11001206|
+|32      |Ashley Hays Wright       |Ashley Hays Wright  |Cadence Wright      |nm10977492 |nm10977492|nm11001208|
+|32      |Rajiv Chilaka            |Julie Tejwani       |Jigna Bhardwaj      |nm5592581  |nm5598720 |nm5598807 |
+|32      |Lambert Hillyer          |Johnny Mack Brown   |Raymond Hatton      |nm0385171  |nm0113902 |nm0369058 |
+|31      |M. Krishnan Nair         |Adoor Bhasi         |Prem Nazir          |nm0619759  |nm0006982 |nm0623427 |
+|31      |Shirô Nakagawa           |Okuzan Asao         |Shôzô Arashi        |nm2361543  |nm0038373 |nm2367854 |
+|31      |Ladislav Povazay         |Paul Löwinger       |Sissy Löwinger      |nm2823681  |nm0530591 |nm0530593 |
+|31      |Jesús Franco             |Antonio Mayans      |Lina Romay          |nm0001238  |nm0562210 |nm0739124 |
+|31      |Mark Polonia             |Tim Hatch           |Jeff Kirkendall     |nm0689789  |nm2374888 |nm2386198 |
+|31      |Rajiv Chilaka            |Jigna Bhardwaj      |Rajesh Kava         |nm5592581  |nm5598807 |nm5598824 |
+|31      |Yoshinobu Ikeda          |Yûkichi Iwata       |Sumiko Kurishima    |nm1283324  |nm0412637 |nm0475732 |
+|30      |Rajiv Chilaka            |Julie Tejwani       |Rajesh Kava         |nm5592581  |nm5598720 |nm5598824 |
+|30      |Sasikumar                |Adoor Bhasi         |Bahadur             |nm0765881  |nm0006982 |nm0046850 |
+|30      |Jason Young              |Jason Young         |Susan Jarrett       |nm3248232  |nm3248232 |nm3269386 |
+|30      |Alonso O. Lara           |Luis Huizar         |Vianey Huizar       |nm1024715  |nm2593355 |nm4052191 |
+|30      |Ladislav Povazay         |Paul Löwinger       |Hilde Rom           |nm2823681  |nm0530591 |nm0738560 |
+|29      |William Beaudine         |Leo Gorcey          |Huntz Hall          |nm0064415  |nm0329832 |nm0355653 |
+|29      |Sasikumar                |Bahadur             |Prem Nazir          |nm0765881  |nm0046850 |nm0623427 |
+|28      |Gilberto Martínez Solares|Marcelo Chávez      |Germán Valdés       |nm0554924  |nm0161672 |nm0848910 |
+|28      |Sasikumar                |Prem Nazir          |Sankaradi           |nm0765881  |nm0623427 |nm0762844 |
+|28      |Jason Young              |Claudette Young     |Ann Waugh           |nm3248232  |nm3269501 |nm3501384 |
+|28      |Leon Ding                |Justin J. Wheeler   |Paul 'Maxx' Rinehart|nm5694753  |nm5694766 |nm5703019 |
+|27      |Kinya Ogawa              |Kiichirô Mutô       |Mayumi Sanjô        |nm0644554  |nm0992655 |nm1001836 |
+|27      |Wui Ng                   |Yin Pak             |Wood-Yau Cheung     |nm0628860  |nm1720239 |nm1908630 |
+|27      |William Witney           |Roy Rogers          |Trigger             |nm0936823  |nm0001678 |nm1022326 |
+|27      |Lau Lauritzen            |Carl Schenstrøm     |Harald Madsen       |nm0491503  |nm0234670 |nm0535206 |
 
 ## Personal questions
 
-### for every month of the last year: 10 most watched movies with score above average score of that month.
+### For the last and current year: 10 most watched movies per genre with score above average score of that genre for those two years.
+
+|genre         |title                                                 |release year|above genre average|average rating|number of votes|imdb movie id|
+|--------------|------------------------------------------------------|------------|-------------------|--------------|---------------|-------------|
+|Action        |Dune: Part Two                                        |2024        |2.2                |8.4           |685526         |tt15239678   |
+|Action        |Deadpool & Wolverine                                  |2024        |1.3                |7.5           |540708         |tt6263850    |
+|Action        |Superman                                              |2025        |0.9                |7.1           |356931         |tt5950044    |
+|Action        |Sinners                                               |2025        |1.4                |7.6           |319398         |tt31193180   |
+|Action        |Furiosa: A Mad Max Saga                               |2024        |1.3                |7.5           |309014         |tt12037194   |
+|Action        |Gladiator II                                          |2024        |0.3                |6.5           |280913         |tt9218128    |
+|Action        |Civil War                                             |2024        |0.8                |7.0           |257081         |tt17279496   |
+|Action        |F1: The Movie                                         |2025        |1.5                |7.7           |248997         |tt16311594   |
+|Action        |Thunderbolts*                                         |2025        |0.9                |7.1           |244882         |tt20969586   |
+|Action        |The Fall Guy                                          |2024        |0.6                |6.8           |242562         |tt1684562    |
+|Adventure     |Dune: Part Two                                        |2024        |2.3                |8.4           |685526         |tt15239678   |
+|Adventure     |Deadpool & Wolverine                                  |2024        |1.4                |7.5           |540708         |tt6263850    |
+|Adventure     |Superman                                              |2025        |1.0                |7.1           |356931         |tt5950044    |
+|Adventure     |Furiosa: A Mad Max Saga                               |2024        |1.4                |7.5           |309014         |tt12037194   |
+|Adventure     |Gladiator II                                          |2024        |0.4                |6.5           |280913         |tt9218128    |
+|Adventure     |Thunderbolts*                                         |2025        |1.0                |7.1           |244882         |tt20969586   |
+|Adventure     |Inside Out 2                                          |2024        |1.4                |7.5           |237291         |tt22022452   |
+|Adventure     |Mickey 17                                             |2025        |0.6                |6.7           |214851         |tt12299608   |
+|Adventure     |The Fantastic Four: First Steps                       |2025        |0.8                |6.9           |213538         |tt10676052   |
+|Adventure     |The Wild Robot                                        |2024        |2.1                |8.2           |205692         |tt29623480   |
+|Animation     |Inside Out 2                                          |2024        |0.8                |7.5           |237291         |tt22022452   |
+|Animation     |The Wild Robot                                        |2024        |1.5                |8.2           |205692         |tt29623480   |
+|Animation     |Flow                                                  |2024        |1.2                |7.9           |100829         |tt4772188    |
+|Animation     |KPop Demon Hunters                                    |2025        |0.8                |7.5           |100703         |tt14205554   |
+|Animation     |Transformers One                                      |2024        |0.9                |7.6           |60350          |tt8864596    |
+|Animation     |Demon Slayer: Kimetsu no Yaiba Infinity Castle        |2025        |1.8                |8.5           |53258          |tt32820897   |
+|Animation     |Predator: Killer of Killers                           |2025        |0.7                |7.4           |53009          |tt36463894   |
+|Animation     |Mahavatar Narsimha                                    |2024        |1.9                |8.6           |42900          |tt34365591   |
+|Animation     |Wallace & Gromit: Vengeance Most Fowl                 |2024        |0.8                |7.5           |39153          |tt17163970   |
+|Animation     |Elio                                                  |2025        |0.0                |6.7           |33177          |tt4900148    |
+|Biography     |I'm Still Here                                        |2024        |1.2                |8.1           |123870         |tt14961016   |
+|Biography     |A Complete Unknown                                    |2024        |0.4                |7.3           |107776         |tt11563598   |
+|Biography     |The Apprentice                                        |2024        |0.2                |7.1           |68016          |tt8368368    |
+|Biography     |Better Man                                            |2024        |0.6                |7.5           |41963          |tt14260836   |
+|Biography     |Saturday Night                                        |2024        |0.0                |6.9           |36767          |tt27657135   |
+|Biography     |Chandu Champion                                       |2024        |0.9                |7.8           |36122          |tt27470893   |
+|Biography     |Roofman                                               |2025        |0.1                |7.0           |26754          |tt4627382    |
+|Biography     |Maidaan                                               |2024        |1.0                |7.9           |23254          |tt10869778   |
+|Biography     |Amaran                                                |2024        |1.2                |8.1           |23031          |tt27118357   |
+|Biography     |The Outrun                                            |2024        |0.0                |6.9           |20548          |tt11687002   |
+|Comedy        |Deadpool & Wolverine                                  |2024        |1.3                |7.5           |540708         |tt6263850    |
+|Comedy        |The Fall Guy                                          |2024        |0.6                |6.8           |242562         |tt1684562    |
+|Comedy        |Inside Out 2                                          |2024        |1.3                |7.5           |237291         |tt22022452   |
+|Comedy        |Anora                                                 |2024        |1.2                |7.4           |236831         |tt28607951   |
+|Comedy        |Mickey 17                                             |2025        |0.5                |6.7           |214851         |tt12299608   |
+|Comedy        |Challengers                                           |2024        |0.8                |7.0           |169182         |tt16426418   |
+|Comedy        |Beetlejuice Beetlejuice                               |2024        |0.4                |6.6           |167059         |tt2049403    |
+|Comedy        |The Ministry of Ungentlemanly Warfare                 |2024        |0.6                |6.8           |149999         |tt5177120    |
+|Comedy        |Moana 2                                               |2024        |0.1                |6.3           |118835         |tt13622970   |
+|Comedy        |A Real Pain                                           |2024        |0.8                |7.0           |118421         |tt21823606   |
+|Crime         |Thunderbolts*                                         |2025        |0.8                |7.1           |244882         |tt20969586   |
+|Crime         |Longlegs                                              |2024        |0.3                |6.6           |212468         |tt23468450   |
+|Crime         |One Battle After Another                              |2025        |1.7                |8.0           |186383         |tt30144839   |
+|Crime         |Carry-On                                              |2024        |0.2                |6.5           |184288         |tt21382296   |
+|Crime         |Juror #2                                              |2024        |0.7                |7.0           |118120         |tt27403986   |
+|Crime         |The Accountant 2                                      |2025        |0.3                |6.6           |116839         |tt7068946    |
+|Crime         |Abigail                                               |2024        |0.2                |6.5           |108478         |tt27489557   |
+|Crime         |Rebel Ridge                                           |2024        |0.5                |6.8           |98400          |tt11301886   |
+|Crime         |Monkey Man                                            |2024        |0.5                |6.8           |97600          |tt9214772    |
+|Crime         |Wolfs                                                 |2024        |0.2                |6.5           |97042          |tt14257582   |
+|Documentary   |No Other Land                                         |2024        |0.9                |8.2           |17194          |tt30953759   |
+|Documentary   |The Greatest Night in Pop                             |2024        |0.6                |7.9           |15814          |tt30796448   |
+|Documentary   |The Remarkable Life of Ibelin                         |2024        |0.9                |8.2           |14199          |tt19811010   |
+|Documentary   |Will & Harper                                         |2024        |0.1                |7.4           |13347          |tt30321133   |
+|Documentary   |We Will Dance Again                                   |2024        |0.3                |7.6           |11386          |tt31556612   |
+|Documentary   |Super/Man: The Christopher Reeve Story                |2024        |0.7                |8.0           |11185          |tt27902121   |
+|Documentary   |John Candy: I Like Me                                 |2025        |0.8                |8.1           |8755           |tt26683420   |
+|Documentary   |I Am: Celine Dion                                     |2024        |0.4                |7.7           |8197           |tt28620587   |
+|Documentary   |Avicii - I'm Tim                                      |2024        |0.4                |7.7           |8026           |tt32138523   |
+|Documentary   |Jung Kook: I Am Still                                 |2024        |0.9                |8.2           |7658           |tt32903026   |
+|Drama         |Dune: Part Two                                        |2024        |1.8                |8.4           |685526         |tt15239678   |
+|Drama         |The Substance                                         |2024        |0.6                |7.2           |366414         |tt17526714   |
+|Drama         |Sinners                                               |2025        |1.0                |7.6           |319398         |tt31193180   |
+|Drama         |F1: The Movie                                         |2025        |1.1                |7.7           |248997         |tt16311594   |
+|Drama         |The Fall Guy                                          |2024        |0.2                |6.8           |242562         |tt1684562    |
+|Drama         |Anora                                                 |2024        |0.8                |7.4           |236831         |tt28607951   |
+|Drama         |Conclave                                              |2024        |0.8                |7.4           |226471         |tt20215234   |
+|Drama         |One Battle After Another                              |2025        |1.4                |8.0           |186383         |tt30144839   |
+|Drama         |Frankenstein                                          |2025        |0.9                |7.5           |170476         |tt1312221    |
+|Drama         |Challengers                                           |2024        |0.4                |7.0           |169182         |tt16426418   |
+|Family        |The Wild Robot                                        |2024        |1.9                |8.2           |205692         |tt29623480   |
+|Family        |Flow                                                  |2024        |1.6                |7.9           |100829         |tt4772188    |
+|Family        |Karate Kid: Legends                                   |2025        |0.0                |6.3           |39517          |tt1674782    |
+|Family        |Paddington in Peru                                    |2024        |0.3                |6.6           |31670          |tt5822536    |
+|Family        |Wicked: For Good                                      |2025        |0.7                |7.0           |31235          |tt19847976   |
+|Family        |Freakier Friday                                       |2025        |0.0                |6.3           |29944          |tt31956415   |
+|Family        |Meiyazhagan                                           |2024        |2.2                |8.5           |20807          |tt26758372   |
+|Family        |How to Make Millions Before Grandma Dies              |2024        |1.6                |7.9           |20058          |tt31392609   |
+|Family        |Mission Muh Dikhayi                                   |2025        |2.8                |9.1           |9849           |tt38063392   |
+|Family        |Young Hearts                                          |2024        |1.6                |7.9           |7430           |tt15245268   |
+|Fantasy       |Nosferatu                                             |2024        |1.0                |7.1           |249204         |tt5040012    |
+|Fantasy       |Mickey 17                                             |2025        |0.6                |6.7           |214851         |tt12299608   |
+|Fantasy       |Wicked                                                |2024        |1.3                |7.4           |198520         |tt1262426    |
+|Fantasy       |Frankenstein                                          |2025        |1.4                |7.5           |170476         |tt1312221    |
+|Fantasy       |Beetlejuice Beetlejuice                               |2024        |0.5                |6.6           |167059         |tt2049403    |
+|Fantasy       |Damsel                                                |2024        |0.0                |6.1           |115183         |tt13452446   |
+|Fantasy       |Ghostbusters: Frozen Empire                           |2024        |0.0                |6.1           |100617         |tt21235248   |
+|Fantasy       |Kantara: A Legend - Chapter 1                         |2025        |2.2                |8.3           |48406          |tt26439764   |
+|Fantasy       |The Life of Chuck                                     |2024        |1.2                |7.3           |43460          |tt12908150   |
+|Fantasy       |Better Man                                            |2024        |1.4                |7.5           |41963          |tt14260836   |
+|Game-Show     |The Netflix Slam                                      |2024        |1.1                |7.2           |149            |tt30413143   |
+|Game-Show     |Disaster Date Roulette (I Married a Monster on a Hill)|2025        |2.3                |8.4           |11             |tt36809646   |
+|History       |I'm Still Here                                        |2024        |1.2                |8.1           |123870         |tt14961016   |
+|History       |The Apprentice                                        |2024        |0.2                |7.1           |68016          |tt8368368    |
+|History       |Chhaava                                               |2025        |0.4                |7.3           |39035          |tt27922706   |
+|History       |September 5                                           |2024        |0.2                |7.1           |32992          |tt28082769   |
+|History       |Maidaan                                               |2024        |1.0                |7.9           |23254          |tt10869778   |
+|History       |The Girl with the Needle                              |2024        |0.6                |7.5           |18225          |tt10236164   |
+|History       |Intoxicated by Love                                   |2024        |0.2                |7.1           |14979          |tt11281220   |
+|History       |Kesari Chapter 2: The Untold Story of Jallianwala Bagh|2025        |1.1                |8.0           |14925          |tt3562110    |
+|History       |Nuremberg                                             |2025        |0.7                |7.6           |14751          |tt29567915   |
+|History       |Joy                                                   |2024        |0.2                |7.1           |11111          |tt10243672   |
+|Horror        |The Substance                                         |2024        |1.8                |7.2           |366414         |tt17526714   |
+|Horror        |Sinners                                               |2025        |2.2                |7.6           |319398         |tt31193180   |
+|Horror        |Alien: Romulus                                        |2024        |1.7                |7.1           |274237         |tt18412256   |
+|Horror        |Weapons                                               |2025        |2.1                |7.5           |253522         |tt26581740   |
+|Horror        |Nosferatu                                             |2024        |1.7                |7.1           |249204         |tt5040012    |
+|Horror        |Longlegs                                              |2024        |1.2                |6.6           |212468         |tt23468450   |
+|Horror        |Heretic                                               |2024        |1.6                |7.0           |206222         |tt28015403   |
+|Horror        |Frankenstein                                          |2025        |2.1                |7.5           |170476         |tt1312221    |
+|Horror        |Beetlejuice Beetlejuice                               |2024        |1.2                |6.6           |167059         |tt2049403    |
+|Horror        |A Quiet Place: Day One                                |2024        |0.9                |6.3           |165295         |tt13433802   |
+|Music         |A Complete Unknown                                    |2024        |0.1                |7.3           |107776         |tt11563598   |
+|Music         |Better Man                                            |2024        |0.3                |7.5           |41963          |tt14260836   |
+|Music         |Kneecap                                               |2024        |0.4                |7.6           |23017          |tt27367464   |
+|Music         |Amar Singh Chamkila                                   |2024        |0.6                |7.8           |17040          |tt26658272   |
+|Music         |The Greatest Night in Pop                             |2024        |0.7                |7.9           |15814          |tt30796448   |
+|Music         |The Ballad of Wallis Island                           |2025        |0.2                |7.4           |14980          |tt27674982   |
+|Music         |I Am: Celine Dion                                     |2024        |0.5                |7.7           |8197           |tt28620587   |
+|Music         |Avicii - I'm Tim                                      |2024        |0.5                |7.7           |8026           |tt32138523   |
+|Music         |Jung Kook: I Am Still                                 |2024        |1.0                |8.2           |7658           |tt32903026   |
+|Music         |Becoming Led Zeppelin                                 |2025        |0.3                |7.5           |7379           |tt10365912   |
+|Musical       |Wicked                                                |2024        |0.6                |7.4           |198520         |tt1262426    |
+|Musical       |Wicked: For Good                                      |2025        |0.2                |7.0           |31235          |tt19847976   |
+|Musical       |Tere Ishk Mein                                        |2025        |1.2                |8.0           |21821          |tt28142095   |
+|Musical       |Gaga Chromatica Ball                                  |2024        |1.3                |8.1           |2131           |tt29794647   |
+|Musical       |Andaaz 2                                              |2025        |0.1                |6.9           |1662           |tt30224735   |
+|Musical       |CMantham                                              |2025        |1.2                |8.0           |1528           |tt37919259   |
+|Musical       |How Could I Live Without You?                         |2024        |0.1                |6.9           |1244           |tt29344974   |
+|Musical       |Meghalu Cheppina Prema Katha                          |2025        |0.4                |7.2           |1040           |tt37140876   |
+|Musical       |Songs of Paradise                                     |2025        |0.2                |7.0           |1028           |tt6540996    |
+|Musical       |Roi Roi Binale                                        |2025        |2.1                |8.9           |940            |tt29939499   |
+|Mystery       |Weapons                                               |2025        |1.3                |7.5           |253522         |tt26581740   |
+|Mystery       |Nosferatu                                             |2024        |0.9                |7.1           |249204         |tt5040012    |
+|Mystery       |Longlegs                                              |2024        |0.4                |6.6           |212468         |tt23468450   |
+|Mystery       |Smile 2                                               |2024        |0.5                |6.7           |130943         |tt29268110   |
+|Mystery       |Blink Twice                                           |2024        |0.3                |6.5           |120981         |tt14858658   |
+|Mystery       |Juror #2                                              |2024        |0.8                |7.0           |118120         |tt27403986   |
+|Mystery       |Bring Her Back                                        |2025        |0.9                |7.1           |98511          |tt32246771   |
+|Mystery       |Black Bag                                             |2025        |0.5                |6.7           |78944          |tt30988739   |
+|Mystery       |The Conjuring: Last Rites                             |2025        |0.0                |6.2           |77790          |tt22898462   |
+|Mystery       |Do Patti                                              |2024        |0.1                |6.3           |70205          |tt28075881   |
+|News          |Zurawski v Texas                                      |2024        |0.0                |7.6           |127            |tt33303798   |
+|News          |Can't Look Away: The Case Against Social Media        |2025        |1.3                |8.9           |22             |tt36270205   |
+|News          |Every Christopher Nolan Movie Ranked                  |2024        |1.0                |8.6           |18             |tt32204353   |
+|News          |Investigating the Supernatural: Miracles              |2025        |0.5                |8.1           |14             |tt29089628   |
+|News          |Minnesota v. We the People                            |2024        |1.8                |9.4           |7              |tt34096687   |
+|Reality-TV    |The Netflix Slam                                      |2024        |0.1                |7.2           |149            |tt30413143   |
+|Reality-TV    |Citizen Glenn                                         |2024        |1.4                |8.5           |106            |tt35286402   |
+|Reality-TV    |Dinner Party Diaries with José Andrés                 |2024        |0.5                |7.6           |79             |tt31194941   |
+|Reality-TV    |The Loneliest Boy on Earth                            |2024        |1.9                |9.0           |73             |tt31849609   |
+|Reality-TV    |Giada in My Kitchen                                   |2025        |0.6                |7.7           |30             |tt37255713   |
+|Reality-TV    |Nenn Country                                          |2024        |2.1                |9.2           |26             |tt28197836   |
+|Reality-TV    |Sidelined: Rewind with Noah and Siena                 |2025        |1.2                |8.3           |14             |tt38686603   |
+|Reality-TV    |Beta Squad vs AMP Charity Match 2024                  |2024        |1.7                |8.8           |10             |tt32565918   |
+|Reality-TV    |Inquietus                                             |2024        |0.8                |7.9           |8              |tt33201707   |
+|Romance       |Anora                                                 |2024        |1.0                |7.4           |236831         |tt28607951   |
+|Romance       |Wicked                                                |2024        |1.0                |7.4           |198520         |tt1262426    |
+|Romance       |Challengers                                           |2024        |0.6                |7.0           |169182         |tt16426418   |
+|Romance       |Black Bag                                             |2025        |0.3                |6.7           |78944          |tt30988739   |
+|Romance       |We Live in Time                                       |2024        |0.6                |7.0           |66852          |tt27131358   |
+|Romance       |Fly Me to the Moon                                    |2024        |0.2                |6.6           |55547          |tt1896747    |
+|Romance       |Together                                              |2025        |0.3                |6.7           |53664          |tt31184028   |
+|Romance       |My Old Ass                                            |2024        |0.5                |6.9           |45376          |tt18559464   |
+|Romance       |The Life List                                         |2025        |0.4                |6.8           |36493          |tt2172954    |
+|Romance       |Bridget Jones: Mad About the Boy                      |2025        |0.1                |6.5           |30920          |tt32063050   |
+|Sci-Fi        |The Substance                                         |2024        |1.3                |7.2           |366414         |tt17526714   |
+|Sci-Fi        |Superman                                              |2025        |1.2                |7.1           |356931         |tt5950044    |
+|Sci-Fi        |Furiosa: A Mad Max Saga                               |2024        |1.6                |7.5           |309014         |tt12037194   |
+|Sci-Fi        |Alien: Romulus                                        |2024        |1.2                |7.1           |274237         |tt18412256   |
+|Sci-Fi        |The Fantastic Four: First Steps                       |2025        |1.0                |6.9           |213538         |tt10676052   |
+|Sci-Fi        |A Quiet Place: Day One                                |2024        |0.4                |6.3           |165295         |tt13433802   |
+|Sci-Fi        |28 Years Later                                        |2025        |0.7                |6.6           |164652         |tt10548174   |
+|Sci-Fi        |Jurassic World: Rebirth                               |2025        |0.0                |5.9           |158941         |tt31036941   |
+|Sci-Fi        |Companion                                             |2025        |1.0                |6.9           |154839         |tt26584495   |
+|Sci-Fi        |The Long Walk                                         |2025        |0.9                |6.8           |75361          |tt10374610   |
+|Sport         |F1: The Movie                                         |2025        |0.7                |7.7           |248997         |tt16311594   |
+|Sport         |Lubber Pandhu                                         |2024        |1.1                |8.1           |8519           |tt27007466   |
+|Sport         |Gundi: Legend of Love                                 |2024        |1.9                |8.9           |5826           |tt31853193   |
+|Sport         |Bison: Kaalamaadan                                    |2025        |0.9                |7.9           |5470           |tt15097358   |
+|Sport         |Federer: Twelve Final Days                            |2024        |0.3                |7.3           |4433           |tt31392065   |
+|Sport         |Giannis: The Marvelous Journey                        |2024        |1.3                |8.3           |1912           |tt30895834   |
+|Sport         |EFC                                                   |2024        |0.6                |7.6           |1257           |tt5930062    |
+|Sport         |Nasty                                                 |2024        |0.7                |7.7           |1144           |tt31437303   |
+|Sport         |Marty Supreme                                         |2025        |0.6                |7.6           |991            |tt32916440   |
+|Sport         |100 Meters                                            |2025        |1.1                |8.1           |781            |tt32600395   |
+|Talk-Show     |Jim Jefferies: Two Limb Policy                        |2025        |0.2                |6.9           |1557           |tt37649515   |
+|Talk-Show     |National Theatre Live: Dear England                   |2024        |1.5                |8.2           |152            |tt29640718   |
+|Talk-Show     |(Verifying) Grief 80% // 65+ X59 // Stream 283        |2025        |2.2                |8.9           |8              |tt38792547   |
+|Thriller      |Alien: Romulus                                        |2024        |1.1                |7.1           |274237         |tt18412256   |
+|Thriller      |Civil War                                             |2024        |1.0                |7.0           |257081         |tt17279496   |
+|Thriller      |Conclave                                              |2024        |1.4                |7.4           |226471         |tt20215234   |
+|Thriller      |Heretic                                               |2024        |1.0                |7.0           |206222         |tt28015403   |
+|Thriller      |Twisters                                              |2024        |0.5                |6.5           |187766         |tt12584954   |
+|Thriller      |Mission: Impossible - The Final Reckoning             |2025        |1.2                |7.2           |187688         |tt9603208    |
+|Thriller      |Carry-On                                              |2024        |0.5                |6.5           |184288         |tt21382296   |
+|Thriller      |Road House                                            |2024        |0.2                |6.2           |178547         |tt3359350    |
+|Thriller      |The Beekeeper                                         |2024        |0.3                |6.3           |172439         |tt15314262   |
+|Thriller      |28 Years Later                                        |2025        |0.6                |6.6           |164652         |tt10548174   |
+|War           |Civil War                                             |2024        |0.5                |7.0           |257081         |tt17279496   |
+|War           |The Ministry of Ungentlemanly Warfare                 |2024        |0.3                |6.8           |149999         |tt5177120    |
+|War           |Warfare                                               |2025        |0.7                |7.2           |93774          |tt31434639   |
+|War           |The Six Triple Eight                                  |2024        |0.2                |6.7           |30262          |tt24458622   |
+|War           |Nr. 24                                                |2024        |1.0                |7.5           |18368          |tt23782584   |
+|War           |Sisu: Road to Revenge                                 |2025        |0.8                |7.3           |5060           |tt31844586   |
+|War           |Eleanor the Great                                     |2025        |0.1                |6.6           |3659           |tt30268321   |
+|War           |My Dead Friend Zoe                                    |2024        |0.0                |6.5           |3598           |tt22022784   |
+|War           |Dead to Rights                                        |2025        |1.3                |7.8           |2379           |tt36598036   |
+|War           |Sound of Falling                                      |2025        |0.7                |7.2           |1922           |tt28690468   |
+|Western       |Horizon: An American Saga - Chapter 1                 |2024        |0.5                |6.6           |43590          |tt17505010   |
+|Western       |Eddington                                             |2025        |0.5                |6.6           |41162          |tt31176520   |
+|Western       |Manitou's Canoe                                       |2025        |0.2                |6.3           |3305           |tt30972054   |
+|Western       |Broke                                                 |2025        |0.0                |6.1           |2702           |tt35048826   |
+|Western       |Horizon: An American Saga - Chapter 2                 |2024        |1.0                |7.1           |1604           |tt27665778   |
+|Western       |Eye for an Eye 2                                      |2024        |0.5                |6.6           |660            |tt30972810   |
+|Western       |Same Old West                                         |2024        |1.4                |7.5           |617            |tt12636944   |
+|Western       |Stolen Time                                           |2025        |1.6                |7.7           |584            |tt14453496   |
+|Western       |Heads or Tails?                                       |2025        |0.3                |6.4           |239            |tt32448429   |
+|Western       |Bitter Gold                                           |2024        |1.1                |7.2           |118            |tt20358190   |
+
+### For the last and current year: 10 most watched movies per genre with score a score above the ALL TIME AVERGAE SCORE for a genre.
+
+|genre         |title                                                 |release year|above genre average|average rating|number of votes|imdb movie id|
+|--------------|------------------------------------------------------|------------|-------------------|--------------|---------------|-------------|
+|Action        |Dune: Part Two                                        |2024        |1.3                |8.4           |685526         |tt15239678   |
+|Action        |Deadpool & Wolverine                                  |2024        |0.4                |7.5           |540708         |tt6263850    |
+|Action        |Superman                                              |2025        |0.0                |7.1           |356931         |tt5950044    |
+|Action        |Sinners                                               |2025        |0.5                |7.6           |319398         |tt31193180   |
+|Action        |Furiosa: A Mad Max Saga                               |2024        |0.4                |7.5           |309014         |tt12037194   |
+|Action        |F1: The Movie                                         |2025        |0.6                |7.7           |248997         |tt16311594   |
+|Action        |Thunderbolts*                                         |2025        |0.0                |7.1           |244882         |tt20969586   |
+|Action        |Mission: Impossible - The Final Reckoning             |2025        |0.1                |7.2           |187688         |tt9603208    |
+|Action        |One Battle After Another                              |2025        |0.9                |8.0           |186383         |tt30144839   |
+|Action        |How to Train Your Dragon                              |2025        |0.7                |7.8           |110103         |tt26743210   |
+|Adventure     |Dune: Part Two                                        |2024        |1.2                |8.4           |685526         |tt15239678   |
+|Adventure     |Deadpool & Wolverine                                  |2024        |0.3                |7.5           |540708         |tt6263850    |
+|Adventure     |Furiosa: A Mad Max Saga                               |2024        |0.3                |7.5           |309014         |tt12037194   |
+|Adventure     |Inside Out 2                                          |2024        |0.3                |7.5           |237291         |tt22022452   |
+|Adventure     |The Wild Robot                                        |2024        |1.0                |8.2           |205692         |tt29623480   |
+|Adventure     |Mission: Impossible - The Final Reckoning             |2025        |0.0                |7.2           |187688         |tt9603208    |
+|Adventure     |How to Train Your Dragon                              |2025        |0.6                |7.8           |110103         |tt26743210   |
+|Adventure     |Flow                                                  |2024        |0.7                |7.9           |100829         |tt4772188    |
+|Adventure     |KPop Demon Hunters                                    |2025        |0.3                |7.5           |100703         |tt14205554   |
+|Adventure     |Transformers One                                      |2024        |0.4                |7.6           |60350          |tt8864596    |
+|Animation     |Inside Out 2                                          |2024        |0.3                |7.5           |237291         |tt22022452   |
+|Animation     |The Wild Robot                                        |2024        |1.0                |8.2           |205692         |tt29623480   |
+|Animation     |Flow                                                  |2024        |0.7                |7.9           |100829         |tt4772188    |
+|Animation     |KPop Demon Hunters                                    |2025        |0.3                |7.5           |100703         |tt14205554   |
+|Animation     |Transformers One                                      |2024        |0.4                |7.6           |60350          |tt8864596    |
+|Animation     |Demon Slayer: Kimetsu no Yaiba Infinity Castle        |2025        |1.3                |8.5           |53258          |tt32820897   |
+|Animation     |Predator: Killer of Killers                           |2025        |0.2                |7.4           |53009          |tt36463894   |
+|Animation     |Mahavatar Narsimha                                    |2024        |1.4                |8.6           |42900          |tt34365591   |
+|Animation     |Wallace & Gromit: Vengeance Most Fowl                 |2024        |0.3                |7.5           |39153          |tt17163970   |
+|Animation     |Chainsaw Man - The Movie: Reze Arc                    |2025        |1.3                |8.5           |25136          |tt30472557   |
+|Biography     |I'm Still Here                                        |2024        |0.8                |8.1           |123870         |tt14961016   |
+|Biography     |A Complete Unknown                                    |2024        |0.0                |7.3           |107776         |tt11563598   |
+|Biography     |Better Man                                            |2024        |0.2                |7.5           |41963          |tt14260836   |
+|Biography     |Chandu Champion                                       |2024        |0.5                |7.8           |36122          |tt27470893   |
+|Biography     |Maidaan                                               |2024        |0.6                |7.9           |23254          |tt10869778   |
+|Biography     |Amaran                                                |2024        |0.8                |8.1           |23031          |tt27118357   |
+|Biography     |Young Woman and the Sea                               |2024        |0.2                |7.5           |19064          |tt5177114    |
+|Biography     |Nr. 24                                                |2024        |0.2                |7.5           |18368          |tt23782584   |
+|Biography     |Swatantrya Veer Savarkar                              |2024        |0.4                |7.7           |17999          |tt14753612   |
+|Biography     |Ordinary Angels                                       |2024        |0.1                |7.4           |17973          |tt4996328    |
+|Comedy        |Deadpool & Wolverine                                  |2024        |0.5                |7.5           |540708         |tt6263850    |
+|Comedy        |Inside Out 2                                          |2024        |0.5                |7.5           |237291         |tt22022452   |
+|Comedy        |Anora                                                 |2024        |0.4                |7.4           |236831         |tt28607951   |
+|Comedy        |How to Train Your Dragon                              |2025        |0.8                |7.8           |110103         |tt26743210   |
+|Comedy        |Bugonia                                               |2025        |0.5                |7.5           |56118          |tt12300742   |
+|Comedy        |Wallace & Gromit: Vengeance Most Fowl                 |2024        |0.5                |7.5           |39153          |tt17163970   |
+|Comedy        |Aavesham                                              |2024        |0.8                |7.8           |31920          |tt26660021   |
+|Comedy        |Kneecap                                               |2024        |0.6                |7.6           |23017          |tt27367464   |
+|Comedy        |Premalu                                               |2024        |0.8                |7.8           |22327          |tt28288786   |
+|Comedy        |How to Make Millions Before Grandma Dies              |2024        |0.9                |7.9           |20058          |tt31392609   |
+|Crime         |One Battle After Another                              |2025        |0.9                |8.0           |186383         |tt30144839   |
+|Crime         |Maharaja                                              |2024        |1.2                |8.3           |77198          |tt26548265   |
+|Crime         |Bugonia                                               |2025        |0.4                |7.5           |56118          |tt12300742   |
+|Crime         |Lucky Baskhar                                         |2024        |0.9                |8.0           |39099          |tt27540542   |
+|Crime         |The Girl with the Needle                              |2024        |0.4                |7.5           |18225          |tt10236164   |
+|Crime         |The Seed of the Sacred Fig                            |2024        |0.5                |7.6           |18223          |tt32178949   |
+|Crime         |Viduthalai Part 2                                     |2024        |0.6                |7.7           |18020          |tt25434834   |
+|Crime         |Anweshippin Kandethum                                 |2024        |0.3                |7.4           |11880          |tt13885428   |
+|Crime         |Eleven                                                |2025        |0.3                |7.4           |11462          |tt28679253   |
+|Crime         |Identity                                              |2025        |0.1                |7.2           |10879          |tt27436132   |
+|Documentary   |No Other Land                                         |2024        |1.0                |8.2           |17194          |tt30953759   |
+|Documentary   |The Greatest Night in Pop                             |2024        |0.7                |7.9           |15814          |tt30796448   |
+|Documentary   |The Remarkable Life of Ibelin                         |2024        |1.0                |8.2           |14199          |tt19811010   |
+|Documentary   |Will & Harper                                         |2024        |0.2                |7.4           |13347          |tt30321133   |
+|Documentary   |We Will Dance Again                                   |2024        |0.4                |7.6           |11386          |tt31556612   |
+|Documentary   |Super/Man: The Christopher Reeve Story                |2024        |0.8                |8.0           |11185          |tt27902121   |
+|Documentary   |John Candy: I Like Me                                 |2025        |0.9                |8.1           |8755           |tt26683420   |
+|Documentary   |I Am: Celine Dion                                     |2024        |0.5                |7.7           |8197           |tt28620587   |
+|Documentary   |Avicii - I'm Tim                                      |2024        |0.5                |7.7           |8026           |tt32138523   |
+|Documentary   |Jung Kook: I Am Still                                 |2024        |1.0                |8.2           |7658           |tt32903026   |
+|Drama         |Dune: Part Two                                        |2024        |1.3                |8.4           |685526         |tt15239678   |
+|Drama         |The Substance                                         |2024        |0.1                |7.2           |366414         |tt17526714   |
+|Drama         |Sinners                                               |2025        |0.5                |7.6           |319398         |tt31193180   |
+|Drama         |F1: The Movie                                         |2025        |0.6                |7.7           |248997         |tt16311594   |
+|Drama         |Anora                                                 |2024        |0.3                |7.4           |236831         |tt28607951   |
+|Drama         |Conclave                                              |2024        |0.3                |7.4           |226471         |tt20215234   |
+|Drama         |One Battle After Another                              |2025        |0.9                |8.0           |186383         |tt30144839   |
+|Drama         |Frankenstein                                          |2025        |0.4                |7.5           |170476         |tt1312221    |
+|Drama         |I'm Still Here                                        |2024        |1.0                |8.1           |123870         |tt14961016   |
+|Drama         |The Brutalist                                         |2024        |0.2                |7.3           |110984         |tt8999762    |
+|Family        |The Wild Robot                                        |2024        |1.1                |8.2           |205692         |tt29623480   |
+|Family        |Flow                                                  |2024        |0.8                |7.9           |100829         |tt4772188    |
+|Family        |Meiyazhagan                                           |2024        |1.4                |8.5           |20807          |tt26758372   |
+|Family        |How to Make Millions Before Grandma Dies              |2024        |0.8                |7.9           |20058          |tt31392609   |
+|Family        |Mission Muh Dikhayi                                   |2025        |2.0                |9.1           |9849           |tt38063392   |
+|Family        |Young Hearts                                          |2024        |0.8                |7.9           |7430           |tt15245268   |
+|Family        |Laggam                                                |2024        |1.2                |8.3           |5134           |tt32292009   |
+|Family        |My Mom Jayne                                          |2025        |1.2                |8.3           |4240           |tt36464353   |
+|Family        |Palayam PC                                            |2024        |0.2                |7.3           |3199           |tt30454120   |
+|Family        |Fear                                                  |2024        |0.6                |7.7           |2945           |tt31064317   |
+|Fantasy       |Wicked                                                |2024        |0.3                |7.4           |198520         |tt1262426    |
+|Fantasy       |Frankenstein                                          |2025        |0.4                |7.5           |170476         |tt1312221    |
+|Fantasy       |Kantara: A Legend - Chapter 1                         |2025        |1.2                |8.3           |48406          |tt26439764   |
+|Fantasy       |The Life of Chuck                                     |2024        |0.2                |7.3           |43460          |tt12908150   |
+|Fantasy       |Better Man                                            |2024        |0.4                |7.5           |41963          |tt14260836   |
+|Fantasy       |Hanu Man                                              |2024        |0.6                |7.7           |30107          |tt15433956   |
+|Fantasy       |Lokah Chapter One: Chandra                            |2025        |0.6                |7.7           |16549          |tt33372494   |
+|Fantasy       |Mirai                                                 |2025        |0.1                |7.2           |9463           |tt30858568   |
+|Fantasy       |Eternity                                              |2025        |0.1                |7.2           |8714           |tt24950660   |
+|Fantasy       |Sore: Wife from the Future                            |2025        |1.3                |8.4           |2492           |tt34548722   |
+|Game-Show     |The Netflix Slam                                      |2024        |0.1                |7.2           |149            |tt30413143   |
+|Game-Show     |Disaster Date Roulette (I Married a Monster on a Hill)|2025        |1.3                |8.4           |11             |tt36809646   |
+|History       |I'm Still Here                                        |2024        |0.7                |8.1           |123870         |tt14961016   |
+|History       |Maidaan                                               |2024        |0.5                |7.9           |23254          |tt10869778   |
+|History       |The Girl with the Needle                              |2024        |0.1                |7.5           |18225          |tt10236164   |
+|History       |Kesari Chapter 2: The Untold Story of Jallianwala Bagh|2025        |0.6                |8.0           |14925          |tt3562110    |
+|History       |Nuremberg                                             |2025        |0.2                |7.6           |14751          |tt29567915   |
+|History       |The Children's Train                                  |2024        |0.0                |7.4           |9146           |tt29242846   |
+|History       |The New Year That Never Came                          |2024        |0.7                |8.1           |6005           |tt33030375   |
+|History       |I Swear                                               |2025        |1.2                |8.6           |4216           |tt31514146   |
+|History       |Guru Nanak Jahaz                                      |2025        |1.4                |8.8           |3853           |tt36722524   |
+|History       |Ataturk II: 1881-1919                                 |2024        |1.4                |8.8           |2840           |tt19396786   |
+|Horror        |The Substance                                         |2024        |1.1                |7.2           |366414         |tt17526714   |
+|Horror        |Sinners                                               |2025        |1.5                |7.6           |319398         |tt31193180   |
+|Horror        |Alien: Romulus                                        |2024        |1.0                |7.1           |274237         |tt18412256   |
+|Horror        |Weapons                                               |2025        |1.4                |7.5           |253522         |tt26581740   |
+|Horror        |Nosferatu                                             |2024        |1.0                |7.1           |249204         |tt5040012    |
+|Horror        |Longlegs                                              |2024        |0.5                |6.6           |212468         |tt23468450   |
+|Horror        |Heretic                                               |2024        |0.9                |7.0           |206222         |tt28015403   |
+|Horror        |Frankenstein                                          |2025        |1.4                |7.5           |170476         |tt1312221    |
+|Horror        |Beetlejuice Beetlejuice                               |2024        |0.5                |6.6           |167059         |tt2049403    |
+|Horror        |A Quiet Place: Day One                                |2024        |0.2                |6.3           |165295         |tt13433802   |
+|Music         |A Complete Unknown                                    |2024        |0.2                |7.3           |107776         |tt11563598   |
+|Music         |Better Man                                            |2024        |0.4                |7.5           |41963          |tt14260836   |
+|Music         |Kneecap                                               |2024        |0.5                |7.6           |23017          |tt27367464   |
+|Music         |Amar Singh Chamkila                                   |2024        |0.7                |7.8           |17040          |tt26658272   |
+|Music         |The Greatest Night in Pop                             |2024        |0.8                |7.9           |15814          |tt30796448   |
+|Music         |The Ballad of Wallis Island                           |2025        |0.3                |7.4           |14980          |tt27674982   |
+|Music         |I Am: Celine Dion                                     |2024        |0.6                |7.7           |8197           |tt28620587   |
+|Music         |Avicii - I'm Tim                                      |2024        |0.6                |7.7           |8026           |tt32138523   |
+|Music         |Jung Kook: I Am Still                                 |2024        |1.1                |8.2           |7658           |tt32903026   |
+|Music         |Becoming Led Zeppelin                                 |2025        |0.4                |7.5           |7379           |tt10365912   |
+|Musical       |Wicked                                                |2024        |0.8                |7.4           |198520         |tt1262426    |
+|Musical       |Wicked: For Good                                      |2025        |0.4                |7.0           |31235          |tt19847976   |
+|Musical       |Tere Ishk Mein                                        |2025        |1.4                |8.0           |21821          |tt28142095   |
+|Musical       |Badass Ravikumar                                      |2025        |0.2                |6.8           |9249           |tt23220552   |
+|Musical       |Gaga Chromatica Ball                                  |2024        |1.5                |8.1           |2131           |tt29794647   |
+|Musical       |Andaaz 2                                              |2025        |0.3                |6.9           |1662           |tt30224735   |
+|Musical       |CMantham                                              |2025        |1.4                |8.0           |1528           |tt37919259   |
+|Musical       |How Could I Live Without You?                         |2024        |0.3                |6.9           |1244           |tt29344974   |
+|Musical       |Meghalu Cheppina Prema Katha                          |2025        |0.6                |7.2           |1040           |tt37140876   |
+|Musical       |Songs of Paradise                                     |2025        |0.4                |7.0           |1028           |tt6540996    |
+|Mystery       |Weapons                                               |2025        |0.4                |7.5           |253522         |tt26581740   |
+|Mystery       |Rekhachithram                                         |2025        |0.8                |7.9           |16335          |tt32284154   |
+|Mystery       |Kishkindha Kaandam                                    |2024        |0.9                |8.0           |14912          |tt15980138   |
+|Mystery       |Sookshma Darshini                                     |2024        |0.7                |7.8           |12188          |tt32495687   |
+|Mystery       |Anweshippin Kandethum                                 |2024        |0.3                |7.4           |11880          |tt13885428   |
+|Mystery       |Eleven                                                |2025        |0.3                |7.4           |11462          |tt28679253   |
+|Mystery       |Golam                                                 |2024        |0.1                |7.2           |7173           |tt29272469   |
+|Mystery       |Thalavan                                              |2024        |0.1                |7.2           |6641           |tt27510257   |
+|Mystery       |It Was Just an Accident                               |2025        |0.6                |7.7           |6557           |tt36491653   |
+|Mystery       |Like Aani Subscribe                                   |2024        |0.1                |7.2           |6209           |tt33477418   |
+|News          |Zurawski v Texas                                      |2024        |0.9                |7.6           |127            |tt33303798   |
+|News          |Can't Look Away: The Case Against Social Media        |2025        |2.2                |8.9           |22             |tt36270205   |
+|News          |Every Christopher Nolan Movie Ranked                  |2024        |1.9                |8.6           |18             |tt32204353   |
+|News          |Investigating the Supernatural: Miracles              |2025        |1.4                |8.1           |14             |tt29089628   |
+|News          |Minnesota v. We the People                            |2024        |2.7                |9.4           |7              |tt34096687   |
+|Reality-TV    |The Netflix Slam                                      |2024        |0.1                |7.2           |149            |tt30413143   |
+|Reality-TV    |Citizen Glenn                                         |2024        |1.4                |8.5           |106            |tt35286402   |
+|Reality-TV    |Dinner Party Diaries with José Andrés                 |2024        |0.5                |7.6           |79             |tt31194941   |
+|Reality-TV    |The Loneliest Boy on Earth                            |2024        |1.9                |9.0           |73             |tt31849609   |
+|Reality-TV    |Giada in My Kitchen                                   |2025        |0.6                |7.7           |30             |tt37255713   |
+|Reality-TV    |Nenn Country                                          |2024        |2.1                |9.2           |26             |tt28197836   |
+|Reality-TV    |Sidelined: Rewind with Noah and Siena                 |2025        |1.2                |8.3           |14             |tt38686603   |
+|Reality-TV    |Beta Squad vs AMP Charity Match 2024                  |2024        |1.7                |8.8           |10             |tt32565918   |
+|Reality-TV    |Inquietus                                             |2024        |0.8                |7.9           |8              |tt33201707   |
+|Romance       |Anora                                                 |2024        |0.4                |7.4           |236831         |tt28607951   |
+|Romance       |Wicked                                                |2024        |0.4                |7.4           |198520         |tt1262426    |
+|Romance       |Challengers                                           |2024        |0.0                |7.0           |169182         |tt16426418   |
+|Romance       |We Live in Time                                       |2024        |0.0                |7.0           |66852          |tt27131358   |
+|Romance       |Premalu                                               |2024        |0.8                |7.8           |22327          |tt28288786   |
+|Romance       |Young Woman and the Sea                               |2024        |0.5                |7.5           |19064          |tt5177114    |
+|Romance       |Borbaad                                               |2025        |0.0                |7.0           |18099          |tt33305312   |
+|Romance       |Dragon                                                |2025        |0.8                |7.8           |16851          |tt32080876   |
+|Romance       |Intoxicated by Love                                   |2024        |0.1                |7.1           |14979          |tt11281220   |
+|Romance       |All We Imagine as Light                               |2024        |0.1                |7.1           |12844          |tt32086077   |
+|Sci-Fi        |The Substance                                         |2024        |0.5                |7.2           |366414         |tt17526714   |
+|Sci-Fi        |Superman                                              |2025        |0.4                |7.1           |356931         |tt5950044    |
+|Sci-Fi        |Furiosa: A Mad Max Saga                               |2024        |0.8                |7.5           |309014         |tt12037194   |
+|Sci-Fi        |Alien: Romulus                                        |2024        |0.4                |7.1           |274237         |tt18412256   |
+|Sci-Fi        |The Fantastic Four: First Steps                       |2025        |0.2                |6.9           |213538         |tt10676052   |
+|Sci-Fi        |Companion                                             |2025        |0.2                |6.9           |154839         |tt26584495   |
+|Sci-Fi        |The Long Walk                                         |2025        |0.1                |6.8           |75361          |tt10374610   |
+|Sci-Fi        |Kalki 2898 AD                                         |2024        |0.3                |7.0           |73449          |tt12735488   |
+|Sci-Fi        |Bugonia                                               |2025        |0.8                |7.5           |56118          |tt12300742   |
+|Sci-Fi        |Caddo Lake                                            |2024        |0.1                |6.8           |50934          |tt15552142   |
+|Sport         |F1: The Movie                                         |2025        |0.7                |7.7           |248997         |tt16311594   |
+|Sport         |Arthur the King                                       |2024        |0.0                |7.0           |37251          |tt10720352   |
+|Sport         |Lubber Pandhu                                         |2024        |1.1                |8.1           |8519           |tt27007466   |
+|Sport         |Gundi: Legend of Love                                 |2024        |1.9                |8.9           |5826           |tt31853193   |
+|Sport         |Bison: Kaalamaadan                                    |2025        |0.9                |7.9           |5470           |tt15097358   |
+|Sport         |Federer: Twelve Final Days                            |2024        |0.3                |7.3           |4433           |tt31392065   |
+|Sport         |Giannis: The Marvelous Journey                        |2024        |1.3                |8.3           |1912           |tt30895834   |
+|Sport         |My Sunshine                                           |2024        |0.0                |7.0           |1635           |tt22694908   |
+|Sport         |EFC                                                   |2024        |0.6                |7.6           |1257           |tt5930062    |
+|Sport         |Nasty                                                 |2024        |0.7                |7.7           |1144           |tt31437303   |
+|Talk-Show     |Jim Jefferies: Two Limb Policy                        |2025        |0.2                |6.9           |1557           |tt37649515   |
+|Talk-Show     |National Theatre Live: Dear England                   |2024        |1.5                |8.2           |152            |tt29640718   |
+|Talk-Show     |(Verifying) Grief 80% // 65+ X59 // Stream 283        |2025        |2.2                |8.9           |8              |tt38792547   |
+|Thriller      |Alien: Romulus                                        |2024        |0.6                |7.1           |274237         |tt18412256   |
+|Thriller      |Civil War                                             |2024        |0.5                |7.0           |257081         |tt17279496   |
+|Thriller      |Conclave                                              |2024        |0.9                |7.4           |226471         |tt20215234   |
+|Thriller      |Heretic                                               |2024        |0.5                |7.0           |206222         |tt28015403   |
+|Thriller      |Twisters                                              |2024        |0.0                |6.5           |187766         |tt12584954   |
+|Thriller      |Mission: Impossible - The Final Reckoning             |2025        |0.7                |7.2           |187688         |tt9603208    |
+|Thriller      |Carry-On                                              |2024        |0.0                |6.5           |184288         |tt21382296   |
+|Thriller      |28 Years Later                                        |2025        |0.1                |6.6           |164652         |tt10548174   |
+|Thriller      |Companion                                             |2025        |0.4                |6.9           |154839         |tt26584495   |
+|Thriller      |Final Destination: Bloodlines                         |2025        |0.2                |6.7           |143210         |tt9619824    |
+|War           |Warfare                                               |2025        |0.1                |7.2           |93774          |tt31434639   |
+|War           |Nr. 24                                                |2024        |0.4                |7.5           |18368          |tt23782584   |
+|War           |Sisu: Road to Revenge                                 |2025        |0.2                |7.3           |5060           |tt31844586   |
+|War           |Dead to Rights                                        |2025        |0.7                |7.8           |2379           |tt36598036   |
+|War           |Sound of Falling                                      |2025        |0.1                |7.2           |1922           |tt28690468   |
+|War           |Porcelain War                                         |2024        |0.0                |7.1           |1385           |tt30294282   |
+|War           |2000 Meters to Andriivka                              |2025        |1.6                |8.7           |1101           |tt34964205   |
+|War           |Amrum                                                 |2025        |0.1                |7.2           |989            |tt22507216   |
+|War           |Red Rain                                              |2025        |0.8                |7.9           |853            |tt37997249   |
+|War           |Dharmarakshak Mahaveer Chhatrapati Sambhaji Maharaj   |2024        |1.1                |8.2           |694            |tt32166678   |
+|Western       |Horizon: An American Saga - Chapter 2                 |2024        |0.1                |7.1           |1604           |tt27665778   |
+|Western       |Same Old West                                         |2024        |0.5                |7.5           |617            |tt12636944   |
+|Western       |Stolen Time                                           |2025        |0.7                |7.7           |584            |tt14453496   |
+|Western       |Bitter Gold                                           |2024        |0.2                |7.2           |118            |tt20358190   |
+|Western       |Was Once a Hero                                       |2024        |1.2                |8.2           |86             |tt19715532   |
+|Western       |Adiós al amigo                                        |2024        |1.0                |8.0           |85             |tt27856708   |
+|Western       |Harsh Treatment                                       |2024        |0.8                |7.8           |61             |tt21625826   |
+|Western       |Velvet Hammer                                         |2025        |2.5                |9.5           |50             |tt20863750   |
+|Western       |Bad Men Must Bleed                                    |2025        |0.3                |7.3           |47             |tt13594688   |
+|Western       |A Gunfighter's Deal                                   |2025        |1.5                |8.5           |46             |tt27450169   |
+
 
 ### high scoring movies with lesser known actors in the past 70 years
+
+1. First look for movies with lessser votes that average, but not too much. so in the second lowest quantile.
+2. Find the actors that are present in those movies
+3. Find all movies for those actors that have a score higher than 7
+
