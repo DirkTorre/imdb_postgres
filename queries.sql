@@ -576,3 +576,442 @@ WHERE     ranking < 11
 ORDER BY  genre,
           num_votes DESC;
 
+
+--------------------------------------------------------------------
+-- high scoring movies with lesser known actors in the past 70 years
+--------------------------------------------------------------------
+
+tussen 200 en 500
+
+
+1. First look for movies with lessser votes than average, but not too much. so in the second lowest quantile.
+2. Find the actors that are present in those movies
+3. Find all movies for those actors that have a score higher than 7
+
+
+
+
+
+
+with movie_votes as (
+	select tr.tconst, num_votes
+	FROM title_ratings tr
+	join title_basics tb on tr.tconst=tb.tconst
+	where title_type  IN ('movie','tvMovie') AND    is_adult=false
+) 
+select tp2.tconst
+from movie_votes mv
+join title_principals tp on mv.tconst=tp.tconst
+join title_principals tp2 on tp.nconst=tp2.nconst
+join title_basics tb2 on tp2.tconst=tb2.tconst
+join title_ratings tr on tp2.tconst=tb2.tconst
+where 
+	mv.num_votes > 200 and mv.num_votes < 500
+	and tp.category in ('actor', 'actress')
+	and tr.title_rating > 7
+order by mv.num_votes desc;
+
+
+
+
+-- 2e versie
+
+with movie_votes as (
+	select tr.tconst, num_votes, title_rating
+	FROM title_ratings tr
+	join title_basics tb on tr.tconst=tb.tconst
+	where title_type  IN ('movie','tvMovie') AND    is_adult=false
+), higher_than_7 as (
+	select *
+	FROM title_ratings
+	where title_rating > 7
+)
+select tp2.tconst
+from movie_votes mv
+
+
+
+join title_principals tp on mv.tconst=tp.tconst
+join title_principals tp2 on tp.nconst=tp2.nconst
+join title_basics tb2 on tp2.tconst=tb2.tconst
+join title_ratings tr on tp2.tconst=tb2.tconst
+where 
+	mv.num_votes > 200 and mv.num_votes < 500
+	and tp.category in ('actor', 'actress')
+	and tr.title_rating > 7
+order by mv.num_votes desc;
+
+-- copilot verbeterde versie die werkt:
+WITH lesser_known_actors AS (
+    SELECT DISTINCT tp.nconst
+    FROM title_principals tp
+    JOIN title_ratings tr ON tp.tconst = tr.tconst
+    JOIN title_basics tb ON tp.tconst = tb.tconst
+    WHERE tb.title_type IN ('movie','tvMovie')
+      AND tb.is_adult = false
+      AND tp.category IN ('actor','actress')
+      AND tr.num_votes BETWEEN 200 AND 500
+)
+SELECT DISTINCT tp.tconst, tr.average_rating, tr.num_votes
+FROM title_principals tp
+JOIN lesser_known_actors lka ON tp.nconst = lka.nconst
+JOIN title_ratings tr ON tp.tconst = tr.tconst
+JOIN title_basics tb ON tp.tconst = tb.tconst
+WHERE tr.average_rating > 7 AND tr.average_rating < 8.5
+  AND tb.title_type IN ('movie','tvMovie')
+  AND tb.is_adult = false
+  AND tr.num_votes > 10000 and tr.num_votes < 1000000
+ORDER BY tr.num_votes DESC;
+
+-- there is a problem that big movies are also in this list.
+-- lets take a look at the distribution for the sum of votes per actor
+WITH actors_total_votes AS (
+    SELECT DISTINCT tp.nconst, avg(tr.average_rating), sum(tr.num_votes) as sum_votes
+    FROM title_principals tp
+    JOIN title_ratings tr ON tp.tconst = tr.tconst
+    JOIN title_basics tb ON tp.tconst = tb.tconst
+    WHERE tb.title_type IN ('movie','tvMovie')
+      AND tb.is_adult = false
+      AND tp.category IN ('actor','actress')
+	group by tp.nconst
+	  
+)
+SELECT
+	percentile_cont(0.0) WITHIN GROUP (ORDER BY sum_votes) AS median_sum_votes_0,
+	percentile_cont(0.25) WITHIN GROUP (ORDER BY sum_votes) AS median_sum_votes_0_25,
+	percentile_cont(0.50) WITHIN GROUP (ORDER BY sum_votes) AS median_sum_votes_0_50,
+	percentile_cont(0.75) WITHIN GROUP (ORDER BY sum_votes) AS median_sum_votes_0_75,
+	percentile_cont(0.80) WITHIN GROUP (ORDER BY sum_votes) AS median_sum_votes_0_80,
+	percentile_cont(0.85) WITHIN GROUP (ORDER BY sum_votes) AS median_sum_votes_0_85,
+	percentile_cont(0.90) WITHIN GROUP (ORDER BY sum_votes) AS median_sum_votes_0_90,
+	percentile_cont(0.95) WITHIN GROUP (ORDER BY sum_votes) AS median_sum_votes_0_95,
+	percentile_cont(1.00) WITHIN GROUP (ORDER BY sum_votes) AS median_sum_votes_0_100
+from actors_total_votes;
+
+-- result:
+--      sum_votes     avg_rating    total_movies
+-- 0:   5             1             1
+-- 25:  28            5.3           1
+-- 50:  118           6             1
+-- 75:  781           6.6           2
+-- 80:  1313          6.71          3
+-- 85:  2447          6.9           4
+-- 90:  5483          7.1           6
+-- 95:  19736         7.45          11
+-- 100: 26104938      10            825
+
+-- i will take actors with a sum_votes between 1.000 and 20.000 and a average_rating between 6.5 and 7.5 and total_movies between 4 and 11 (with the reasoning the more movies  played in, the better the actor).
+WITH actors_total_votes AS (
+    SELECT DISTINCT tp.nconst, avg(tr.average_rating) as avg_actor_rating, sum(tr.num_votes) as sum_votes, count(*) as total_movies
+    FROM title_principals tp
+    JOIN title_ratings tr ON tp.tconst = tr.tconst
+    JOIN title_basics tb ON tp.tconst = tb.tconst
+    WHERE tb.title_type IN ('movie','tvMovie')
+      AND tb.is_adult = false
+      AND tp.category IN ('actor','actress')
+	group by tp.nconst
+), interesting_actors as (
+	SELECT *
+	from actors_total_votes
+	where sum_votes > 1000 and sum_votes < 20000
+		and avg_actor_rating > 6.5 and avg_actor_rating < 7.5
+		and total_movies > 4 and total_movies < 11
+)
+select * from interesting_actors;
+
+
+-------------------------------------------------
+-- movies that have good tv series actors in them
+-------------------------------------------------
+
+-- i came up with a better idea: actors who played in a lot of series episodes, but not that much of movies (yet).
+-- the best part about this is that you can determine the actors performance better, because an series episode is short!
+
+-- i take title_type in ('tvSeries', 'tvMiniSeries')
+
+-- precentile result for series actors:
+--      sum_votes    avg_actor_rating     total_episodes
+-- 0:   5            1                    1
+-- 25:  22           6.38                 1
+-- 50:  87           7.1                  1
+-- 75:  620          7.8                  3
+-- 80:  1074         7.9                  3
+-- 85:  2108         8.1                  4
+-- 90:  4979         8.4                  6
+-- 95:  17639        8.7                  9
+-- 100: 6109394      10                   456
+
+-- the jump after the 90 percentile rank is very high: those are popular series
+-- so i take the area between percentile rank 75 and 90, made fuzzy.
+-- sum_votes: 700-5.000; avg_actor_rating: 7.5-8.5; episodes: 3-10
+-- i set total_episodes higher, because the jump is just very big, and more experience will make a better actor.
+
+-- this gives 4.238 actors, that's doable!
+WITH actors_total_votes AS (
+    SELECT DISTINCT tp.nconst, avg(tr.average_rating) as avg_actor_rating, sum(tr.num_votes) as sum_votes, count(*) as total_episodes
+    FROM title_principals tp
+    JOIN title_ratings tr ON tp.tconst = tr.tconst
+    JOIN title_basics tb ON tp.tconst = tb.tconst
+    WHERE tb.title_type IN ('tvSeries', 'tvMiniSeries')
+      AND tb.is_adult = false
+      AND tp.category IN ('actor','actress')
+	group by tp.nconst
+	  
+)
+select *
+from actors_total_votes
+where 
+	sum_votes between 700 and 5000 and
+	avg_actor_rating between 7.5 and 8.5 and 
+	total_episodes between 3 and 10
+;
+
+-- i have to come up with a good amount of number of votes per movie to filter the folowing query (so i don't get ultra low watched moves or extremely wel known movies)
+-- quantiles for num_votes
+-- 0:   5
+-- 25:  19
+-- 50:  58
+-- 75:  330
+-- 80:  563
+-- 85:  1043
+-- 90:  2207
+-- 95:  7581
+-- 100: 1535259
+
+-- i will take a range from 300 to 3.000
+
+-- this takes 30 minutes to execute, but works!
+
+ WITH actors_total_votes AS (
+                SELECT DISTINCT tp.nconst,
+                                Avg(tr.average_rating) AS avg_actor_rating,
+                                Sum(tr.num_votes)      AS sum_votes,
+                                Count(*)               AS total_episodes
+                FROM            title_principals tp
+                JOIN            title_ratings tr
+                ON              tp.tconst = tr.tconst
+                JOIN            title_basics tb
+                ON              tp.tconst = tb.tconst
+                WHERE           tb.title_type IN ('tvSeries',
+                                                  'tvMiniSeries')
+                AND             tb.is_adult = false
+                AND             tp.category IN ('actor',
+                                                'actress')
+                GROUP BY        tp.nconst ),
+movies AS (
+       SELECT tb.tconst,
+              tb.primary_title,
+              tb.start_year,
+              tr.average_rating,
+              tr.num_votes
+       FROM   title_basics  AS tb
+       JOIN   title_ratings AS tr
+       ON     tr.tconst=tb.tconst
+       WHERE  tb.title_type IN ('movie',
+                                'tvMovie')
+       AND    tb.is_adult=false
+       AND    tr.average_rating BETWEEN 6 AND    8
+       AND    tr.num_votes BETWEEN 300 AND    3000 ), 
+good_series_actors AS (
+       SELECT nconst
+       FROM   actors_total_votes
+       WHERE  sum_votes BETWEEN 700 AND    5000
+       AND    avg_actor_rating BETWEEN 7.5 AND    8.5
+       AND    total_episodes BETWEEN 3 AND    10 ), -- change to total_episodes >= 3 ??  
+top_movies AS (
+         SELECT   *,
+                  row_number() OVER w AS top_rank
+         FROM     good_series_actors  AS gsa
+         JOIN     title_principals    AS tp
+         ON       gsa.nconst=tp.nconst
+         JOIN     movies
+         ON       tp.tconst=movies.tconst
+         JOIN     genres
+         ON       movies.tconst=genres.tconst window w AS (partition BY genre ORDER BY average_rating DESC) )
+SELECT   *
+FROM     top_movies
+WHERE    top_rank < 11
+ORDER BY genre,
+         top_rank
+
+-- problem: there are duplicates (in the genre catagory too!)
+
+ WITH actors_total_votes AS (
+                SELECT DISTINCT tp.nconst,
+                                Avg(tr.average_rating) AS avg_actor_rating,
+                                Sum(tr.num_votes)      AS sum_votes,
+                                Count(*)               AS total_episodes
+                FROM            title_principals tp
+                JOIN            title_ratings tr
+                ON              tp.tconst = tr.tconst
+                JOIN            title_basics tb
+                ON              tp.tconst = tb.tconst
+                WHERE           tb.title_type IN ('tvSeries',
+                                                  'tvMiniSeries')
+                AND             tb.is_adult = false
+                AND             tp.category IN ('actor',
+                                                'actress')
+                GROUP BY        tp.nconst ),
+movies AS (
+       SELECT tb.tconst,
+              tb.primary_title,
+              tb.start_year,
+              tr.average_rating,
+              tr.num_votes
+       FROM   title_basics  AS tb
+       JOIN   title_ratings AS tr
+       ON     tr.tconst=tb.tconst
+       WHERE  tb.title_type IN ('movie',
+                                'tvMovie')
+       AND    tb.is_adult=false
+       AND    tr.average_rating BETWEEN 6 AND    8
+       AND    tr.num_votes BETWEEN 300 AND    3000 ), 
+good_series_actors AS (
+       SELECT nconst
+       FROM   actors_total_votes
+       WHERE  sum_votes BETWEEN 700 AND    5000
+       AND    avg_actor_rating BETWEEN 7.5 AND    8.5
+       AND    total_episodes BETWEEN 3 AND    10 ), -- change to total_episodes >= 3 ??  
+top_movies AS (
+         SELECT   genre, tconst, primary_title, start_year, avergae_rating, num_votes
+                  row_number() OVER w AS top_rank
+         FROM     good_series_actors  AS gsa
+         JOIN     title_principals    AS tp
+         ON       gsa.nconst=tp.nconst
+         JOIN     movies
+         ON       tp.tconst=movies.tconst
+         JOIN     genres
+         ON       movies.tconst=genres.tconst window w AS (partition BY genre ORDER BY average_rating DESC) )
+SELECT   *
+FROM     top_movies
+WHERE    top_rank < 11
+ORDER BY genre,
+         top_rank
+
+-- calculate votes per episode
+with vpe as (
+	SELECT tp.nconst,
+					Avg(tr.average_rating) AS avg_actor_rating,
+					Sum(tr.num_votes)      AS sum_votes,
+					Count(*)               AS total_episodes,
+					Sum(tr.num_votes) / Count(*) as votes_per_episode
+	FROM            title_principals tp
+	JOIN            title_ratings tr
+	ON              tp.tconst = tr.tconst
+	JOIN            title_basics tb
+	ON              tp.tconst = tb.tconst
+	WHERE           tb.title_type IN ('tvSeries',
+									  'tvMiniSeries')
+	AND             tb.is_adult = false
+	AND             tp.category IN ('actor',
+									'actress')
+	GROUP BY        tp.nconst
+	having 			Count(*) > 3
+	order by votes_per_episode desc
+)
+select
+	percentile_cont(0.0) WITHIN GROUP (ORDER BY vpe.votes_per_episode) AS median_sum_votes_0,
+	percentile_cont(0.25) WITHIN GROUP (ORDER BY vpe.votes_per_episode) AS median_sum_votes_0_25,
+	percentile_cont(0.50) WITHIN GROUP (ORDER BY vpe.votes_per_episode) AS median_sum_votes_0_50,
+	percentile_cont(0.75) WITHIN GROUP (ORDER BY vpe.votes_per_episode) AS median_sum_votes_0_75,
+	percentile_cont(0.80) WITHIN GROUP (ORDER BY vpe.votes_per_episode) AS median_sum_votes_0_80,
+	percentile_cont(0.85) WITHIN GROUP (ORDER BY vpe.votes_per_episode) AS median_sum_votes_0_85,
+	percentile_cont(0.90) WITHIN GROUP (ORDER BY vpe.votes_per_episode) AS median_sum_votes_0_90,
+	percentile_cont(0.95) WITHIN GROUP (ORDER BY vpe.votes_per_episode) AS median_sum_votes_0_95,
+	percentile_cont(1.00) WITHIN GROUP (ORDER BY vpe.votes_per_episode) AS median_sum_votes_0_100
+from vpe;
+
+-- between 1000: and 10000	
+-- 00: 5
+-- 25: 68
+-- 75: 1159
+-- 80: 1777
+-- 85: 2996
+-- 90: 5735
+-- 95: 14334
+-- 100: 621571
+
+
+
+
+
+
+
+-- final query:
+WITH actors_vpe AS
+( -- votes per episode
+         SELECT   tp.nconst,
+                  Avg(tr.average_rating) AS avg_actor_rating,
+                  Sum(tr.num_votes)      AS sum_votes,
+                  Count(*)               AS total_episodes,
+                  Avg(tr.num_votes)      AS votes_per_episode
+         FROM     title_principals tp
+         JOIN     title_ratings tr
+         ON       tp.tconst = tr.tconst
+         JOIN     title_basics tb
+         ON       tp.tconst = tb.tconst
+         WHERE    tb.title_type IN ('tvSeries',
+                                    'tvMiniSeries')
+         AND      tb.is_adult = false
+         AND      tp.category IN ('actor',
+                                  'actress')
+         GROUP BY tp.nconst
+         HAVING   Count(*) > 3
+         ORDER BY votes_per_episode DESC ) , possible_good_actors AS
+(
+         SELECT   nconst
+         FROM     actors_vpe
+         WHERE    votes_per_episode BETWEEN 1000 AND      10000
+         AND      avg_actor_rating BETWEEN 7 AND      9
+         ORDER BY avg_actor_rating ), movies AS
+(
+       SELECT tb.tconst,
+              tb.primary_title,
+              tb.start_year,
+              tr.average_rating,
+              tr.num_votes
+       FROM   title_basics  AS tb
+       JOIN   title_ratings AS tr
+       ON     tr.tconst=tb.tconst
+       WHERE  tb.title_type IN ('movie',
+                                'tvMovie')
+       AND    tb.is_adult=false
+       AND    tr.average_rating BETWEEN 6 AND    8
+       AND    tr.num_votes BETWEEN 300 AND    3000 ) , movies_of_good_actors AS
+(
+                SELECT DISTINCT tp.tconst
+                FROM            possible_good_actors pga
+                LEFT JOIN       title_principals tp
+                ON              pga.nconst=tp.nconst ) , possible_good_movies AS
+(
+       SELECT mga.tconst,
+              primary_title,
+              start_year,
+              average_rating,
+              num_votes
+       FROM   movies_of_good_actors AS mga
+       JOIN   movies pgm
+       ON     mga.tconst=pgm.tconst ) , ranked AS
+(
+         SELECT   genre,
+                  start_year,
+				  pgm.tconst,
+                  primary_title,
+                  average_rating,
+                  num_votes,
+                  row_number() OVER w  AS top_rank
+         FROM     possible_good_movies AS pgm
+         JOIN     genres
+         ON       pgm.tconst=genres.tconst window w AS (partition BY genre ORDER BY average_rating DESC) )
+SELECT   
+	array_agg(genre),
+	start_year,
+	tconst,
+	primary_title,
+	average_rating,
+	num_votes
+FROM     ranked
+WHERE    top_rank < 30
+GROUP BY tconst, start_year, average_rating, num_votes, primary_title
+ORDER BY 
+	num_votes DESC;

@@ -1289,9 +1289,495 @@ So which ones are most popular per movie score category (good, okay, bad)
 |Western       |A Gunfighter's Deal                                   |2025        |1.5                |8.5           |46             |tt27450169   |
 
 
-### high scoring movies with lesser known actors in the past 70 years
+### possible good movies with possible good actors (that aren't extremely popular) for every genre (top 30 per genre)
 
-1. First look for movies with lessser votes that average, but not too much. so in the second lowest quantile.
-2. Find the actors that are present in those movies
-3. Find all movies for those actors that have a score higher than 7
-
+|array_agg            |start_year|tconst    |primary_title                                                                                               |average_rating|num_votes|
+|---------------------|----------|----------|------------------------------------------------------------------------------------------------------------|--------------|---------|
+|{Mystery}            |1995      |tt0114180 |Prime Suspect: Inner Circles                                                                                |7.6           |2981     |
+|{Action,Crime}       |2007      |tt2355791 |Polladhavan                                                                                                 |7.7           |2981     |
+|{Thriller}           |1998      |tt0189153 |Wheels                                                                                                      |7.5           |2973     |
+|{Sci-Fi}             |1980      |tt0081036 |The Lathe of Heaven                                                                                         |7.1           |2959     |
+|{Horror}             |2011      |tt1517225 |The Enemy                                                                                                   |7.3           |2949     |
+|{Western}            |1946      |tt0038395 |Canyon Passage                                                                                              |6.9           |2923     |
+|{History,Action}     |2019      |tt10834986|Gumnaami                                                                                                    |7.8           |2915     |
+|{Sport}              |1940      |tt0032342 |City for Conquest                                                                                           |7.2           |2910     |
+|{Mystery}            |1988      |tt0095244 |Zerograd                                                                                                    |7.4           |2908     |
+|{Romance}            |1984      |tt0216755 |Formula of Love                                                                                             |7.9           |2892     |
+|{War}                |1960      |tt0052961 |Kapo                                                                                                        |7.6           |2882     |
+|{War}                |1964      |tt0058263 |King & Country                                                                                              |7.5           |2880     |
+|{Romance}            |1928      |tt0019109 |Lonesome                                                                                                    |7.7           |2877     |
+|{Sport}              |2004      |tt0467003 |Challenge                                                                                                   |7.4           |2862     |
+|{Adventure}          |2024      |tt30475122|Monsters: 103 Mercies Dragon Damnation                                                                      |7.7           |2856     |
+|{Biography}          |2010      |tt1632679 |Painted with Words                                                                                          |7.9           |2852     |
+|{Sci-Fi}             |1995      |tt0113264 |Harrison Bergeron                                                                                           |7.2           |2839     |
+|{Thriller}           |2015      |tt4016994 |Why Me?                                                                                                     |7.5           |2832     |
+|{Music}              |1967      |tt0060668 |Marat/Sade                                                                                                  |7.5           |2830     |
+|{Film-Noir}          |1946      |tt0039029 |Three Strangers                                                                                             |6.9           |2823     |
+|{Family,Comedy,Romance}|1981      |tt0082162 |Chashme Buddoor                                                                                             |7.9           |2823     |
+|{Crime,Action}       |1988      |tt0095441 |The Cold Summer of 1953                                                                                     |7.8           |2816     |
+|{War}                |1986      |tt0067625 |Trial on the Road                                                                                           |7.8           |2807     |
+|{Thriller}           |2017      |tt6660112 |Nabab                                                                                                       |7.5           |2799     |
+|{Film-Noir}          |1950      |tt0042648 |Kiss Tomorrow Goodbye                                                                                       |7.1           |2777     |
+|{Action,Adventure,Animation}|2023      |tt14636186|The Venture Bros.: Radiant Is the Blood of the Baboon Heart                                                 |7.9           |2739     |
+|{Drama}              |1986      |tt0091398 |The Beauty of Vice                                                                                          |8.0           |2736     |
+|{Musical}            |1978      |tt0078418 |Trishul                                                                                                     |7.6           |2735     |
+|{Drama}              |2009      |tt2321421 |Mee Shivajiraje Bhosale Boltoy                                                                              |8.0           |2735     |
+|{Mystery}            |1987      |tt0092497 |Agatha Christie's Miss Marple: 4:50 from Paddington                                                         |7.6           |2733     |
+|{History}            |1974      |tt0071175 |The Autobiography of Miss Jane Pittman                                                                      |7.8           |2729     |
+|{Western}            |1955      |tt0048806 |Wichita                                                                                                     |6.9           |2716     |
+|{Thriller}           |2024      |tt27744719|Thiru.Manickam                                                                                              |8.0           |2675     |
+|{Film-Noir}          |1955      |tt0048199 |Illegal                                                                                                     |7.0           |2672     |
+|{Music}              |2005      |tt0407936 |Lackawanna Blues                                                                                            |7.8           |2667     |
+|{Film-Noir}          |1954      |tt0047417 |Riot in Cell Block 11                                                                                       |7.0           |2651     |
+|{Crime,Mystery}      |1990      |tt0097082 |Columbo Cries Wolf                                                                                          |7.8           |2647     |
+|{Film-Noir}          |1948      |tt0040087 |All My Sons                                                                                                 |7.3           |2639     |
+|{Adventure}          |2011      |tt1909796 |K-On! The Movie                                                                                             |7.7           |2639     |
+|{Biography,Documentary,Music}|2019      |tt10011448|Linda Ronstadt: The Sound of My Voice                                                                       |8.0           |2627     |
+|{Drama}              |1977      |tt0077222 |White Bim Black Ear                                                                                         |8.0           |2616     |
+|{Thriller}           |2003      |tt0356982 |Paanch                                                                                                      |7.6           |2609     |
+|{Sport}              |2005      |tt0448621 |Marathon                                                                                                    |7.6           |2609     |
+|{War}                |2012      |tt2244877 |Halima's Path                                                                                               |7.9           |2598     |
+|{Family}             |2018      |tt6722976 |The Elephant Queen                                                                                          |7.8           |2565     |
+|{Crime}              |1998      |tt0151479 |Next Stop Paradise                                                                                          |7.7           |2557     |
+|{Crime}              |1960      |tt0052784 |Skeleton of Mrs. Morales                                                                                    |7.7           |2554     |
+|{Film-Noir}          |1942      |tt0035082 |Moontide                                                                                                    |6.8           |2553     |
+|{Mystery}            |1986      |tt0170266 |Agatha Christie's Miss Marple: The Murder at the Vicarage                                                   |7.5           |2542     |
+|{Crime}              |2005      |tt0477857 |Sehar                                                                                                       |7.7           |2541     |
+|{Western}            |2005      |tt0486420 |Love's Long Journey                                                                                         |7.1           |2536     |
+|{Fantasy}            |1976      |tt0073570 |The Adventures of Buratino                                                                                  |7.5           |2530     |
+|{Music}              |1988      |tt0095515 |Let's Get Lost                                                                                              |7.7           |2530     |
+|{Fantasy}            |2016      |tt6273736 |Vanishing Time: A Boy Who Returned                                                                          |7.3           |2529     |
+|{Biography}          |2014      |tt2247566 |Kano                                                                                                        |7.7           |2523     |
+|{Crime,Mystery}      |1990      |tt0097088 |Columbo: Rest in Peace, Mrs. Columbo                                                                        |7.7           |2493     |
+|{Music}              |1996      |tt0122689 |The Rolling Stones Rock and Roll Circus                                                                     |7.6           |2482     |
+|{Romance,History}    |1979      |tt0079907 |Siberiade                                                                                                   |7.9           |2471     |
+|{Thriller}           |2017      |tt6747242 |8 Thottakkal                                                                                                |7.5           |2467     |
+|{Film-Noir}          |1948      |tt0040798 |Sleep, My Love                                                                                              |6.8           |2447     |
+|{Western}            |1997      |tt0119501 |Last Stand at Saber River                                                                                   |6.9           |2429     |
+|{Western}            |1991      |tt0101609 |Conagher                                                                                                    |7.2           |2428     |
+|{Sci-Fi}             |1985      |tt0089568 |Max Headroom                                                                                                |7.1           |2427     |
+|{Mystery}            |1987      |tt0091970 |Miss Marple: Sleeping Murder                                                                                |7.6           |2426     |
+|{Sport}              |2021      |tt11755300|Golondaaj                                                                                                   |7.3           |2426     |
+|{Film-Noir}          |1947      |tt0039666 |Nora Prentiss                                                                                               |7.1           |2408     |
+|{Mystery}            |2016      |tt5857968 |Kuttrame Thandanai                                                                                          |7.6           |2399     |
+|{Animation}          |2005      |tt0488836 |Hanuman                                                                                                     |8.0           |2394     |
+|{Family,Musical}     |2015      |tt4767274 |Dolly Parton's Coat of Many Colors                                                                          |7.7           |2369     |
+|{Crime,Animation,Action}|2008      |tt1278060 |The Garden of Sinners: Paradox Spiral                                                                       |7.9           |2367     |
+|{Crime}              |2000      |tt0226771 |Homicide: The Movie                                                                                         |7.7           |2366     |
+|{Film-Noir}          |1941      |tt0033582 |The Face Behind the Mask                                                                                    |7.1           |2364     |
+|{Sci-Fi}             |1999      |tt0212887 |Comic Relief: Doctor Who - The Curse of Fatal Death                                                         |7.9           |2363     |
+|{Sci-Fi}             |1985      |tt0089714 |O-Bi, O-Ba: The End of Civilization                                                                         |7.2           |2359     |
+|{Romance}            |1964      |tt0058414 |Nothing But a Man                                                                                           |7.9           |2356     |
+|{Drama}              |1985      |tt0089069 |An Early Frost                                                                                              |8.0           |2347     |
+|{Western}            |1958      |tt0051690 |Gunman's Walk                                                                                               |7.1           |2333     |
+|{Musical}            |1995      |tt0265987 |Victor/Victoria                                                                                             |7.8           |2323     |
+|{Horror}             |1973      |tt0070074 |Frankenstein: The True Story                                                                                |7.1           |2321     |
+|{Film-Noir}          |1957      |tt0049856 |Time Without Pity                                                                                           |6.8           |2320     |
+|{Horror}             |1997      |tt0118350 |Intensity                                                                                                   |7.1           |2312     |
+|{War}                |1985      |tt0090250 |The Heifer                                                                                                  |7.5           |2282     |
+|{Mystery}            |1990      |tt0099288 |Columbo: Agenda for Murder                                                                                  |7.6           |2276     |
+|{Mystery}            |1992      |tt0104882 |Miss Marple: The Mirror Crack'd from Side to Side                                                           |7.5           |2261     |
+|{Horror,Mystery}     |1960      |tt0054116 |Never Take Candy from a Stranger                                                                            |7.4           |2260     |
+|{Horror}             |1945      |tt0037931 |Murder, He Says                                                                                             |6.9           |2257     |
+|{Fantasy,Family}     |1988      |tt0096329 |Ubit drakona                                                                                                |7.8           |2241     |
+|{Film-Noir}          |1954      |tt0046935 |Drive a Crooked Road                                                                                        |6.9           |2239     |
+|{Mystery}            |1998      |tt0144141 |Ashes to Ashes                                                                                              |7.5           |2228     |
+|{Horror}             |2019      |tt5123896 |Scream, Queen! My Nightmare on Elm Street                                                                   |7.2           |2210     |
+|{Film-Noir}          |1946      |tt0038780 |Nobody Lives Forever                                                                                        |7.1           |2197     |
+|{Film-Noir}          |1947      |tt0039895 |I Became a Criminal                                                                                         |7.2           |2177     |
+|{Western}            |2006      |tt0785025 |Love's Abiding Joy                                                                                          |6.9           |2168     |
+|{Mystery}            |1991      |tt0101603 |Columbo: Death Hits the Jackpot                                                                             |7.5           |2165     |
+|{Western}            |1971      |tt0067763 |Skin Game                                                                                                   |7.0           |2156     |
+|{Family}             |2020      |tt13273172|Pawn                                                                                                        |7.7           |2156     |
+|{Mystery}            |1990      |tt0097091 |Columbo: Uneasy Lies the Crown                                                                              |7.4           |2155     |
+|{Crime}              |2006      |tt0495027 |Cracker                                                                                                     |7.7           |2144     |
+|{Comedy}             |1981      |tt0081915 |The Pee-Wee Herman Show                                                                                     |8.0           |2137     |
+|{Thriller}           |1989      |tt0098238 |The French Revolution                                                                                       |7.7           |2092     |
+|{Mystery}            |1997      |tt0118874 |Columbo: A Trace of Murder                                                                                  |7.5           |2087     |
+|{Biography}          |1975      |tt0073438 |The Naked Civil Servant                                                                                     |7.8           |2080     |
+|{Film-Noir}          |1938      |tt0030996 |You and Me                                                                                                  |6.8           |2069     |
+|{Horror}             |1977      |tt0075882 |Count Dracula                                                                                               |7.2           |2054     |
+|{War}                |2000      |tt0248912 |Into the Arms of Strangers: Stories of the Kindertransport                                                  |7.7           |2047     |
+|{Fantasy}            |1991      |tt0101435 |Bernard and the Genie                                                                                       |7.3           |2040     |
+|{Film-Noir}          |1953      |tt0045911 |Inferno                                                                                                     |7.0           |2039     |
+|{Sci-Fi}             |2012      |tt2381287 |Robot Chicken: DC Comics Special                                                                            |7.7           |2035     |
+|{History,War,Documentary}|1987      |tt0092851 |Dear America: Letters Home from Vietnam                                                                     |7.9           |2033     |
+|{Adventure}          |1989      |tt0200528 |Chip 'n' Dale's Rescue Rangers to the Rescue                                                                |7.6           |2021     |
+|{Horror}             |1992      |tt0103926 |Careful                                                                                                     |7.0           |2012     |
+|{Comedy,Music,Animation}|2013      |tt3298820 |Metalocalypse: The Doomstar Requiem - A Klok Opera                                                          |7.9           |2000     |
+|{Western}            |1953      |tt0046384 |The Sun Shines Bright                                                                                       |6.9           |1986     |
+|{Western}            |1972      |tt0067072 |Evil Roy Slade                                                                                              |7.1           |1982     |
+|{History,Documentary,Horror}|2020      |tt13198946|In Search of Darkness Part II: The Journey Into '80s Horror Continues                                       |7.9           |1973     |
+|{Film-Noir}          |1951      |tt0044136 |Tomorrow Is Another Day                                                                                     |7.1           |1966     |
+|{Music}              |2010      |tt0756727 |Who Is Harry Nilsson (And Why Is Everybody Talkin' About Him?)                                              |7.6           |1966     |
+|{Sport}              |2006      |tt0464955 |White Palms                                                                                                 |7.4           |1945     |
+|{Adventure}          |1983      |tt0086590 |The Wind in the Willows                                                                                     |7.6           |1944     |
+|{Animation,Fantasy}  |2023      |tt28036417|Rascal Does Not Dream of a Knapsack Kid                                                                     |7.8           |1938     |
+|{Film-Noir}          |1954      |tt0047479 |Shield for Murder                                                                                           |6.8           |1937     |
+|{Musical,Family}     |1988      |tt0251640 |Christmas at Pee-wee's Playhouse                                                                            |7.8           |1937     |
+|{Western}            |1995      |tt0113399 |In Pursuit of Honor                                                                                         |7.0           |1932     |
+|{Adventure}          |2000      |tt0301083 |Cardcaptor Sakura: The Sealed Card                                                                          |7.7           |1921     |
+|{Fantasy,Horror}     |2017      |tt5476944 |Black Butler: Book of the Atlantic                                                                          |7.6           |1915     |
+|{Romance}            |2009      |tt1359552 |Antaheen                                                                                                    |7.9           |1911     |
+|{Sport}              |2016      |tt4431208 |Ice Guardians                                                                                               |7.4           |1907     |
+|{Horror}             |1991      |tt0101592 |Clearcut                                                                                                    |7.0           |1904     |
+|{Sci-Fi,Animation,Action}|2025      |tt36440312|Dan Da Dan: Evil Eye                                                                                        |7.8           |1901     |
+|{Documentary}        |2008      |tt1347512 |Blackadder Rides Again                                                                                      |7.9           |1892     |
+|{Thriller}           |2012      |tt2202607 |Everybody in Our Family                                                                                     |7.5           |1886     |
+|{Film-Noir}          |1952      |tt0045190 |The Steel Trap                                                                                              |6.9           |1859     |
+|{Fantasy}            |2003      |tt0309150 |DreamKeeper                                                                                                 |7.5           |1852     |
+|{Mystery}            |2014      |tt4065336 |Signed, Sealed, Delivered for Christmas                                                                     |7.5           |1851     |
+|{History}            |2021      |tt4554690 |The Automat                                                                                                 |7.8           |1836     |
+|{Romance}            |1968      |tt0062907 |We'll Live Till Monday                                                                                      |7.8           |1831     |
+|{History,Biography}  |2012      |tt2374835 |The Best of Men                                                                                             |7.9           |1828     |
+|{Music}              |2021      |tt15766576|A Man Named Scott                                                                                           |7.7           |1826     |
+|{Crime,Biography}    |1989      |tt0097132 |A Cry for Help: The Tracey Thurman Story                                                                    |7.8           |1820     |
+|{War}                |2018      |tt8032912 |Parwaaz Hai Junoon                                                                                          |7.5           |1808     |
+|{War}                |1967      |tt0061876 |The Commissar                                                                                               |7.5           |1797     |
+|{Film-Noir}          |1948      |tt0040934 |The Velvet Touch                                                                                            |6.8           |1783     |
+|{Mystery}            |1959      |tt0053039 |The Facts of Murder                                                                                         |7.4           |1779     |
+|{Horror}             |1990      |tt10045260|The Exorcist III: Legion                                                                                    |7.3           |1774     |
+|{Sport,Documentary}  |2011      |tt1908471 |Catching Hell                                                                                               |7.9           |1774     |
+|{Horror}             |1965      |tt0059116 |The Possessed                                                                                               |7.0           |1757     |
+|{Action,Animation,Adventure}|2007      |tt6490990 |JoJo's Bizarre Adventure: Phantom Blood                                                                     |7.8           |1749     |
+|{Thriller}           |1995      |tt0377321 |Aasai                                                                                                       |7.5           |1740     |
+|{War}                |1977      |tt0074447 |Twenty Days Without War                                                                                     |7.7           |1738     |
+|{Horror,Thriller}    |2025      |tt18815884|Kaal Trighori                                                                                               |7.9           |1720     |
+|{Romance,History,Adventure}|1969      |tt0065180 |The Last Relic                                                                                              |7.8           |1708     |
+|{Sport}              |2016      |tt5805252 |Budhia Singh: Born to Run                                                                                   |7.5           |1700     |
+|{Romance,Action}     |2008      |tt1621424 |Jayam Kondaan                                                                                               |8.0           |1697     |
+|{Thriller}           |1986      |tt0089599 |Mirch Masala                                                                                                |7.8           |1669     |
+|{Romance}            |2017      |tt7684228 |MalliRaava                                                                                                  |7.9           |1666     |
+|{Action,Adventure}   |2003      |tt0460394 |Aithe                                                                                                       |7.9           |1647     |
+|{Musical}            |2006      |tt0888503 |Imsai Arasan 23rd Pulikecei                                                                                 |7.8           |1647     |
+|{Action,Animation,Adventure}|2001      |tt0831848 |Shin Chan: The Adult Empire Strikes Back                                                                    |7.8           |1635     |
+|{Thriller}           |2024      |tt32362515|The Paradise of Thorns                                                                                      |7.6           |1631     |
+|{Fantasy,Musical}    |1986      |tt0099263 |Jim Henson's: The Christmas Toy                                                                             |7.7           |1621     |
+|{Music}              |2007      |tt0819796 |Play Me a Love Song                                                                                         |7.5           |1617     |
+|{Musical}            |2020      |tt10230436|Yeh Ballet                                                                                                  |7.5           |1612     |
+|{Adventure,Crime,Animation}|2014      |tt5714216 |Black Butler: Book of Murder                                                                                |7.9           |1597     |
+|{Drama,Animation,Action}|2009      |tt1422651 |Gurren Lagann the Movie: The Lights in the Sky are Stars                                                    |8.0           |1593     |
+|{Animation,Adventure,Action}|2012      |tt2598466 |One Piece: Episode of Nami - Tears of a Navigator and the Bonds of Friends                                  |7.8           |1584     |
+|{Film-Noir}          |1948      |tt0040751 |Ruthless                                                                                                    |6.8           |1574     |
+|{Mystery}            |2015      |tt4662412 |Signed, Sealed, Delivered: From Paris with Love                                                             |7.6           |1572     |
+|{Music}              |2014      |tt2624704 |Kaaviya Thalaivan                                                                                           |7.5           |1563     |
+|{Action,Adventure}   |2017      |tt6180274 |Poorna                                                                                                      |7.7           |1557     |
+|{Western}            |2007      |tt0960143 |Love's Unfolding Dream                                                                                      |6.9           |1530     |
+|{Musical}            |1975      |tt0073391 |Mili                                                                                                        |7.4           |1529     |
+|{Biography}          |2010      |tt1815837 |Moner Manush                                                                                                |7.9           |1525     |
+|{Documentary}        |2024      |tt19895822|Made in England: The Films of Powell and Pressburger                                                        |7.9           |1515     |
+|{Film-Noir}          |1957      |tt0050847 |Plunder Road                                                                                                |6.9           |1503     |
+|{Film-Noir}          |1953      |tt0045824 |The Glass Wall                                                                                              |6.9           |1498     |
+|{History,Family,Documentary}|2021      |tt5618690 |Street Gang: How We Got to Sesame Street                                                                    |8.0           |1482     |
+|{Animation,Adventure,Action}|2013      |tt3354352 |One Piece: Episode of Merry - Mou Hitori no Nakama no Monogatari                                            |7.9           |1480     |
+|{Musical}            |2015      |tt4431392 |Malli Malli Idi Rani Roju                                                                                   |7.5           |1477     |
+|{Horror}             |1987      |tt0094242 |Reflections                                                                                                 |7.7           |1469     |
+|{Musical}            |2021      |tt11744358|Golata istina za grupa Zhiguli                                                                              |7.4           |1467     |
+|{Biography}          |2022      |tt16977750|Sidney                                                                                                      |7.8           |1458     |
+|{Comedy}             |1989      |tt0233926 |In Which Annie Gives It Those Ones                                                                          |7.9           |1457     |
+|{Sport}              |2021      |tt10443794|The United Way                                                                                              |7.2           |1447     |
+|{Western}            |1979      |tt0082508 |Heartland                                                                                                   |7.2           |1442     |
+|{Action,Crime}       |2002      |tt0339252 |Khadgam                                                                                                     |7.8           |1428     |
+|{Western}            |1963      |tt0056982 |Business People                                                                                             |7.6           |1420     |
+|{News}               |2013      |tt2419284 |Red Obsession                                                                                               |6.6           |1408     |
+|{Sport}              |2012      |tt2328503 |As One                                                                                                      |7.2           |1400     |
+|{Animation,Fantasy}  |2018      |tt9266104 |Zoku Owarimonogatari                                                                                        |7.9           |1396     |
+|{Film-Noir}          |1954      |tt0046790 |Black Tuesday                                                                                               |6.8           |1394     |
+|{Drama,History,Crime}|2023      |tt27862531|Ajmer 92                                                                                                    |8.0           |1386     |
+|{War}                |1997      |tt0119561 |The Long Way Home                                                                                           |7.6           |1360     |
+|{War}                |2018      |tt5913184 |Spitfire                                                                                                    |7.5           |1352     |
+|{Musical}            |2002      |tt1390851 |Sathi                                                                                                       |7.4           |1337     |
+|{Film-Noir}          |1956      |tt0049130 |Death of a Scoundrel                                                                                        |6.9           |1336     |
+|{Music}              |2024      |tt27210519|Devo                                                                                                        |7.6           |1329     |
+|{Family,Musical}     |2006      |tt2325675 |Em Magan                                                                                                    |8.0           |1312     |
+|{Western}            |2009      |tt1388402 |Bad Day to Go Fishing                                                                                       |6.9           |1308     |
+|{Documentary,Biography}|2017      |tt7218812 |The Other Side of Everything                                                                                |8.0           |1299     |
+|{Film-Noir}          |1951      |tt0043709 |Kind Lady                                                                                                   |7.1           |1290     |
+|{Documentary}        |2006      |tt0808482 |Stephen Fry: The Secret Life of the Manic Depressive                                                        |8.0           |1289     |
+|{Comedy,Drama}       |1984      |tt0179918 |Kamiondzije opet voze                                                                                       |8.0           |1287     |
+|{War}                |1968      |tt0063615 |Two Comrades Served                                                                                         |7.8           |1282     |
+|{Music}              |2018      |tt6029778 |Bathtubs Over Broadway                                                                                      |7.6           |1280     |
+|{War}                |2005      |tt0473567 |...Yahaan                                                                                                   |7.5           |1272     |
+|{Family}             |2009      |tt1804623 |Pasanga                                                                                                     |7.7           |1262     |
+|{Sci-Fi}             |2022      |tt11341742|In Search of Tomorrow                                                                                       |7.7           |1261     |
+|{Action}             |1988      |tt0095512 |Legend of the Galactic Heroes: My Conquest is the Sea of Stars                                              |7.7           |1256     |
+|{Sci-Fi}             |2024      |tt7130698 |Son's Will                                                                                                  |7.3           |1250     |
+|{Mystery,Thriller}   |1986      |tt0089413 |Khamosh                                                                                                     |7.5           |1243     |
+|{Romance}            |2024      |tt31368823|Kacher Manush Dure Thuiya                                                                                   |7.8           |1243     |
+|{Sci-Fi}             |2020      |tt11433874|Psycho-Pass 3: First Inspector                                                                              |7.4           |1242     |
+|{History}            |1981      |tt0081256 |Say a Word for the Poor Hussar                                                                              |7.8           |1237     |
+|{History}            |2007      |tt1047459 |Religion                                                                                                    |8.0           |1230     |
+|{Thriller}           |2025      |tt35661996|Dashavatar                                                                                                  |7.8           |1219     |
+|{Drama,Crime,Thriller}|2005      |tt0833444 |Dombivli Fast                                                                                               |8.0           |1215     |
+|{Music}              |1993      |tt0108192 |Sopyonje                                                                                                    |7.6           |1210     |
+|{Western}            |1997      |tt0120216 |Stolen Women, Captured Hearts                                                                               |7.3           |1210     |
+|{Family,Adventure}   |1983      |tt0141830 |The Story of the Voyages                                                                                    |7.7           |1204     |
+|{Western}            |1984      |tt0087631 |Little House: The Last Farewell                                                                             |7.7           |1200     |
+|{Crime,Action}       |1988      |tt0320421 |Sathyaa                                                                                                     |7.9           |1194     |
+|{Mystery}            |2004      |tt0417229 |Venky                                                                                                       |7.5           |1191     |
+|{Drama}              |2016      |tt6047684 |Signed, Sealed, Delivered: Lost Without You                                                                 |8.0           |1189     |
+|{Documentary}        |1977      |tt0076042 |A Grin Without A Cat                                                                                        |7.9           |1183     |
+|{Horror}             |1994      |tt0109900 |Giorgino                                                                                                    |7.2           |1181     |
+|{History,Biography}  |2013      |tt3385404 |Six by Sondheim                                                                                             |7.9           |1181     |
+|{Western}            |1948      |tt0040370 |Four Faces West                                                                                             |7.0           |1171     |
+|{Adventure,Horror}   |2015      |tt5234428 |Ajin Part 1: Shoudou                                                                                        |7.6           |1169     |
+|{War}                |1967      |tt0062041 |Japan's Longest Day                                                                                         |7.7           |1164     |
+|{Sport}              |2003      |tt0374497 |Amma Nanna O Tamila Ammayi                                                                                  |7.4           |1163     |
+|{Drama}              |2008      |tt1270783 |Operation Proposal Special                                                                                  |8.0           |1161     |
+|{Drama}              |2017      |tt6568874 |Signed, Sealed, Delivered: Higher Ground                                                                    |8.0           |1160     |
+|{Sport}              |1996      |tt0115631 |Soul of the Game                                                                                            |7.4           |1156     |
+|{Adventure,Family}   |1986      |tt1147528 |Doraemon: Nobita and the Steel Troops                                                                       |7.7           |1156     |
+|{Romance}            |1970      |tt0066124 |The Beginning                                                                                               |7.7           |1155     |
+|{Fantasy}            |2000      |tt0235512 |Kenan & Kel: Two Heads Are Better Than None                                                                 |7.6           |1154     |
+|{Biography}          |2000      |tt0211559 |Padre Pio                                                                                                   |7.8           |1144     |
+|{Animation,Documentary}|2023      |tt10133702|Pelikan Blue                                                                                                |8.0           |1138     |
+|{Romance,War}        |2005      |tt0913394 |Housewife, 49                                                                                               |7.7           |1134     |
+|{War}                |1968      |tt0061802 |I Was Nineteen                                                                                              |7.5           |1132     |
+|{Crime}              |2018      |tt7358598 |Let Me Fall                                                                                                 |7.7           |1128     |
+|{Romance}            |2011      |tt1946280 |Noukadubi                                                                                                   |7.7           |1127     |
+|{Drama,Mystery,Comedy}|2021      |tt15214870|Signed, Sealed, Delivered: The Vows We Have Made                                                            |8.0           |1121     |
+|{Biography}          |2019      |tt9779560 |I Am Patrick Swayze                                                                                         |7.7           |1117     |
+|{Adventure}          |1991      |tt0103272 |A Wish for Wings That Work                                                                                  |7.6           |1115     |
+|{Family}             |2016      |tt5713426 |Dolly Parton's Christmas of Many Colors: Circle of Love                                                     |7.7           |1110     |
+|{Sci-Fi,Music}       |2018      |tt8343642 |Janelle Monáe: Dirty Computer                                                                               |7.5           |1107     |
+|{Drama}              |2023      |tt29299059|Mandali                                                                                                     |8.0           |1090     |
+|{Drama,Romance}      |1992      |tt0108256 |The Seventh Horse of the Sun                                                                                |8.0           |1086     |
+|{Romance}            |1985      |tt0091200 |Hey Babu Riba                                                                                               |7.7           |1082     |
+|{Musical}            |1978      |tt0076732 |The Dog in the Manger                                                                                       |7.7           |1068     |
+|{Horror}             |2012      |tt2551650 |Jekhane Bhooter Bhoy                                                                                        |6.9           |1052     |
+|{Crime,Thriller}     |2019      |tt9373234 |Laal Kabootar                                                                                               |7.7           |1051     |
+|{Film-Noir}          |1948      |tt0040887 |To the Ends of the Earth                                                                                    |6.8           |1043     |
+|{Sci-Fi}             |2004      |tt0395417 |Space Odyssey: Voyage to the Planets                                                                        |7.6           |1043     |
+|{History}            |2023      |tt25396050|Subhedar                                                                                                    |7.9           |1043     |
+|{War}                |1995      |tt0113309 |Hiroshima                                                                                                   |7.8           |1039     |
+|{Action,Fantasy,Animation}|2025      |tt36956670|Jujutsu Kaisen: Hidden Inventory / Premature Death - The Movie                                              |7.9           |1036     |
+|{Music}              |2009      |tt1590078 |It Felt Like a Kiss                                                                                         |7.8           |1016     |
+|{Drama}              |2024      |tt32339951|Phullwanti                                                                                                  |8.0           |1010     |
+|{Horror,Documentary,History}|2022      |tt15768444|In Search of Darkness Part III: The Final Journey Into '80s Horror                                          |7.9           |1007     |
+|{Family}             |1972      |tt0068720 |The House Without a Christmas Tree                                                                          |7.9           |999      |
+|{Sport}              |2017      |tt6010240 |Guru                                                                                                        |7.6           |995      |
+|{Thriller,War}       |2023      |tt21941532|The Teacher                                                                                                 |7.5           |994      |
+|{Sport}              |2025      |tt32916440|Marty Supreme                                                                                               |7.6           |991      |
+|{Biography,History}  |1998      |tt0144937 |Frank Lloyd Wright                                                                                          |7.8           |988      |
+|{Musical}            |1959      |tt0052560 |Anari                                                                                                       |7.6           |986      |
+|{Sport,History,Drama}|1996      |tt0116533 |Hillsborough                                                                                                |8.0           |986      |
+|{Musical}            |2004      |tt0440004 |AD/BC: A Rock Opera                                                                                         |7.4           |978      |
+|{Film-Noir}          |1948      |tt0040072 |An Act of Murder                                                                                            |6.9           |977      |
+|{Comedy,Family}      |2012      |tt2365873 |Kevi Rite Jaish                                                                                             |8.0           |972      |
+|{Thriller,History}   |2025      |tt21825416|Truth & Treason                                                                                             |7.8           |971      |
+|{Thriller,Crime}     |2008      |tt1002963 |Y.M.I. Yeh Mera India                                                                                       |7.7           |953      |
+|{War}                |2011      |tt2316000 |The Civil War on Drugs                                                                                      |7.6           |944      |
+|{Mystery}            |1979      |tt0079593 |Murder by Natural Causes                                                                                    |7.5           |941      |
+|{Action,Animation}   |1993      |tt0107382 |Legend of the Galactic Heroes: Overture to a New War                                                        |7.8           |937      |
+|{Fantasy}            |1980      |tt0343727 |Gnomes                                                                                                      |7.5           |931      |
+|{Biography}          |2001      |tt0286809 |Marilyn Monroe: The Final Days                                                                              |7.8           |922      |
+|{Sci-Fi}             |2025      |tt29002950|Resurrection                                                                                                |7.3           |916      |
+|{Music}              |2010      |tt1588356 |Harmony                                                                                                     |7.5           |913      |
+|{Documentary}        |2008      |tt1294977 |Blackadder Exclusive: The Whole Rotten Saga                                                                 |8.0           |909      |
+|{Drama,Family}       |2023      |tt23024656|Mera Baba Nanak                                                                                             |8.0           |905      |
+|{Fantasy}            |1983      |tt0084696 |Slyozy kapali                                                                                               |7.8           |892      |
+|{Sci-Fi}             |1986      |tt0093065 |G.I. Joe: Arise, Serpentor, Arise!                                                                          |7.7           |892      |
+|{Family}             |1989      |tt0380229 |Bolji zivot                                                                                                 |7.8           |881      |
+|{Animation}          |2025      |tt36733027|Nobody                                                                                                      |7.8           |879      |
+|{War}                |2005      |tt0469589 |Sir! No Sir!                                                                                                |7.6           |872      |
+|{Romance}            |2022      |tt17634494|The Red Point of Marriage                                                                                   |7.8           |872      |
+|{Family,Comedy}      |2017      |tt7155460 |Muramba                                                                                                     |8.0           |869      |
+|{Drama}              |2011      |tt1719681 |Eric & Ernie                                                                                                |8.0           |867      |
+|{Fantasy}            |2004      |tt1149199 |Aga Bai Arecha                                                                                              |7.5           |864      |
+|{Comedy}             |2017      |tt6749328 |Love You More                                                                                               |7.9           |856      |
+|{Animation,Romance,Comedy}|2022      |tt15313532|Teasing Master Takagi-San: The Movie                                                                        |7.9           |851      |
+|{History}            |2025      |tt13286652|Good Night, and Good Luck                                                                                   |7.8           |844      |
+|{Adventure}          |2015      |tt5028778 |Robot Chicken DC Comics Special 3: Magical Friendship                                                       |7.6           |844      |
+|{Sci-Fi}             |2017      |tt8100900 |Code Geass: Lelouch of the Rebellion I - Initiation                                                         |7.3           |839      |
+|{Romance}            |2025      |tt32237099|Premante                                                                                                    |7.8           |836      |
+|{Crime}              |1996      |tt0113666 |Little Criminals                                                                                            |7.8           |833      |
+|{Sport}              |2011      |tt3336654 |Chalo Paltai                                                                                                |7.4           |827      |
+|{Horror}             |1969      |tt0064507 |Hunting Scenes from Bavaria                                                                                 |7.3           |822      |
+|{Biography}          |1981      |tt0082075 |Bill                                                                                                        |7.9           |822      |
+|{Family}             |1997      |tt0304072 |The Dog of Flanders                                                                                         |7.7           |822      |
+|{Thriller}           |2021      |tt14852420|The Dark Side of Dhaka                                                                                      |7.5           |812      |
+|{Fantasy}            |2025      |tt36639986|I Am Frankelda                                                                                              |7.3           |805      |
+|{Animation,Comedy,Adventure}|2018      |tt8734822 |My Little Pony: Best Gift Ever                                                                              |7.9           |804      |
+|{Game-Show}          |2008      |tt1298641 |Britain's Got the Pop Factor... and Possibly a New Celebrity Jesus Christ Soapstar Superstar Strictly on Ice|6.9           |803      |
+|{Comedy}             |2015      |tt5171296 |Bagboy                                                                                                      |8.0           |794      |
+|{Horror}             |1998      |tt0214247 |Universal Horror                                                                                            |7.5           |790      |
+|{Western}            |1990      |tt0100774 |Thousand Pieces of Gold                                                                                     |6.9           |784      |
+|{History}            |2000      |tt0309720 |Islam: Empire of Faith                                                                                      |7.8           |782      |
+|{Thriller}           |2007      |tt0924262 |Okkadunnadu                                                                                                 |7.5           |782      |
+|{Biography,Documentary}|2007      |tt0763852 |I Have Never Forgotten You: The Life & Legacy of Simon Wiesenthal                                           |7.9           |779      |
+|{Comedy}             |2018      |tt6627630 |Cycle                                                                                                       |8.0           |779      |
+|{Musical}            |2021      |tt16727778|Anything Goes                                                                                               |7.6           |778      |
+|{Sci-Fi}             |1977      |tt0295414 |The Making of 'Star Wars'                                                                                   |7.4           |774      |
+|{Sport}              |2009      |tt2196091 |Vennila Kabadi Kuzhu                                                                                        |7.4           |764      |
+|{Documentary}        |2025      |tt34965967|Deaf President Now!                                                                                         |8.0           |757      |
+|{Family}             |2018      |tt8220706 |Daana Paani                                                                                                 |7.9           |755      |
+|{Drama,Musical}      |2018      |tt8330720 |Everybody's Talking About Jamie                                                                             |8.0           |752      |
+|{Crime}              |2017      |tt6981066 |Murdered for Being Different                                                                                |7.7           |751      |
+|{Fantasy}            |1977      |tt0076569 |Pro Krasnuyu Shapochku                                                                                      |7.3           |747      |
+|{Sci-Fi}             |2018      |tt9844256 |Code Geass: Lelouch of the Rebellion - Emperor                                                              |7.5           |744      |
+|{Sport}              |1972      |tt0068178 |Weekend of a Champion                                                                                       |7.3           |742      |
+|{Sci-Fi}             |2016      |tt6323140 |Rogue One: A Star Wars Story - World Premiere                                                               |7.4           |737      |
+|{Action,Adventure,Animation}|1989      |tt2155428 |Dragon Ball                                                                                                 |8.0           |730      |
+|{War}                |1969      |tt0063333 |At War as at War                                                                                            |7.9           |726      |
+|{Animation,Action,Adventure}|2023      |tt27641028|Attack on Titan: The Weight of Pain                                                                         |8.0           |723      |
+|{Music,Documentary,History}|2005      |tt0436095 |Ballets Russes                                                                                              |7.9           |712      |
+|{Biography}          |1973      |tt0070751 |Sunshine                                                                                                    |7.8           |711      |
+|{Family}             |1987      |tt0172238 |A Child's Christmas in Wales                                                                                |7.7           |705      |
+|{Music}              |2003      |tt0369400 |Eroica                                                                                                      |7.7           |700      |
+|{History,Documentary,Adventure}|2003      |tt0382744 |Horatio's Drive: America's First Road Trip                                                                  |8.0           |699      |
+|{Animation,Action}   |2000      |tt0268948 |Arthur's Perfect Christmas                                                                                  |7.8           |694      |
+|{Music}              |1962      |tt0130195 |Come Tomorrow                                                                                               |7.5           |689      |
+|{War}                |2025      |tt32080656|Blücher                                                                                                     |7.5           |684      |
+|{Comedy}             |2014      |tt4045478 |Burning Love 3: Burning Down the House                                                                      |8.0           |673      |
+|{Biography}          |2005      |tt0476209 |Einstein's Big Idea                                                                                         |7.8           |670      |
+|{Sci-Fi}             |1982      |tt0083876 |The Electric Grandmother                                                                                    |7.5           |669      |
+|{Mystery,Crime}      |2003      |tt0368969 |Shubho Mahurat                                                                                              |7.7           |663      |
+|{Mystery}            |1989      |tt0181890 |Time of Miracles                                                                                            |7.5           |656      |
+|{Adventure}          |2015      |tt4913858 |Ever After High: Way Too Wonderland                                                                         |7.7           |656      |
+|{Sport}              |2016      |tt6597832 |Kuroko's Basketball: Winter Cup Highlights -Shadow and Light-                                               |7.6           |651      |
+|{Crime,Thriller}     |1969      |tt0064257 |Dragnet 1966                                                                                                |7.7           |648      |
+|{Romance}            |2002      |tt0329421 |God Forbid a Worse Thing Should Happen                                                                      |7.8           |645      |
+|{Drama}              |1980      |tt0220340 |The Black Stuff                                                                                             |8.0           |641      |
+|{Fantasy,Horror}     |2015      |tt4577388 |Kothanodi                                                                                                   |7.6           |638      |
+|{Sci-Fi}             |2022      |tt20255306|The Smeds and the Smoos                                                                                     |7.2           |636      |
+|{Action,Animation}   |2018      |tt8742774 |Mobile Suit Gundam: The Origin VI - Rise of the Red Comet                                                   |7.8           |636      |
+|{Comedy,Drama}       |1997      |tt0130752 |Gypsy Magic                                                                                                 |8.0           |633      |
+|{Mystery}            |2000      |tt0210714 |The Golden Spiders: A Nero Wolfe Mystery                                                                    |7.6           |632      |
+|{Crime}              |1989      |tt0241914 |Don't Cry for Salim, the Lame                                                                               |7.7           |629      |
+|{Music}              |1996      |tt0117028 |Message to Love: The Isle of Wight Festival                                                                 |7.6           |623      |
+|{Romance,Animation}  |2023      |tt29092780|Sasaki and Miyano: Graduation                                                                               |7.9           |623      |
+|{Musical,Comedy,Western}|2015      |tt4459758 |The Trail to Oregon!                                                                                        |7.9           |614      |
+|{Sport}              |2016      |tt6449216 |Kuroko's Basketball: Winter Cup Highlights -Crossing the Door-                                              |7.7           |610      |
+|{History,Musical}    |2016      |tt6395628 |Firebringer                                                                                                 |7.8           |608      |
+|{Film-Noir}          |1935      |tt0026416 |The Glass Key                                                                                               |6.9           |607      |
+|{Fantasy}            |1982      |tt0085452 |Dom, kotoryy postroil Svift                                                                                 |7.3           |606      |
+|{Documentary}        |1986      |tt0091018 |Ethnic Notions                                                                                              |8.0           |604      |
+|{Family}             |2024      |tt23554698|Gharat Ganpati                                                                                              |7.8           |602      |
+|{Documentary,Family} |2025      |tt34966013|Come See Me in the Good Light                                                                               |8.0           |602      |
+|{Family}             |2000      |tt0287781 |The Festival                                                                                                |7.9           |597      |
+|{Musical}            |2020      |tt13327258|The Jinkx and DeLa Holiday Special                                                                          |7.7           |597      |
+|{Romance,Comedy,Crime}|1950      |tt0042888 |The King of the Neighborhood                                                                                |7.9           |595      |
+|{Biography}          |2000      |tt0264804 |Lon Chaney: A Thousand Faces                                                                                |7.7           |592      |
+|{Horror}             |1979      |tt0286049 |Schalcken the Painter                                                                                       |7.0           |590      |
+|{Sport}              |1977      |tt0076738 |Something for Joey                                                                                          |7.9           |587      |
+|{History}            |2015      |tt5145264 |We're Doomed! The Dad's Army Story                                                                          |7.8           |587      |
+|{Fantasy}            |1968      |tt0144187 |Vechir na Ivana Kupala                                                                                      |7.3           |584      |
+|{Music}              |2004      |tt0425388 |Ramones Raw                                                                                                 |7.5           |583      |
+|{Horror,Musical}     |2020      |tt11242292|Black Friday                                                                                                |7.6           |581      |
+|{Horror}             |2025      |tt35301440|Mononoke the Movie: Chapter II - The Ashes of Rage                                                          |7.1           |578      |
+|{Action,Comedy,Sport}|2012      |tt6999062 |VGHS: The Movie                                                                                             |8.0           |578      |
+|{Drama}              |2016      |tt6289320 |A Billion Colour Story                                                                                      |8.0           |568      |
+|{Thriller}           |2014      |tt4019578 |Rege                                                                                                        |7.5           |567      |
+|{Biography}          |2005      |tt0467697 |Terry                                                                                                       |7.7           |564      |
+|{Horror}             |1994      |tt0199528 |Flesh and Blood: The Hammer Heritage of Horror                                                              |7.5           |561      |
+|{Sport}              |1998      |tt0121118 |Boleiros: Era Uma Vez o Futebol...                                                                          |7.3           |557      |
+|{Musical}            |2009      |tt2040426 |Me and My Dick                                                                                              |7.6           |551      |
+|{Family,Fantasy,Music}|1971      |tt0068613 |Tales from Muppetland: The Frog Prince                                                                      |7.9           |549      |
+|{Western}            |1990      |tt0099721 |Gunsmoke: The Last Apache                                                                                   |7.2           |545      |
+|{Sport}              |2007      |tt0499558 |Ruffian                                                                                                     |7.2           |535      |
+|{Comedy}             |2017      |tt6845890 |National Theatre Live: Twelfth Night                                                                        |7.9           |534      |
+|{Family}             |2017      |tt6912552 |Chi Va Chi Sau Ka                                                                                           |7.7           |530      |
+|{Adventure}          |2016      |tt5170670 |Heroes Manufactured                                                                                         |7.7           |524      |
+|{Sport}              |1976      |tt0074814 |The Loneliest Runner                                                                                        |7.2           |520      |
+|{News}               |2015      |tt3621360 |Rolling Papers                                                                                              |6.2           |520      |
+|{Drama,History,Comedy}|2010      |tt1264889 |An Early Frost                                                                                              |8.0           |517      |
+|{Romance}            |2020      |tt12961718|Last Call                                                                                                   |7.8           |515      |
+|{Horror}             |2017      |tt5545254 |Todd and the Book of Pure Evil: The End of the End                                                          |6.9           |515      |
+|{Comedy}             |2022      |tt22376154|Gilly and Keeves: The Special                                                                               |8.0           |514      |
+|{Drama}              |1971      |tt0067767 |The Snow Goose                                                                                              |8.0           |513      |
+|{Action,Crime}       |1994      |tt0178392 |Droh Kaal                                                                                                   |7.8           |510      |
+|{Documentary}        |2022      |tt12384428|Lancaster                                                                                                   |7.9           |508      |
+|{Sport}              |2010      |tt1895416 |Jaago                                                                                                       |7.3           |506      |
+|{Mystery,Sci-Fi}     |2018      |tt8324486 |Copy                                                                                                        |7.6           |504      |
+|{Fantasy}            |1973      |tt0167415 |Steambath                                                                                                   |7.8           |503      |
+|{War,Romance}        |1978      |tt0078341 |Summer of My German Soldier                                                                                 |7.8           |501      |
+|{Biography}          |1997      |tt0119614 |Marcello Mastroianni: I Remember                                                                            |7.8           |500      |
+|{Sci-Fi}             |2013      |tt3345330 |The Science of Doctor Who                                                                                   |7.6           |497      |
+|{Musical,Comedy}     |1980      |tt0363891 |The Pirates of Penzance                                                                                     |7.9           |492      |
+|{Sci-Fi}             |1992      |tt0159508 |Mobile Suit Gundam 0083: The Afterglow of Zeon                                                              |7.2           |491      |
+|{Fantasy}            |1991      |tt0248926 |Njan Gandharvan                                                                                             |7.7           |489      |
+|{Adventure}          |2002      |tt0332640 |He-Man and the Masters of the Universe: The Beginning                                                       |7.7           |486      |
+|{Biography}          |1977      |tt1082585 |Dummy                                                                                                       |7.9           |486      |
+|{Musical}            |1978      |tt0165625 |Ankhiyon Ke Jharokhon Se                                                                                    |7.6           |484      |
+|{Musical}            |2014      |tt3386444 |That Day We Sang                                                                                            |7.6           |482      |
+|{Romance}            |2022      |tt22191360|Semantic Error: The Movie                                                                                   |7.8           |473      |
+|{War}                |1964      |tt0057717 |The Alive and the Dead                                                                                      |7.7           |470      |
+|{Documentary}        |2012      |tt2311160 |The Godfather Legacy                                                                                        |8.0           |470      |
+|{Western}            |1992      |tt0104379 |Gunsmoke: To the Last Man                                                                                   |7.2           |464      |
+|{Romance}            |2016      |tt5943392 |Branagh Theatre Live: Romeo and Juliet                                                                      |8.0           |464      |
+|{Musical}            |1979      |tt0079464 |Letuchaya mysh                                                                                              |7.6           |460      |
+|{Western}            |1994      |tt0109961 |Gunsmoke: One Man's Justice                                                                                 |7.2           |457      |
+|{Action,Thriller}    |1998      |tt0275925 |Anthahpuram                                                                                                 |7.8           |456      |
+|{Documentary,Music}  |1986      |tt0091216 |Home of the Brave: A Film by Laurie Anderson                                                                |7.9           |455      |
+|{Documentary}        |1963      |tt0057327 |To Die in Madrid                                                                                            |8.0           |454      |
+|{Action,Animation}   |1998      |tt13645944|Revival of Evangelion                                                                                       |7.8           |453      |
+|{History,Documentary}|2018      |tt8946352 |The Mayo Clinic, Faith, Hope and Science                                                                    |8.0           |452      |
+|{Fantasy}            |1978      |tt0270278 |Rich Little's Christmas Carol                                                                               |7.3           |445      |
+|{Adventure,Family}   |1986      |tt0092046 |The Tale of the Bunny Picnic                                                                                |7.7           |444      |
+|{War,Romance}        |2004      |tt0406551 |Bab el shams                                                                                                |7.7           |441      |
+|{Music}              |2009      |tt1308123 |In Search of Beethoven                                                                                      |7.5           |441      |
+|{Sci-Fi}             |2002      |tt0342036 |The 'Alien' Saga                                                                                            |7.6           |437      |
+|{Animation,Family}   |2023      |tt18974074|Billie's Magic World                                                                                        |7.8           |435      |
+|{Horror,Adventure}   |2016      |tt5234462 |Ajin Part 3: Shougeki                                                                                       |7.7           |433      |
+|{Sci-Fi}             |2023      |tt28288396|The Missing                                                                                                 |7.1           |432      |
+|{Biography,History}  |2010      |tt1685518 |The Road to Coronation Street                                                                               |7.9           |430      |
+|{Action,Crime}       |2022      |tt5875460 |How I Got There                                                                                             |7.8           |429      |
+|{Western}            |1993      |tt0107062 |Gunsmoke: The Long Ride                                                                                     |7.2           |421      |
+|{History}            |2001      |tt0282417 |Cleopatra: The Film That Changed Hollywood                                                                  |7.8           |421      |
+|{Music}              |2020      |tt10451082|King Rocker                                                                                                 |7.5           |418      |
+|{Biography}          |2010      |tt1591585 |Mo                                                                                                          |7.8           |418      |
+|{Thriller}           |2025      |tt32919616|Broken Vein                                                                                                 |7.5           |417      |
+|{Music}              |1991      |tt0104843 |Medusa: Dare to Be Truthful                                                                                 |7.6           |414      |
+|{Drama,Comedy}       |1997      |tt5111382 |Palabi Kothae                                                                                               |8.0           |414      |
+|{History,Biography,Documentary}|2010      |tt1262986 |The Last Play at Shea                                                                                       |8.0           |413      |
+|{Mystery}            |1971      |tt0065519 |Cannon                                                                                                      |7.4           |408      |
+|{Drama}              |2025      |tt19848600|Isabel's Garden                                                                                             |8.0           |404      |
+|{Western}            |1995      |tt0113040 |A Father for Charlie                                                                                        |7.0           |401      |
+|{Drama}              |1999      |tt0174882 |Lost for Words                                                                                              |8.0           |401      |
+|{Thriller,Mystery}   |2020      |tt13217756|The Third Day: Autumn                                                                                       |7.6           |400      |
+|{Sci-Fi}             |1976      |tt0203908 |Mr. Rossi Looks for Happiness                                                                               |7.6           |396      |
+|{Film-Noir}          |1951      |tt0043401 |Chicago Calling                                                                                             |7.1           |389      |
+|{War}                |1989      |tt0097933 |Murderers Among Us: The Simon Wiesenthal Story                                                              |7.6           |389      |
+|{Western}            |1932      |tt0023121 |Law and Order                                                                                               |6.9           |387      |
+|{Mystery}            |2000      |tt0286056 |Second Sight: Kingdom of the Blind                                                                          |7.5           |386      |
+|{Sci-Fi}             |1988      |tt0096353 |Urusei Yatsura 5: The Final Chapter                                                                         |7.1           |384      |
+|{Animation,Action,Fantasy}|1995      |tt0315296 |Bishôjo senshi Sailor Moon Super S Special                                                                  |7.8           |382      |
+|{Documentary}        |2021      |tt5078614 |Getting Away with Murder(s)                                                                                 |8.0           |380      |
+|{Biography}          |2008      |tt1297297 |Rock n Roll Nerd                                                                                            |7.8           |377      |
+|{Sport}              |1986      |tt0091913 |Second Serve                                                                                                |7.3           |372      |
+|{Comedy,Documentary} |2013      |tt2319863 |Whoopi Goldberg Presents Moms Mabley                                                                        |7.9           |367      |
+|{Music}              |2024      |tt31257225|Given the Movie: Hiiragi Mix                                                                                |7.8           |367      |
+|{Documentary}        |2004      |tt0421696 |Beautiful Dreamer: Brian Wilson and the Story of 'Smile'                                                    |7.9           |365      |
+|{Biography}          |1977      |tt0075981 |Eleanor and Franklin: The White House Years                                                                 |7.9           |364      |
+|{Music}              |2023      |tt18350228|June                                                                                                        |7.8           |364      |
+|{Horror}             |1979      |tt0169716 |The Man to Kill                                                                                             |6.9           |363      |
+|{Thriller}           |2023      |tt13174230|Dr. Bezbarua 2                                                                                              |7.7           |359      |
+|{Crime,Thriller,Drama}|1987      |tt0095612 |Memories of Manon                                                                                           |8.0           |357      |
+|{Western}            |1987      |tt0092876 |Desperado                                                                                                   |7.0           |356      |
+|{Fantasy}            |1971      |tt0217841 |Ten                                                                                                         |7.4           |354      |
+|{War}                |1983      |tt0180981 |Schindler                                                                                                   |7.6           |352      |
+|{Sci-Fi,Fantasy}     |2003      |tt0366886 |Patalghar                                                                                                   |7.7           |352      |
+|{Fantasy}            |2024      |tt16983588|Maxxie LaWow: Drag Super-shero                                                                              |7.3           |347      |
+|{Sci-Fi}             |2016      |tt4595412 |Marvel's Most Wanted                                                                                        |7.3           |347      |
+|{Fantasy}            |2023      |tt27267852|Yesterday Once More                                                                                         |7.3           |346      |
+|{Musical,Romance}    |1996      |tt0117306 |Passion                                                                                                     |7.9           |345      |
+|{War,Music}          |1965      |tt0057941 |Fort Graveyard                                                                                              |7.5           |344      |
+|{Biography,Sport}    |2004      |tt0471614 |Cheating Death, Stealing Life: The Eddie Guerrero Story                                                     |7.8           |336      |
+|{Family}             |2012      |tt2624852 |Gangoobai                                                                                                   |7.7           |336      |
+|{Thriller,Crime}     |2018      |tt8751994 |Flesh                                                                                                       |7.8           |335      |
+|{Musical}            |1990      |tt0100385 |Polly: Comin' Home!                                                                                         |7.5           |330      |
+|{Western}            |1952      |tt0242593 |The Legend of the Lone Ranger                                                                               |7.0           |328      |
+|{Comedy}             |2017      |tt6845728 |National Theatre Live: Rosencrantz & Guildenstern Are Dead                                                  |7.9           |324      |
+|{Adventure,Animation,Family}|2000      |tt0306008 |Redwall: The Movie                                                                                          |7.8           |322      |
+|{Comedy}             |1993      |tt0107794 |Paul Calf's Video Diary                                                                                     |8.0           |318      |
+|{Romance}            |1980      |tt0081668 |Twelfth Night                                                                                               |7.7           |315      |
+|{Comedy}             |1982      |tt0285073 |Eunice                                                                                                      |7.9           |313      |
+|{Animation}          |2021      |tt4534598 |Legend of Destruction                                                                                       |7.9           |313      |
+|{Comedy}             |1974      |tt0233325 |Bezumnyy den ili zhenitba Figaro                                                                            |8.0           |312      |
+|{Sport}              |2017      |tt8141908 |Free! Take your Marks                                                                                       |7.2           |312      |
+|{Fantasy}            |1969      |tt0290655 |Hey Cinderella!                                                                                             |7.3           |311      |
+|{Biography}          |2018      |tt7122324 |National Theatre Live: Julius Caesar                                                                        |8.0           |311      |
+|{Western}            |1971      |tt0066759 |The American West of John Ford                                                                              |7.1           |309      |
+|{Comedy,Musical}     |1991      |tt0267244 |Aayatya Gharat Gharoba                                                                                      |7.9           |309      |
+|{Drama}              |2023      |tt26698272|Chal Mann Jeetva Jaiye 2                                                                                    |8.0           |309      |
+|{Documentary}        |2013      |tt2827494 |Doctor Who: The Companions                                                                                  |8.0           |305      |
